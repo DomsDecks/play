@@ -43,7 +43,7 @@ const link = {
 		// Add everything to deck for testing.
 		const all = data == "*";
 		if (all) {
-			data = "_";
+			data = "*";
 		}
 
 		// Empty the deck and hand.
