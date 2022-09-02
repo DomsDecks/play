@@ -1,12 +1,13 @@
 body {
 	margin: 0;
-	font-size: large;
+	/*font-size: large;*/
 }
 
 div#top {
 	width: calc(100% - 5vw);
 	min-height: calc(100% - 4vh);
 	position: absolute;
+	top: 1vh;
 	left: 2.5vw;
 	z-index: 25;
 }
