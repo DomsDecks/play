@@ -4,7 +4,7 @@ body {
 
 div#top {
 	width: 98vw;
-	min-height: 98vh;
+	min-height: 85vh;
 	margin: 1vh 0 0 1vw;
 	z-index: 25;
 	display: flex;
