@@ -11,7 +11,7 @@ body.betrayal {
 }
 
 .betrayal div.card {
-	width: calc(88% - 2vh);
+	width: calc(82% - 2vh);
 	max-width: 41vh;
 	border: 2vh solid black;
 	border-radius: 5vh;
