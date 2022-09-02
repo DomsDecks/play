@@ -18,7 +18,7 @@ div#top-content {
 }
 
 div.card {
-	width: 97%;
+	width: calc(97% - 2vh);
 	max-width: 60vh;
 	height: 80vh;
 	border: 1vh solid black;
