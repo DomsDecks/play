@@ -1,0 +1,64 @@
+Cards discard unless in an accounted for.
+Cards in deck stored in binary converted to b36 for URL shortening.
+Cards in hand stored in binary converted to b36 for URL shortening.
+Can use local storage for even better url, bookmarks and history.
+Distribution page splits deck randomly.
+Make card active manually by ID, or maybe even QR code scan?
+
+Events happen once then are discarded.
+Items can happen once or just just stay in hand.
+	Items could have immediate effect, a choice of immediate effect or discard, or a choice of effect at the start of any turn, or an effect at start of haunt.
+	Items could expire when you visit a certain room, or an event happens, or on a roll, or at start of haunt, or you must roll at the end of each turn, or on leaving the basement.
+	Items don't have to all be of equal power.
+	Items can change stats, or be weapons (maybe keeping the ratio of weapons in the deck is important), or be potions etc.
+Omens can't be invented without also making new haunts.
+
+next steps:
+styling all elements
+
+Zombie
+Alien
+Psychosis
+Psycho
+Annihilation
+Medieval knight
+Cult
+Delusion
+Liminal space
+Vampire
+Puzzle box
+Poisoning
+Forbidden knowledge
+Soylent Green
+Pregnancy
+Speak to the dead
+Curse
+Time loop
+Hell portal
+Mutation
+Hunted
+Pervert
+Witch
+Demon prince
+Haunted room
+King in Yellow
+Halluciation
+Shark
+Footage
+Past visions
+Surgeon
+Shaman
+PTSD
+Dream/sleepwalking
+Zombie pet
+Found footage
+Blind monsters
+Cannibal
+Trap
+Telepathy
+Witchhunter
+Cuckoo
+Goblins
+Black lodge
+The Devil
+Rednecks

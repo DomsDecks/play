@@ -1,0 +1,62 @@
+body {
+	margin: 0;
+	font-size: large;
+}
+
+div#top {
+	width: calc(100% - 5vw);
+	min-height: calc(100% - 4vh);
+	position: absolute;
+	left: 2.5vw;
+	z-index: 25;
+}
+
+div#top-content {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+div.card {
+	width: 97%;
+	max-width: 60vh;
+	height: 80vh;
+	border: 1vh solid black;
+	border-radius: 2vh;
+	background: white;
+	padding: 20px;
+}
+
+div.card.drawn {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 75;
+}
+
+div#scroll {
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 0;
+	font-weight: 800;
+}
+
+div#hand {
+	position: absolute;
+	top: 100vh;
+	left: 2.5vw;
+	width: calc(100% - 5vw);
+	display: flex;
+	flex-direction: column;
+	align-items: center	;
+}
+
+div#hand div.card {
+	margin-bottom: 3vh;
+}
+
+i.material-icons {
+	vertical-align: middle;
+}
