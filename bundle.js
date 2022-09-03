@@ -1,3 +1,296 @@
+const card = {
+
+	"get": (id) => {
+		return _.find(game.cards, c => c.id == id);
+	},
+
+	// Bring a card from the deck into the foreground.
+	// In terms of the data it is still in whatever area it was drawn from.
+	// So that, if you close the window with a card drawn, it isn't lost.
+	"draw": (id) => {
+		if (!_.isNull(state.drawnCardId)) {
+			return;
+		}
+		if (_.isUndefined(id)) {
+			state.drawnCardId = null;
+			return;
+		}
+		state.drawnCardId = id;
+		$("div.drawn").replaceWith(
+			render.card(id)
+				.addClass("drawn")
+				.css({ "display": "block" })
+		);
+		// Show new drawn card on screen, with relevant controls.
+	},
+
+	// Remove the drawn card from the GUI.
+	"undraw": () => {
+		state.drawnCardId = null;
+		$("div.card.drawn")
+			.css({ "display": "none" })
+			.html("");
+	},
+
+	// Move a card between arrays.
+	"move": (id, target) => {
+		// Cards can only be in one array at a time, so remove from others while moving.
+		if (target != state.hand && state.hand.some(h => h == id)) {
+			state.hand.splice(state.hand.indexOf(id), 1);
+		}
+		if (target != state.deck && state.deck.some(d => d == id)) {
+			state.deck.splice(state.deck.indexOf(id), 1);
+		}
+		if (!target.some(t => t == id)) {
+			target.push(id);
+		}
+		render.all();
+	},
+
+}; 
+// The object containing the game-specific functions.
+let game = {};
+
+$(document).ready(() => {
+	game = betrayal;
+	// Sort the cards in case theyre in a random order in the game file.
+	game.cards = _.sortBy(_.flatten(game.cards), (c) => c.id);
+
+	/*
+	if theres instance in QS
+		if instance is already stored.
+			set instance
+			load state
+			render all
+			clean QS
+		else if QS also contains game and data
+			set deck and hand from data
+			set game
+			set instance
+			save state
+			render all
+		else
+			main menu and clear QS
+	else
+		main menu and clear QS
+
+	*/
+
+	// Load the instanceId.
+	let instanceMatch = window.location.search.match(/i[=]([^&#]+)([&#]|$)/);
+
+	// Load the game.
+	let gameMatch = window.location.search.match(/g[=]([^&#]+)([&#]|$)/);
+
+	// Load the data.
+	let dataMatch = window.location.search.match(/d[=]([^&#]+)([&#]|$)/);
+
+	if (!_.isEmpty(instanceMatch)) {
+		state.instanceId = instanceMatch[1];
+
+		if (!_.isEmpty(localStorage.getItem(state.instanceId))) {
+			// Load saved game.
+			state.load();
+			render.all();
+		} else if (!_.isEmpty(gameMatch) && !_.isEmpty(dataMatch)) {
+			// New game from data.
+			// TODO: Set game from gameMatch here.
+			link.setStateFromData(dataMatch[1]);
+			state.save();
+			render.all();
+		} else {
+			// TODO: New game screen here.
+			// Splits deck randomly, empties hand, and gets state, repeats and returns list of states. Game specific.
+			//alert("Error: incorrect link used.");
+			link.setStateFromData("*");
+			state.save();
+		}
+	} else {
+		// TODO: New game screen here.
+		// Splits deck randomly, empties hand, and gets state, repeats and returns list of states. Game specific.
+		alert("Error: incorrect link used.");
+	}
+
+	link.cleanURL();
+}); 
+const link = {
+
+	// Clean the URL.
+	"cleanURL": () => {
+		const newUrl =
+			window.location.protocol +
+			"//" +
+			window.location.host +
+			window.location.pathname +
+			(!_.isEmpty(state.instanceId)
+				? ("?i=" + state.instanceId)
+				: "");
+		window.history.pushState({ path: newUrl }, "", newUrl);
+	},
+
+	// Get an encoded string containing the deck and hand.
+	"getData": (deck, hand) => {
+
+		// The cards are sorted by their IDs.
+		// The deckBinary is 1100 if you have the first two cards but not the last two.
+		let deckBinary = "";
+		_.each(game.cards, (c, i) => {
+			deckBinary = (_.any(deck, d => d == c.id) ? "1" : "0") + deckBinary;
+		});
+
+		// The data is the deck binary number, converted to base 36.
+		let data = parseInt(deckBinary, 2).toString(36);
+
+		// Do the same for the hand.
+		let handBinary = "";
+		_.each(game.cards, (c, i) => {
+			handBinary = (_.any(hand, h => h == c.id) ? "1" : "0") + handBinary;
+		});
+		data += "_" + parseInt(handBinary, 2).toString(36);
+
+		// The data is the deck number, then an underscore, then the hand number.
+		return data;
+	},
+
+	// Set the game state from the string.
+	"setStateFromData": (data) => {
+
+		// Add everything to deck for testing.
+		const all = data == "*";
+		if (all) {
+			data = "*";
+		}
+
+		// Empty the deck and hand.
+		state.deck.splice(0, state.deck.length);
+		state.hand.splice(0, state.hand.length);
+
+		// Parse the data into those binary numbers.
+		const deckBinary = parseInt(data.split("_")[0], 36).toString(2).padStart(game.cards.length, "0");
+		_.each(game.cards, (c, i) => {
+			// For each possible card, add to the deck it if it's a 1.
+			if (deckBinary.substring(i, i + 1) == 1 || all) {
+				state.deck.push(c.id);
+			}
+		});
+
+		// Do the same for the hand.
+		const handBinary = parseInt(data.split("_")[1], 36).toString(2).padStart(game.cards.length, "0");
+		_.each(game.cards, (c, i) => {
+			if (handBinary.substring(i, i + 1) == 1) {
+				state.hand.push(c.id);
+			}
+		});
+	},
+
+}; 
+// Simple Fast Counter.
+// https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+sfc32 = (a, b, c, d) => {
+	return () => {
+		a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
+		var t = (a + b) | 0;
+		a = b ^ b >>> 9;
+		b = c + (c << 3) | 0;
+		c = (c << 21 | c >>> 11);
+		d = d + 1 | 0;
+		t = t + d | 0;
+		c = c + t | 0;
+		return (t >>> 0) / 4294967296;
+	}
+}
+
+// 32-bit seed with optional XOR value.
+var seed = (Math.random() * 100000) ^ 0xDEADBEEF;
+// Pad seed with Phi, Pi and E.
+// https://en.wikipedia.org/wiki/Nothing-up-my-sleeve_number
+var rand = sfc32(0x9E3779B9, 0x243F6A88, 0xB7E15162, seed);
+for (let i = 0; i < 15; i++) {
+	rand();
+} 
+const render = {
+
+	"all": () => {
+		game.renderDeck();
+		render.hand();
+		text.setScroll();
+	},
+
+	"card": (id) => {
+		// Render a card generically, and then fill it with the game's content.
+		return game.renderCard($("<div>")
+			.attr("id", id))
+			.addClass("card");
+	},
+
+	"hand": () => {
+		// If there's a card on the page not in the hand...
+		$("div#hand div.card").each((i, c) => {
+			if (state.hand.indexOf(c.attr("id")) < 0) {
+				c.remove();
+			}
+		});
+		// If there's a card in the hand but not on the page...
+		const missingCards = _.filter(state.hand, h => $(`div#hand div#${h}.card`).length == 0);
+		_.each(missingCards, c => {
+			$("div#hand").append(render.card(c));
+		});
+	},
+
+	"popup": (content) => {
+		// Show a popup with any content.
+	},
+
+}; 
+const state = {
+
+	// Unique ID of the instance of a game.
+	"instanceId": "",
+
+	// Card IDs currently in hand.
+	"hand": [],
+
+	// Card IDs currently in all combined decks.
+	"deck": [],
+
+	// The currently drawn card.
+	"drawnCardId": null,
+
+	// Time the game was started.
+	"started": null,
+
+	// Store to local storage.
+	"save": () => {
+		let gameData = {
+			"deck": state.deck,
+			"hand": state.hand,
+			"started": state.started,
+		};
+		localStorage.setItem(state.instanceId, JSON.stringify(gameData));
+	},
+
+	"load": () => {
+		let gameData = JSON.parse(localStorage.getItem(state.instanceId));
+		state.deck = gameData.deck;
+		state.hand = gameData.hand;
+		state.started = gameData.started;
+	},
+
+}; 
+const text = {
+
+	"scroll": "<i class='material-icons'>keyboard_double_arrow_down</i>\
+		<span>Scroll down to see your hand of cards...<span>\
+		<i class='material-icons'>keyboard_double_arrow_down</i>",
+
+	"empty": "<span>Your hand of cards is empty.<span>",
+
+	"setScroll": () => {
+		$("div#scroll")
+			.html(_.isEmpty(state.hand) ? text.empty : text.scroll);
+	},
+
+}; 
 const betrayal = {
 
 	// All cards in the game.
@@ -897,4 +1190,4 @@ $(document).ready(() => {
 	$("div.deck#items").click(betrayal.drawItem);
 	$("div.deck#omens").click(betrayal.drawOmen);
 	$("div.deck#events").click(betrayal.drawEvent);
-});
+}); 

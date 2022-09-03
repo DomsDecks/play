@@ -58,4 +58,50 @@ div#hand div.card {
 
 i.material-icons {
 	vertical-align: middle;
+} 
+body.betrayal {
+	background-color: rgb(56, 51, 51);
 }
+
+.betrayal div#top-content {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	gap: 2vw;
+}
+
+.betrayal div.card {
+	width: calc(82% - 2vh);
+	max-width: 41vh;
+	border: 2vh solid black;
+	border-radius: 5vh;
+}
+
+.betrayal div.deck {
+	border: 0.5vh solid black;
+	border-radius: 1vh;
+	position: relative;
+	height: 38vh;
+	max-height: 800px;
+	width: 19vh;
+	max-width: 400px;
+}
+
+
+.betrayal div.card.item {
+	background: yellow;
+}
+
+.betrayal div.card.omen {
+	background: green;
+}
+
+.betrayal div.card.event {
+	background: brown;
+}
+
+
+div#scroll {
+	color: rgba(134, 132, 111, 0.664);
+} 
