@@ -11,4 +11,9 @@ const text = {
 			.html(_.isEmpty(state.hand) ? text.empty : text.scroll);
 	},
 
+	"hand": "Keep in your hand",
+
+	"deck": "Shuffle in to deck",
+
+	"discard": "Place on discard pile",
 };

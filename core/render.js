@@ -10,13 +10,29 @@ const render = {
 		// Render a card generically, and then fill it with the game's content.
 		return game.renderCard($("<div>")
 			.attr("id", id))
-			.addClass("card");
+			.addClass("card")
+			.append(
+				$("<div>")
+					.addClass("tab tab-hand")
+					.html(text.hand)
+					.click(() => card.move(id, state.hand))
+			).append(
+				$("<div>")
+					.addClass("tab tab-deck")
+					.html(text.deck)
+					.click(() => card.move(id, state.deck))
+			).append(
+				$("<div>")
+					.addClass("tab tab-discard")
+					.html(text.discard)
+					.click(() => card.move(id, []))
+			);
 	},
 
 	"hand": () => {
 		// If there's a card on the page not in the hand...
 		$("div#hand div.card").each((i, c) => {
-			if (state.hand.indexOf(c.attr("id")) < 0) {
+			if (state.hand.indexOf(c.id) < 0) {
 				c.remove();
 			}
 		});

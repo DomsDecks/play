@@ -28,12 +28,17 @@ const card = {
 	"undraw": () => {
 		state.drawnCardId = null;
 		$("div.card.drawn")
+			.removeAttr('id')
 			.css({ "display": "none" })
-			.html("");
+			.empty();
 	},
 
 	// Move a card between arrays.
 	"move": (id, target) => {
+		if(state.drawnCardId == id) {
+			card.undraw();
+		}
+
 		// Cards can only be in one array at a time, so remove from others while moving.
 		if (target != state.hand && state.hand.some(h => h == id)) {
 			state.hand.splice(state.hand.indexOf(id), 1);
@@ -44,6 +49,7 @@ const card = {
 		if (!target.some(t => t == id)) {
 			target.push(id);
 		}
+
 		render.all();
 	},
 

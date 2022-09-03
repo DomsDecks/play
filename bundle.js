@@ -28,12 +28,17 @@ const card = {
 	"undraw": () => {
 		state.drawnCardId = null;
 		$("div.card.drawn")
+			.removeAttr('id')
 			.css({ "display": "none" })
-			.html("");
+			.empty();
 	},
 
 	// Move a card between arrays.
 	"move": (id, target) => {
+		if(state.drawnCardId == id) {
+			card.undraw();
+		}
+
 		// Cards can only be in one array at a time, so remove from others while moving.
 		if (target != state.hand && state.hand.some(h => h == id)) {
 			state.hand.splice(state.hand.indexOf(id), 1);
@@ -44,6 +49,7 @@ const card = {
 		if (!target.some(t => t == id)) {
 			target.push(id);
 		}
+
 		render.all();
 	},
 
@@ -201,7 +207,7 @@ sfc32 = (a, b, c, d) => {
 }
 
 // 32-bit seed with optional XOR value.
-var seed = (0.1 * 100000) ^ 0xDEADBEEF;
+var seed = (Math.random() * 100000) ^ 0xDEADBEEF;
 // Pad seed with Phi, Pi and E.
 // https://en.wikipedia.org/wiki/Nothing-up-my-sleeve_number
 var rand = sfc32(0x9E3779B9, 0x243F6A88, 0xB7E15162, seed);
@@ -220,13 +226,29 @@ const render = {
 		// Render a card generically, and then fill it with the game's content.
 		return game.renderCard($("<div>")
 			.attr("id", id))
-			.addClass("card");
+			.addClass("card")
+			.append(
+				$("<div>")
+					.addClass("tab tab-hand")
+					.html(text.hand)
+					.click(() => card.move(id, state.hand))
+			).append(
+				$("<div>")
+					.addClass("tab tab-deck")
+					.html(text.deck)
+					.click(() => card.move(id, state.deck))
+			).append(
+				$("<div>")
+					.addClass("tab tab-discard")
+					.html(text.discard)
+					.click(() => card.move(id, []))
+			);
 	},
 
 	"hand": () => {
 		// If there's a card on the page not in the hand...
 		$("div#hand div.card").each((i, c) => {
-			if (state.hand.indexOf(c.attr("id")) < 0) {
+			if (state.hand.indexOf(c.id) < 0) {
 				c.remove();
 			}
 		});
@@ -290,6 +312,11 @@ const text = {
 			.html(_.isEmpty(state.hand) ? text.empty : text.scroll);
 	},
 
+	"hand": "Keep in your hand",
+
+	"deck": "Shuffle in to deck",
+
+	"discard": "Place on discard pile",
 }; 
 const betrayal = {
 
@@ -1184,10 +1211,4 @@ const betrayal = {
 		return element;
 	},
 
-};
-
-$(document).ready(() => {
-	$("div.deck#items").click(betrayal.drawItem);
-	$("div.deck#omens").click(betrayal.drawOmen);
-	$("div.deck#events").click(betrayal.drawEvent);
-}); 
+}; 

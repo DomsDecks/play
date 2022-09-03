@@ -892,9 +892,3 @@ const betrayal = {
 	},
 
 };
-
-$(document).ready(() => {
-	$("div.deck#items").click(betrayal.drawItem);
-	$("div.deck#omens").click(betrayal.drawOmen);
-	$("div.deck#events").click(betrayal.drawEvent);
-});
