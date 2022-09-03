@@ -54,7 +54,7 @@ const link = {
 		const deckBinary = parseInt(data.split("_")[0], 36).toString(2).padStart(game.cards.length, "0");
 		_.each(game.cards, (c, i) => {
 			// For each possible card, add to the deck it if it's a 1.
-			if (deckBinary.substring(i, i + 1) == 1 || all) {
+			if (deckBinary.substring(game.cards.length - 1 - i, game.cards.length - i) == 1 || all) {
 				state.deck.push(c.id);
 			}
 		});
@@ -62,7 +62,7 @@ const link = {
 		// Do the same for the hand.
 		const handBinary = parseInt(data.split("_")[1], 36).toString(2).padStart(game.cards.length, "0");
 		_.each(game.cards, (c, i) => {
-			if (handBinary.substring(i, i + 1) == 1) {
+			if (handBinary.substring(game.cards.length - 1 - i, game.cards.length - i) == 1) {
 				state.hand.push(c.id);
 			}
 		});
