@@ -7,7 +7,7 @@ body {
 
 div#top {
 	width: calc(100% - 16px);
-	min-height: 93vh;
+	min-height: 98vh;
 	margin-top: 2vh;
 	z-index: 25;
 	display: flex;
@@ -21,7 +21,7 @@ div#top-content {
 
 div#scroll {
 	height: 1em;
-	margin: 1em 0 1em 0;
+	margin: 1em 0 4em 0;
 	font-weight: 800;
 	text-align: center;
 	white-space: nowrap;
