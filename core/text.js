@@ -16,4 +16,10 @@ const text = {
 	"deck": "Shuffle in to deck",
 
 	"discard": "Place on discard pile",
+
+	"discardCancel": "Leave in discard pile",
+
+	"up": "<i class='material-icons'>keyboard_arrow_up</i>",
+
+	"down": "<i class='material-icons'>keyboard_arrow_down</i>",
 };

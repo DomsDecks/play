@@ -7,7 +7,10 @@ const card = {
 	// Bring a card from the deck into the foreground.
 	// In terms of the data it is still in whatever area it was drawn from.
 	// So that, if you close the window with a card drawn, it isn't lost.
-	"draw": (id) => {
+	"draw": (id, replace = false) => {
+		if (replace) {
+			card.undraw();
+		}
 		if (!_.isNull(state.drawnCardId)) {
 			return;
 		}

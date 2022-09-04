@@ -8,11 +8,11 @@ const render = {
 
 	"card": (id) => {
 		// Render a card generically, and then fill it with the game's content.
-		let element = game.renderCard($("<div>")
+		const element = game.renderCard($("<div>")
 			.attr("id", id))
 			.addClass("card");
 
-		let c = card.get(id);
+		const c = card.get(id);
 
 		if (c["hand"] && state.hand.indexOf(id) < 0) {
 			element.append(
@@ -32,13 +32,33 @@ const render = {
 			);
 		}
 
+		const index = state.discard.indexOf(id);
 		if (c["discard"]) {
 			element.append(
 				$("<div>")
 					.addClass("tab tab-discard")
-					.html(text.discard)
+					.html(index < 0 ? text.discard : text.discardCancel)
 					.click(() => card.move(id, state.discard))
 			);
+		}
+
+		if (index >= 0) {
+			if (_.last(state.discard) != id) {
+				element.append(
+					$("<div>")
+						.addClass("tab tab-up")
+						.html(text.up)
+						.click(() => card.draw(state.discard[index + 1], true))
+				);
+			}
+			if (_.first(state.discard) != id) {
+				element.append(
+					$("<div>")
+						.addClass("tab tab-down")
+						.html(text.down)
+						.click(() => card.draw(state.discard[index - 1], true))
+				);
+			}
 		}
 
 		return element;

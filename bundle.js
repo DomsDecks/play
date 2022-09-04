@@ -7,7 +7,10 @@ const card = {
 	// Bring a card from the deck into the foreground.
 	// In terms of the data it is still in whatever area it was drawn from.
 	// So that, if you close the window with a card drawn, it isn't lost.
-	"draw": (id) => {
+	"draw": (id, replace = false) => {
+		if (replace) {
+			card.undraw();
+		}
 		if (!_.isNull(state.drawnCardId)) {
 			return;
 		}
@@ -237,11 +240,11 @@ const render = {
 
 	"card": (id) => {
 		// Render a card generically, and then fill it with the game's content.
-		let element = game.renderCard($("<div>")
+		const element = game.renderCard($("<div>")
 			.attr("id", id))
 			.addClass("card");
 
-		let c = card.get(id);
+		const c = card.get(id);
 
 		if (c["hand"] && state.hand.indexOf(id) < 0) {
 			element.append(
@@ -261,13 +264,33 @@ const render = {
 			);
 		}
 
+		const index = state.discard.indexOf(id);
 		if (c["discard"]) {
 			element.append(
 				$("<div>")
 					.addClass("tab tab-discard")
-					.html(text.discard)
+					.html(index < 0 ? text.discard : text.discardCancel)
 					.click(() => card.move(id, state.discard))
 			);
+		}
+
+		if (index >= 0) {
+			if (_.last(state.discard) != id) {
+				element.append(
+					$("<div>")
+						.addClass("tab tab-up")
+						.html(text.up)
+						.click(() => card.draw(state.discard[index + 1], true))
+				);
+			}
+			if (_.first(state.discard) != id) {
+				element.append(
+					$("<div>")
+						.addClass("tab tab-down")
+						.html(text.down)
+						.click(() => card.draw(state.discard[index - 1], true))
+				);
+			}
 		}
 
 		return element;
@@ -351,6 +374,12 @@ const text = {
 	"deck": "Shuffle in to deck",
 
 	"discard": "Place on discard pile",
+
+	"discardCancel": "Leave in discard pile",
+
+	"up": "<i class='material-icons'>keyboard_arrow_up</i>",
+
+	"down": "<i class='material-icons'>keyboard_arrow_down</i>",
 }; 
 const betrayal = {
 
