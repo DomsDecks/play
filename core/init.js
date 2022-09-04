@@ -54,6 +54,7 @@ $(document).ready(() => {
 			//alert("Error: incorrect link used.");
 			link.setStateFromData("*");
 			state.save();
+			render.all();
 		}
 	} else {
 		// TODO: New game screen here.

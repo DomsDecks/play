@@ -9,6 +9,10 @@ const state = {
 	// Card IDs currently in all combined decks.
 	"deck": [],
 
+	// Card IDs currently in discard pile.
+	// The last element is the top of the pile.
+	"discard": [],
+
 	// The currently drawn card.
 	"drawnCardId": null,
 
@@ -20,6 +24,7 @@ const state = {
 		let gameData = {
 			"deck": state.deck,
 			"hand": state.hand,
+			"discard": state.discard,
 			"started": state.started,
 		};
 		localStorage.setItem(state.instanceId, JSON.stringify(gameData));
@@ -27,9 +32,10 @@ const state = {
 
 	"load": () => {
 		let gameData = JSON.parse(localStorage.getItem(state.instanceId));
-		state.deck = gameData.deck;
-		state.hand = gameData.hand;
-		state.started = gameData.started;
+		state.deck = gameData.deck || [];
+		state.hand = gameData.hand || {};
+		state.discard = gameData.discard || [];
+		state.started = gameData.started || new Date().toLocaleString();
 	},
 
 };

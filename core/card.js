@@ -33,6 +33,11 @@ const card = {
 			.empty();
 	},
 
+	// Draw from the top of the discard pile.
+	"drawDiscard": () => {
+		card.draw(_.last(state.discard));
+	},
+
 	// Move a card between arrays.
 	"move": (id, target) => {
 		if(state.drawnCardId == id) {
@@ -46,9 +51,16 @@ const card = {
 		if (target != state.deck && state.deck.some(d => d == id)) {
 			state.deck.splice(state.deck.indexOf(id), 1);
 		}
+		if (target != state.discard && state.discard.some(d => d == id)) {
+			state.discard.splice(state.discard.indexOf(id), 1);
+		}
+
+		// Add it to the end of the target array.
 		if (!target.some(t => t == id)) {
 			target.push(id);
 		}
+
+		state.save();
 
 		render.all();
 	},

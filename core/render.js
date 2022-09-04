@@ -25,7 +25,7 @@ const render = {
 				$("<div>")
 					.addClass("tab tab-discard")
 					.html(text.discard)
-					.click(() => card.move(id, []))
+					.click(() => card.move(id, state.discard))
 			);
 	},
 

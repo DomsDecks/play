@@ -872,6 +872,7 @@ const betrayal = {
 				$("div.deck#items").click(betrayal.drawItem);
 				$("div.deck#omens").click(betrayal.drawOmen);
 				$("div.deck#events").click(betrayal.drawEvent);
+				$("div.deck#discard").click(card.drawDiscard);
 
 				$("body").addClass("betrayal");
 		}

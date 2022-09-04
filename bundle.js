@@ -33,6 +33,11 @@ const card = {
 			.empty();
 	},
 
+	// Draw from the top of the discard pile.
+	"drawDiscard": () => {
+		card.draw(_.last(state.discard));
+	},
+
 	// Move a card between arrays.
 	"move": (id, target) => {
 		if(state.drawnCardId == id) {
@@ -46,9 +51,16 @@ const card = {
 		if (target != state.deck && state.deck.some(d => d == id)) {
 			state.deck.splice(state.deck.indexOf(id), 1);
 		}
+		if (target != state.discard && state.discard.some(d => d == id)) {
+			state.discard.splice(state.discard.indexOf(id), 1);
+		}
+
+		// Add it to the end of the target array.
 		if (!target.some(t => t == id)) {
 			target.push(id);
 		}
+
+		state.save();
 
 		render.all();
 	},
@@ -110,6 +122,7 @@ $(document).ready(() => {
 			//alert("Error: incorrect link used.");
 			link.setStateFromData("*");
 			state.save();
+			render.all();
 		}
 	} else {
 		// TODO: New game screen here.
@@ -241,7 +254,7 @@ const render = {
 				$("<div>")
 					.addClass("tab tab-discard")
 					.html(text.discard)
-					.click(() => card.move(id, []))
+					.click(() => card.move(id, state.discard))
 			);
 	},
 
@@ -275,6 +288,10 @@ const state = {
 	// Card IDs currently in all combined decks.
 	"deck": [],
 
+	// Card IDs currently in discard pile.
+	// The last element is the top of the pile.
+	"discard": [],
+
 	// The currently drawn card.
 	"drawnCardId": null,
 
@@ -286,6 +303,7 @@ const state = {
 		let gameData = {
 			"deck": state.deck,
 			"hand": state.hand,
+			"discard": state.discard,
 			"started": state.started,
 		};
 		localStorage.setItem(state.instanceId, JSON.stringify(gameData));
@@ -293,9 +311,10 @@ const state = {
 
 	"load": () => {
 		let gameData = JSON.parse(localStorage.getItem(state.instanceId));
-		state.deck = gameData.deck;
-		state.hand = gameData.hand;
-		state.started = gameData.started;
+		state.deck = gameData.deck || [];
+		state.hand = gameData.hand || {};
+		state.discard = gameData.discard || [];
+		state.started = gameData.started || new Date().toLocaleString();
 	},
 
 }; 
@@ -1192,6 +1211,7 @@ const betrayal = {
 				$("div.deck#items").click(betrayal.drawItem);
 				$("div.deck#omens").click(betrayal.drawOmen);
 				$("div.deck#events").click(betrayal.drawEvent);
+				$("div.deck#discard").click(card.drawDiscard);
 
 				$("body").addClass("betrayal");
 		}
