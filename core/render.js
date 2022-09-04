@@ -66,20 +66,56 @@ const render = {
 
 	"hand": () => {
 		// If there's a card on the page not in the hand...
-		$("div#hand div.card").each((i, c) => {
+		$("#hand div.card").each((i, c) => {
 			if (state.hand.indexOf(c.id) < 0) {
 				c.remove();
 			}
 		});
 		// If there's a card in the hand but not on the page...
-		const missingCards = _.filter(state.hand, h => $(`div#hand div#${h}.card`).length == 0);
+		const missingCards = _.filter(state.hand, h => $(`#hand div#${h}.card`).length == 0);
 		_.each(missingCards, c => {
-			$("div#hand").append(render.card(c));
+			$("#hand").append(render.card(c));
 		});
 	},
 
-	"popup": (content) => {
-		// Show a popup with any content.
+	"menu": (content) => {
+		// Show a menu with any content.
+		$("#top").append(
+			$("<div>")
+				.addClass("menu")
+				.append(content)
+		);
+	},
+
+	"newGame": () => {
+		render.menu();
+		$(".menu")
+			.attr("id", "new")
+			.append(
+				$("<input type='number' min='1' max='6' value='1'>")
+					.attr("id", "players")
+			).append(
+				$("<button type='button'>")
+					.attr("id", "start")
+					.html(text.start)
+			).append(
+				$("<div>")
+					.attr("id", "links")
+			);
+	},
+
+	"findCard": () => {
+		render.menu();
+		$(".menu")
+			.attr("id", "find")
+			.append(
+				$("<input type='number' min='1000' max='9999'>")
+					.attr("id", "id")
+			).append(
+				$("<button type='button'>")
+					.attr("id", "draw")
+					.html(text.draw)
+			);
 	},
 
 };

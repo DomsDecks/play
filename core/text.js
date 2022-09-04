@@ -22,4 +22,8 @@ const text = {
 	"up": "<i class='material-icons'>keyboard_arrow_up</i>",
 
 	"down": "<i class='material-icons'>keyboard_arrow_down</i>",
+
+	"start": "Start",
+
+	"draw": "Draw",
 };

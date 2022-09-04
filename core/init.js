@@ -3,6 +3,8 @@ let game = {};
 
 $(document).ready(() => {
 	game = betrayal;
+	game.init();
+
 	// Sort the cards in case theyre in a random order in the game file.
 	game.cards = _.sortBy(_.flatten(game.cards), (c) => c.id);
 
@@ -49,18 +51,28 @@ $(document).ready(() => {
 			state.save();
 			render.all();
 		} else {
-			// TODO: New game screen here.
-			// Splits deck randomly, empties hand, and gets state, repeats and returns list of states. Game specific.
-			//alert("Error: incorrect link used.");
-			link.setStateFromData("*");
-			state.save();
-			render.all();
+			render.newGame();
 		}
 	} else {
-		// TODO: New game screen here.
-		// Splits deck randomly, empties hand, and gets state, repeats and returns list of states. Game specific.
-		alert("Error: incorrect link used.");
+		render.newGame();
 	}
+
+	$("#start").click(() => {
+		const states = game.startGame($("#players").val());
+		const instanceId = Date.now();
+		_.each(states, s => {
+			const url = link.share(instanceId, "b", s);
+			$("#links")
+				.append($(`<a href="${url}">`)
+					.html(url))
+				.append("</br></br>");
+		});
+		$("#start, #players").prop('disabled', true);
+	});
+
+	$("#draw").click(() => {
+		//TODO: draw card here.
+	});
 
 	link.cleanURL();
 });

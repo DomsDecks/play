@@ -3,6 +3,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background-color: #111;
 }
 
 div#top {
@@ -91,6 +92,16 @@ div.tab-down {
 div.tab-up {
 	bottom: 4em;
 	left: 2vw;
+}
+
+div.menu {
+	width: 80vw;
+	height: 50vh;
+	position: fixed;
+	background-color: white;
+	z-index: 90;
+	top: 50vh;
+	margin-top: -25vh;
 } 
 body.betrayal {
 	background-color: rgb(56, 51, 51);

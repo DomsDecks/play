@@ -31,7 +31,7 @@ const card = {
 	"undraw": () => {
 		state.drawnCardId = null;
 		$("div.card.drawn")
-			.removeAttr('id')
+			.removeAttr("id")
 			.css({ "display": "none" })
 			.empty();
 	},

@@ -31,7 +31,7 @@ const card = {
 	"undraw": () => {
 		state.drawnCardId = null;
 		$("div.card.drawn")
-			.removeAttr('id')
+			.removeAttr("id")
 			.css({ "display": "none" })
 			.empty();
 	},
@@ -74,6 +74,8 @@ let game = {};
 
 $(document).ready(() => {
 	game = betrayal;
+	game.init();
+
 	// Sort the cards in case theyre in a random order in the game file.
 	game.cards = _.sortBy(_.flatten(game.cards), (c) => c.id);
 
@@ -120,18 +122,28 @@ $(document).ready(() => {
 			state.save();
 			render.all();
 		} else {
-			// TODO: New game screen here.
-			// Splits deck randomly, empties hand, and gets state, repeats and returns list of states. Game specific.
-			//alert("Error: incorrect link used.");
-			link.setStateFromData("*");
-			state.save();
-			render.all();
+			render.newGame();
 		}
 	} else {
-		// TODO: New game screen here.
-		// Splits deck randomly, empties hand, and gets state, repeats and returns list of states. Game specific.
-		alert("Error: incorrect link used.");
+		render.newGame();
 	}
+
+	$("#start").click(() => {
+		const states = game.startGame($("#players").val());
+		const instanceId = Date.now();
+		_.each(states, s => {
+			const url = link.share(instanceId, "b", s);
+			$("#links")
+				.append($(`<a href="${url}">`)
+					.html(url))
+				.append("</br></br>");
+		});
+		$("#start, #players").prop('disabled', true);
+	});
+
+	$("#draw").click(() => {
+		//TODO: draw card here.
+	});
 
 	link.cleanURL();
 }); 
@@ -139,15 +151,13 @@ const link = {
 
 	// Clean the URL.
 	"cleanURL": () => {
-		const newUrl =
-			window.location.protocol +
-			"//" +
-			window.location.host +
-			window.location.pathname +
-			(!_.isEmpty(state.instanceId)
-				? ("?i=" + state.instanceId)
-				: "");
+		const newUrl =`${window.location.protocol}//${window.location.host}${window.location.pathname}${!_.isEmpty(state.instanceId) ? ("?i=" + state.instanceId) : ""}`;
 		window.history.pushState({ path: newUrl }, "", newUrl);
+	},
+
+	// Get the sharing URL.
+	"share": (instanceId, game, data) => {
+		return `${window.location.protocol}//${window.location.host}${window.location.pathname}?i=${instanceId}&g=${game}&d=${data}`;
 	},
 
 	// Get an encoded string containing the deck and hand.
@@ -298,20 +308,56 @@ const render = {
 
 	"hand": () => {
 		// If there's a card on the page not in the hand...
-		$("div#hand div.card").each((i, c) => {
+		$("#hand div.card").each((i, c) => {
 			if (state.hand.indexOf(c.id) < 0) {
 				c.remove();
 			}
 		});
 		// If there's a card in the hand but not on the page...
-		const missingCards = _.filter(state.hand, h => $(`div#hand div#${h}.card`).length == 0);
+		const missingCards = _.filter(state.hand, h => $(`#hand div#${h}.card`).length == 0);
 		_.each(missingCards, c => {
-			$("div#hand").append(render.card(c));
+			$("#hand").append(render.card(c));
 		});
 	},
 
-	"popup": (content) => {
-		// Show a popup with any content.
+	"menu": (content) => {
+		// Show a menu with any content.
+		$("#top").append(
+			$("<div>")
+				.addClass("menu")
+				.append(content)
+		);
+	},
+
+	"newGame": () => {
+		render.menu();
+		$(".menu")
+			.attr("id", "new")
+			.append(
+				$("<input type='number' min='1' max='6' value='1'>")
+					.attr("id", "players")
+			).append(
+				$("<button type='button'>")
+					.attr("id", "start")
+					.html(text.start)
+			).append(
+				$("<div>")
+					.attr("id", "links")
+			);
+	},
+
+	"findCard": () => {
+		render.menu();
+		$(".menu")
+			.attr("id", "find")
+			.append(
+				$("<input type='number' min='1000' max='9999'>")
+					.attr("id", "id")
+			).append(
+				$("<button type='button'>")
+					.attr("id", "draw")
+					.html(text.draw)
+			);
 	},
 
 }; 
@@ -380,6 +426,10 @@ const text = {
 	"up": "<i class='material-icons'>keyboard_arrow_up</i>",
 
 	"down": "<i class='material-icons'>keyboard_arrow_down</i>",
+
+	"start": "Start",
+
+	"draw": "Draw",
 }; 
 const betrayal = {
 
@@ -1137,7 +1187,7 @@ const betrayal = {
 			shuffledCards[a].push(_.extend(c, { "rand": rand() }));
 		});
 		_.each(shuffledCards, (a, i) => {
-			shuffledGameCards[a] = _.sortBy(shuffledGameCards[a], c => c["rand"]);
+			shuffledCards[i] = _.sortBy(a, c => c["rand"]);
 		});
 
 		const states = [];
@@ -1180,8 +1230,8 @@ const betrayal = {
 
 	"renderDeck": () => {
 		// Render the decks.
-		if ($("div#top-content div").length == 0) {
-			$("div#top-content")
+		if ($("#top-content div").length == 0) {
+			$("#top-content")
 				.append(
 					$("<div>")
 						.addClass("deck")
@@ -1252,10 +1302,10 @@ const betrayal = {
 				);
 
 				// Bind events.
-				$("div.deck#items").click(betrayal.drawItem);
-				$("div.deck#omens").click(betrayal.drawOmen);
-				$("div.deck#events").click(betrayal.drawEvent);
-				$("div.deck#discard").click(card.drawDiscard);
+				$("#items").click(betrayal.drawItem);
+				$("#omens").click(betrayal.drawOmen);
+				$("#events").click(betrayal.drawEvent);
+				$("#discard").click(card.drawDiscard);
 
 				$("body").addClass("betrayal");
 		}
@@ -1275,4 +1325,7 @@ const betrayal = {
 		return element;
 	},
 
+	"init": () => {
+		return;
+	},
 }; 

@@ -754,7 +754,7 @@ const betrayal = {
 			shuffledCards[a].push(_.extend(c, { "rand": rand() }));
 		});
 		_.each(shuffledCards, (a, i) => {
-			shuffledGameCards[a] = _.sortBy(shuffledGameCards[a], c => c["rand"]);
+			shuffledCards[i] = _.sortBy(a, c => c["rand"]);
 		});
 
 		const states = [];
@@ -797,8 +797,8 @@ const betrayal = {
 
 	"renderDeck": () => {
 		// Render the decks.
-		if ($("div#top-content div").length == 0) {
-			$("div#top-content")
+		if ($("#top-content div").length == 0) {
+			$("#top-content")
 				.append(
 					$("<div>")
 						.addClass("deck")
@@ -869,10 +869,10 @@ const betrayal = {
 				);
 
 				// Bind events.
-				$("div.deck#items").click(betrayal.drawItem);
-				$("div.deck#omens").click(betrayal.drawOmen);
-				$("div.deck#events").click(betrayal.drawEvent);
-				$("div.deck#discard").click(card.drawDiscard);
+				$("#items").click(betrayal.drawItem);
+				$("#omens").click(betrayal.drawOmen);
+				$("#events").click(betrayal.drawEvent);
+				$("#discard").click(card.drawDiscard);
 
 				$("body").addClass("betrayal");
 		}
@@ -892,4 +892,7 @@ const betrayal = {
 		return element;
 	},
 
+	"init": () => {
+		return;
+	},
 };
