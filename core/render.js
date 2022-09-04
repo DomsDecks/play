@@ -8,25 +8,40 @@ const render = {
 
 	"card": (id) => {
 		// Render a card generically, and then fill it with the game's content.
-		return game.renderCard($("<div>")
+		let element = game.renderCard($("<div>")
 			.attr("id", id))
-			.addClass("card")
-			.append(
+			.addClass("card");
+
+		let c = card.get(id);
+
+		if (c["hand"] && state.hand.indexOf(id) < 0) {
+			element.append(
 				$("<div>")
 					.addClass("tab tab-hand")
 					.html(text.hand)
 					.click(() => card.move(id, state.hand))
-			).append(
+			);
+		}
+
+		if (c["deck"]) {
+			element.append(
 				$("<div>")
 					.addClass("tab tab-deck")
 					.html(text.deck)
 					.click(() => card.move(id, state.deck))
-			).append(
+			);
+		}
+
+		if (c["discard"]) {
+			element.append(
 				$("<div>")
 					.addClass("tab tab-discard")
 					.html(text.discard)
 					.click(() => card.move(id, state.discard))
 			);
+		}
+
+		return element;
 	},
 
 	"hand": () => {
