@@ -22,14 +22,14 @@ const link = {
 		});
 
 		// The data is the deck binary number, converted to base 36.
-		let data = parseInt(deckBinary, 2).toString(36);
+		let data = parseBigInt(deckBinary, 2).toString(36);
 
 		// Do the same for the hand.
 		let handBinary = "";
 		_.each(game.cards, (c, i) => {
 			handBinary = (_.any(hand, h => h == c.id) ? "1" : "0") + handBinary;
 		});
-		data += "_" + parseInt(handBinary, 2).toString(36);
+		data += "_" + parseBigInt(handBinary, 2).toString(36);
 
 		// The data is the deck number, then an underscore, then the hand number.
 		return data;
@@ -49,7 +49,7 @@ const link = {
 		state.hand.splice(0, state.hand.length);
 
 		// Parse the data into those binary numbers.
-		const deckBinary = parseInt(data.split("_")[0], 36).toString(2).padStart(game.cards.length, "0");
+		const deckBinary = parseBigInt(data.split("_")[0], 36).toString(2).padStart(game.cards.length, "0");
 		_.each(game.cards, (c, i) => {
 			// For each possible card, add to the deck it if it's a 1.
 			if (deckBinary.substring(game.cards.length - 1 - i, game.cards.length - i) == 1 || all) {
@@ -58,7 +58,7 @@ const link = {
 		});
 
 		// Do the same for the hand.
-		const handBinary = parseInt(data.split("_")[1], 36).toString(2).padStart(game.cards.length, "0");
+		const handBinary = parseBigInt(data.split("_")[1], 36).toString(2).padStart(game.cards.length, "0");
 		_.each(game.cards, (c, i) => {
 			if (handBinary.substring(game.cards.length - 1 - i, game.cards.length - i) == 1) {
 				state.hand.push(c.id);
