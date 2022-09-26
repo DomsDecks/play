@@ -22,3 +22,13 @@ var rand = sfc32(0x9E3779B9, 0x243F6A88, 0xB7E15162, seed);
 for (let i = 0; i < 15; i++) {
 	rand();
 }
+
+// Get a big int from the string value and the specified base.
+function parseBigInt(value, radix) {
+	let size = 10,
+			factor = BigInt(radix ** size),
+			i = value.length % size || size,
+			parts = [value.slice(0, i)];
+	while (i < value.length) parts.push(value.slice(i, i += size));
+	return parts.reduce((r, v) => r * factor + BigInt(parseInt(v, radix)), 0n);
+}

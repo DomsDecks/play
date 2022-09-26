@@ -128,23 +128,6 @@ $(document).ready(() => {
 		render.newGame();
 	}
 
-	$("#start").click(() => {
-		const states = game.startGame($("#players").val());
-		const instanceId = Date.now();
-		_.each(states, s => {
-			const url = link.share(instanceId, "b", s);
-			$("#links")
-				.append($(`<a href="${url}">`)
-					.html(url))
-				.append("</br></br>");
-		});
-		$("#start, #players").prop('disabled', true);
-	});
-
-	$("#draw").click(() => {
-		//TODO: draw card here.
-	});
-
 	link.cleanURL();
 }); 
 const link = {
@@ -239,6 +222,16 @@ var seed = (Math.random() * 100000) ^ 0xDEADBEEF;
 var rand = sfc32(0x9E3779B9, 0x243F6A88, 0xB7E15162, seed);
 for (let i = 0; i < 15; i++) {
 	rand();
+}
+
+// Get a big int from the string value and the specified base.
+function parseBigInt(value, radix) {
+	let size = 10,
+			factor = BigInt(radix ** size),
+			i = value.length % size || size,
+			parts = [value.slice(0, i)];
+	while (i < value.length) parts.push(value.slice(i, i += size));
+	return parts.reduce((r, v) => r * factor + BigInt(parseInt(v, radix)), 0n);
 } 
 const render = {
 
@@ -331,6 +324,7 @@ const render = {
 
 	"newGame": () => {
 		render.menu();
+
 		$(".menu")
 			.attr("id", "new")
 			.append(
@@ -344,10 +338,28 @@ const render = {
 				$("<div>")
 					.attr("id", "links")
 			);
+
+		$("#start").click(() => {
+			const states = game.startGame($("#players").val());
+			const instanceId = Date.now();
+			_.each(states, s => {
+				const url = link.share(instanceId, "b", s);
+				$("#links")
+					.append($(`<a href="${url}">`)
+						.html(url))
+					.append("</br></br>");
+			});
+			$("#start, #players").prop('disabled', true);
+		});
 	},
 
 	"findCard": () => {
+		if ($(".menu").length > 0) {
+			return;
+		}
+
 		render.menu();
+
 		$(".menu")
 			.attr("id", "find")
 			.append(
@@ -358,6 +370,14 @@ const render = {
 					.attr("id", "draw")
 					.html(text.draw)
 			);
+
+		$("#draw").click(() => {
+			const id = $("#id").val();
+			card.draw(id);
+			if (state.drawnCardId == id) {
+				$(".menu").remove();
+			}
+		});
 	},
 
 }; 
@@ -1177,10 +1197,10 @@ const betrayal = {
 				case "item":
 					a = 0;
 					break;
-				case "omen":
+				case "event":
 					a = 1;
 					break;
-				case "event":
+				case "omen":
 					a = 2;
 					break;
 			}

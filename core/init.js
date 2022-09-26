@@ -57,22 +57,5 @@ $(document).ready(() => {
 		render.newGame();
 	}
 
-	$("#start").click(() => {
-		const states = game.startGame($("#players").val());
-		const instanceId = Date.now();
-		_.each(states, s => {
-			const url = link.share(instanceId, "b", s);
-			$("#links")
-				.append($(`<a href="${url}">`)
-					.html(url))
-				.append("</br></br>");
-		});
-		$("#start, #players").prop('disabled', true);
-	});
-
-	$("#draw").click(() => {
-		//TODO: draw card here.
-	});
-
 	link.cleanURL();
 });

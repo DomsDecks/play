@@ -89,6 +89,7 @@ const render = {
 
 	"newGame": () => {
 		render.menu();
+
 		$(".menu")
 			.attr("id", "new")
 			.append(
@@ -102,10 +103,28 @@ const render = {
 				$("<div>")
 					.attr("id", "links")
 			);
+
+		$("#start").click(() => {
+			const states = game.startGame($("#players").val());
+			const instanceId = Date.now();
+			_.each(states, s => {
+				const url = link.share(instanceId, "b", s);
+				$("#links")
+					.append($(`<a href="${url}">`)
+						.html(url))
+					.append("</br></br>");
+			});
+			$("#start, #players").prop('disabled', true);
+		});
 	},
 
 	"findCard": () => {
+		if ($(".menu").length > 0) {
+			return;
+		}
+
 		render.menu();
+
 		$(".menu")
 			.attr("id", "find")
 			.append(
@@ -116,6 +135,14 @@ const render = {
 					.attr("id", "draw")
 					.html(text.draw)
 			);
+
+		$("#draw").click(() => {
+			const id = $("#id").val();
+			card.draw(id);
+			if (state.drawnCardId == id) {
+				$(".menu").remove();
+			}
+		});
 	},
 
 };

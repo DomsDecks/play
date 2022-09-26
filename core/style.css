@@ -96,6 +96,7 @@ div.tab-up {
 
 div.menu {
 	width: 80vw;
+	max-width:500px;
 	height: 50vh;
 	position: fixed;
 	background-color: white;

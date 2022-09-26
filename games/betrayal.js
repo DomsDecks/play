@@ -744,10 +744,10 @@ const betrayal = {
 				case "item":
 					a = 0;
 					break;
-				case "omen":
+				case "event":
 					a = 1;
 					break;
-				case "event":
+				case "omen":
 					a = 2;
 					break;
 			}
