@@ -798,83 +798,41 @@ const betrayal = {
 	"renderDeck": () => {
 		// Render the decks.
 		if ($("#top-content div").length == 0) {
+			render.find();
+
 			$("#top-content")
 				.append(
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "items")
 						.html("items")
-						.append($("<div>")
-							.addClass("tab")
-							.css({
-								"background-color": "gray",
-								"width": "40%",
-								"height": "2em",
-								"position": "absolute",
-								"bottom": "1vh",
-								"right": "-1vw",
-							})
-						)
 				)
 				.append(
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "omens")
 						.html("omens")
-						.append($("<div>")
-							.addClass("tab")
-							.css({
-								"background-color": "gray",
-								"width": "40%",
-								"height": "2em",
-								"position": "absolute",
-								"bottom": "1vh",
-								"right": "-1vw",
-							})
-						)
 				)
 				.append(
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "events")
 						.html("events")
-						.append($("<div>")
-							.addClass("tab")
-							.css({
-								"background-color": "gray",
-								"width": "40%",
-								"height": "2em",
-								"position": "absolute",
-								"bottom": "1vh",
-								"right": "-1vw",
-							})
-						)
 				)
 				.append(
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "discard")
 						.html("discard")
-						.append($("<div>")
-							.addClass("tab")
-							.css({
-								"background-color": "gray",
-								"width": "40%",
-								"height": "2em",
-								"position": "absolute",
-								"bottom": "1vh",
-								"right": "-1vw",
-							})
-						)
 				);
 
-				// Bind events.
-				$("#items").click(betrayal.drawItem);
-				$("#omens").click(betrayal.drawOmen);
-				$("#events").click(betrayal.drawEvent);
-				$("#discard").click(card.drawDiscard);
+			// Bind events.
+			$("#items").click(betrayal.drawItem);
+			$("#omens").click(betrayal.drawOmen);
+			$("#events").click(betrayal.drawEvent);
+			$("#discard").click(card.drawDiscard);
 
-				$("body").addClass("betrayal");
+			$("body").addClass("betrayal");
 		}
 	},
 

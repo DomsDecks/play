@@ -28,6 +28,17 @@ div#scroll {
 	white-space: nowrap;
 }
 
+div#find {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	cursor: pointer;
+}
+
+div.deck {
+	cursor: pointer;
+}
+
 div.card {
 	width: calc(97% - 2vh);
 	max-width: 60vh;
@@ -67,6 +78,7 @@ div.tab {
 	width: 40%;
 	height: 2em;
 	position: absolute;
+	cursor: pointer;
 }
 
 div.tab-hand {
@@ -96,11 +108,29 @@ div.tab-up {
 
 div.menu {
 	width: 80vw;
-	max-width:500px;
-	height: 50vh;
+	max-width: 500px;
+	height: 70vh;
 	position: fixed;
 	background-color: white;
 	z-index: 90;
 	top: 50vh;
-	margin-top: -25vh;
+	margin-top: -35vh;
+	border-radius: 2em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+div.menu input,
+div.menu button,
+div.menu div {
+	margin-top: 2em;
+	width: 66%;
+	text-align: center;
+}
+
+div#links {
+	overflow-y: scroll;
+	width: 80%;
+	text-align: left;
 }

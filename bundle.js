@@ -241,6 +241,17 @@ const render = {
 		text.setScroll();
 	},
 
+	"find": () => {
+		if ($("#find").length == 0) {
+			$("#top-content").append(
+				$("<div>")
+					.attr("id", "find")
+					.html($("<i class='material-icons'>search</i>"))
+					.click(render.findCard)
+			);
+		}
+	},
+
 	"card": (id) => {
 		// Render a card generically, and then fill it with the game's content.
 		const element = game.renderCard($("<div>")
@@ -326,7 +337,12 @@ const render = {
 		render.menu();
 
 		$(".menu")
-			.attr("id", "new")
+			.attr("id", "menu-new")
+			.append(
+				$("<div>")
+					.attr("class", "text")
+					.html(text.players)
+			)
 			.append(
 				$("<input type='number' min='1' max='6' value='1'>")
 					.attr("id", "players")
@@ -342,14 +358,19 @@ const render = {
 		$("#start").click(() => {
 			const states = game.startGame(parseInt($("#players").val()));
 			const instanceId = Date.now();
-			_.each(states, s => {
+			$("#links")
+				.before($("<div>")
+					.html(text.link));
+			_.each(states, (s, i) => {
 				const url = link.share(instanceId, "b", s);
 				$("#links")
+					.append($("<span>")
+						.html(`${i + 1}. `))
 					.append($(`<a href="${url}">`)
 						.html(url))
 					.append("</br></br>");
 			});
-			$("#start, #players").prop('disabled', true);
+			// $("#start, #players").prop('disabled', true);
 		});
 	},
 
@@ -361,7 +382,12 @@ const render = {
 		render.menu();
 
 		$(".menu")
-			.attr("id", "find")
+			.attr("id", "menu-find")
+			.append(
+				$("<div>")
+					.attr("class", "text")
+					.html(text.find)
+			)
 			.append(
 				$("<input type='number' min='1000' max='9999'>")
 					.attr("id", "id")
@@ -447,7 +473,13 @@ const text = {
 
 	"down": "<i class='material-icons'>keyboard_arrow_down</i>",
 
+	"players": "Select the number of players in the game.",
+
 	"start": "Start",
+
+	"link": "Send one unique link to each player. Each player must use a different link to play the game.",
+
+	"find": "Enter a card ID number to find it and draw it, regardless of it's current location.",
 
 	"draw": "Draw",
 }; 
@@ -1251,83 +1283,41 @@ const betrayal = {
 	"renderDeck": () => {
 		// Render the decks.
 		if ($("#top-content div").length == 0) {
+			render.find();
+
 			$("#top-content")
 				.append(
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "items")
 						.html("items")
-						.append($("<div>")
-							.addClass("tab")
-							.css({
-								"background-color": "gray",
-								"width": "40%",
-								"height": "2em",
-								"position": "absolute",
-								"bottom": "1vh",
-								"right": "-1vw",
-							})
-						)
 				)
 				.append(
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "omens")
 						.html("omens")
-						.append($("<div>")
-							.addClass("tab")
-							.css({
-								"background-color": "gray",
-								"width": "40%",
-								"height": "2em",
-								"position": "absolute",
-								"bottom": "1vh",
-								"right": "-1vw",
-							})
-						)
 				)
 				.append(
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "events")
 						.html("events")
-						.append($("<div>")
-							.addClass("tab")
-							.css({
-								"background-color": "gray",
-								"width": "40%",
-								"height": "2em",
-								"position": "absolute",
-								"bottom": "1vh",
-								"right": "-1vw",
-							})
-						)
 				)
 				.append(
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "discard")
 						.html("discard")
-						.append($("<div>")
-							.addClass("tab")
-							.css({
-								"background-color": "gray",
-								"width": "40%",
-								"height": "2em",
-								"position": "absolute",
-								"bottom": "1vh",
-								"right": "-1vw",
-							})
-						)
 				);
 
-				// Bind events.
-				$("#items").click(betrayal.drawItem);
-				$("#omens").click(betrayal.drawOmen);
-				$("#events").click(betrayal.drawEvent);
-				$("#discard").click(card.drawDiscard);
+			// Bind events.
+			$("#items").click(betrayal.drawItem);
+			$("#omens").click(betrayal.drawOmen);
+			$("#events").click(betrayal.drawEvent);
+			$("#discard").click(card.drawDiscard);
 
-				$("body").addClass("betrayal");
+			$("body").addClass("betrayal");
 		}
 	},
 

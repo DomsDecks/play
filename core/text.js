@@ -23,7 +23,13 @@ const text = {
 
 	"down": "<i class='material-icons'>keyboard_arrow_down</i>",
 
+	"players": "Select the number of players in the game.",
+
 	"start": "Start",
+
+	"link": "Send one unique link to each player. Each player must use a different link to play the game.",
+
+	"find": "Enter a card ID number to find it and draw it, regardless of it's current location.",
 
 	"draw": "Draw",
 };
