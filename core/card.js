@@ -49,13 +49,13 @@ const card = {
 
 		// Cards can only be in one array at a time, so remove from others while moving.
 		if (target != state.hand && state.hand.some(h => h == id)) {
-			state.hand.splice(state.hand.indexOf(id), 1);
+			state.hand.splice(_.findIndex(state.hand, h => h == id), 1);
 		}
 		if (target != state.deck && state.deck.some(d => d == id)) {
-			state.deck.splice(state.deck.indexOf(id), 1);
+			state.deck.splice(_.findIndex(state.deck, d => d == id), 1);
 		}
 		if (target != state.discard && state.discard.some(d => d == id)) {
-			state.discard.splice(state.discard.indexOf(id), 1);
+			state.discard.splice(_.findIndex(state.discard, d => d == id), 1);
 		}
 
 		// Add it to the end of the target array.

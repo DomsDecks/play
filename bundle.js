@@ -49,13 +49,13 @@ const card = {
 
 		// Cards can only be in one array at a time, so remove from others while moving.
 		if (target != state.hand && state.hand.some(h => h == id)) {
-			state.hand.splice(state.hand.indexOf(id), 1);
+			state.hand.splice(_.findIndex(state.hand, h => h == id), 1);
 		}
 		if (target != state.deck && state.deck.some(d => d == id)) {
-			state.deck.splice(state.deck.indexOf(id), 1);
+			state.deck.splice(_.findIndex(state.deck, d => d == id), 1);
 		}
 		if (target != state.discard && state.discard.some(d => d == id)) {
-			state.discard.splice(state.discard.indexOf(id), 1);
+			state.discard.splice(_.findIndex(state.discard, d => d == id), 1);
 		}
 
 		// Add it to the end of the target array.
@@ -249,7 +249,7 @@ const render = {
 
 		const c = card.get(id);
 
-		if (c["hand"] && state.hand.indexOf(id) < 0) {
+		if (c["hand"] && !_.some(state.hand, h => h == id)) {
 			element.append(
 				$("<div>")
 					.addClass("tab tab-hand")
@@ -267,7 +267,7 @@ const render = {
 			);
 		}
 
-		const index = state.discard.indexOf(id);
+		const index = _.findIndex(state.discard, d => d.id);
 		if (c["discard"]) {
 			element.append(
 				$("<div>")
@@ -302,7 +302,7 @@ const render = {
 	"hand": () => {
 		// If there's a card on the page not in the hand...
 		$("#hand div.card").each((i, c) => {
-			if (state.hand.indexOf(c.id) < 0) {
+			if (!_.some(state.hand, h => c.id)) {
 				c.remove();
 			}
 		});
@@ -340,7 +340,7 @@ const render = {
 			);
 
 		$("#start").click(() => {
-			const states = game.startGame($("#players").val());
+			const states = game.startGame(parseInt($("#players").val()));
 			const instanceId = Date.now();
 			_.each(states, s => {
 				const url = link.share(instanceId, "b", s);
@@ -372,7 +372,7 @@ const render = {
 			);
 
 		$("#draw").click(() => {
-			const id = $("#id").val();
+			const id = parseInt($("#id").val());
 			card.draw(id);
 			if (state.drawnCardId == id) {
 				$(".menu").remove();

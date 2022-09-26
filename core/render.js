@@ -14,7 +14,7 @@ const render = {
 
 		const c = card.get(id);
 
-		if (c["hand"] && state.hand.indexOf(id) < 0) {
+		if (c["hand"] && !_.some(state.hand, h => h == id)) {
 			element.append(
 				$("<div>")
 					.addClass("tab tab-hand")
@@ -32,7 +32,7 @@ const render = {
 			);
 		}
 
-		const index = state.discard.indexOf(id);
+		const index = _.findIndex(state.discard, d => d.id);
 		if (c["discard"]) {
 			element.append(
 				$("<div>")
@@ -67,7 +67,7 @@ const render = {
 	"hand": () => {
 		// If there's a card on the page not in the hand...
 		$("#hand div.card").each((i, c) => {
-			if (state.hand.indexOf(c.id) < 0) {
+			if (!_.some(state.hand, h => c.id)) {
 				c.remove();
 			}
 		});
@@ -105,7 +105,7 @@ const render = {
 			);
 
 		$("#start").click(() => {
-			const states = game.startGame($("#players").val());
+			const states = game.startGame(parseInt($("#players").val()));
 			const instanceId = Date.now();
 			_.each(states, s => {
 				const url = link.share(instanceId, "b", s);
@@ -137,7 +137,7 @@ const render = {
 			);
 
 		$("#draw").click(() => {
-			const id = $("#id").val();
+			const id = parseInt($("#id").val());
 			card.draw(id);
 			if (state.drawnCardId == id) {
 				$(".menu").remove();
