@@ -75,8 +75,7 @@ const card = {
 let game = {};
 
 $(document).ready(() => {
-	game = betrayal;
-	game.init();
+	game = betrayal_2E_Dom;
 
 	// Sort the cards in case theyre in a random order in the game file.
 	game.cards = _.sortBy(_.flatten(game.cards), (c) => c.id);
@@ -486,7 +485,7 @@ const text = {
 
 	"draw": "Draw",
 }; 
-const betrayal = {
+const betrayal_2E = {
 
 	// All cards in the game.
 	"cards": [
@@ -952,7 +951,7 @@ const betrayal = {
 		{
 			"id": 2030,
 			"type": "event",
-			"name": "IMAGE IN THE MIRROR", // TODO: rename stack to deck?
+			"name": "IMAGE IN THE MIRROR",
 			"text": "<b>IF YOU DON'T HAVE ANY ITEM CARDS, THIS EVENT AFFECTS THE NEXT EXPLORER TO YOUR LEFT WITH AN ITEM CARD. DISCARD THIS CARD IF NO EXPLORER HAS AN ITEM CARD.<br><br>There is an old mirror in this room.<br>Your frightened reflection moves on its own. You realize it is you from another time. You need to help your reflection, so you write on the mirror:<br><br><i>THIS WILL HELP</i><br><br>You then hand an item through the mirror.</b><br><br>Choose one of your item cards (not an omen card) and shuffle it into the item stack. Gain 1 Knowledge.<br><br><i class='material-icons'>bolt</i>",
 			"hand": true,
 			"discard": true,
@@ -1186,8 +1185,8 @@ const betrayal = {
 		{
 			"id": 3011,
 			"type": "omen",
-			"name": "CRYSTAL BALL", // TODO: add card trading via links. Or maybe use ID entry as it doesn't involve multiple tabs getting out of sync.
-			"text": "<b>Hazy images appear in the glass.</b><br><br>Once during your turn after the haunt is revealed, you can attempt a Knowledge roll to peer into the Crystal Ball:<br><br>4+ You see the truth. Draw cards from the item or event stack until you find a card of your choice. Shuffle the unwanted cards back into the stack. Keep the chosen card in you hand and don't tell anyone what it is. The next time anyone should draw that type of card, they draw your chosen card. (Ask them to manually draw the card with that number, then discard yours.)<br><br>1-3 You avert your eyes.<br>Lose 1 Sanity.<br><br>0 You stare into Hell.<br>Lose 2 Sanity.<br><br><i class='material-icons'>visibility</i><br><br>Make a haunt roll now.",
+			"name": "CRYSTAL BALL",
+			"text": "<b>Hazy images appear in the glass.</b><br><br>Once during your turn after the haunt is revealed, you can attempt a Knowledge roll to peer into the Crystal Ball:<br><br>4+ You see the truth. Draw cards from the item or event stack until you find a card of your choice. Shuffle the unwanted cards back into the stack. Keep the chosen card in you hand and don't tell anyone what it is. The next time anyone should draw that type of card, they draw your chosen card. (Ask them to manually draw the card with that ID number, then discard yours.)<br><br>1-3 You avert your eyes.<br>Lose 1 Sanity.<br><br>0 You stare into Hell.<br>Lose 2 Sanity.<br><br><i class='material-icons'>visibility</i><br><br>Make a haunt roll now.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1212,8 +1211,7 @@ const betrayal = {
 		},
 	],
 
-	// "text": "<b>You feel a tickling sensation on the top of your head. You look up... and see a girl standing on the ceiling! She's staring down at you and her long messy hair is dangling just shy of your face. Before you can react she drops and lands on you.</b><br>You must attempt a Might or Sanity roll.<br><b>(Might 5+)</b> You pin her in a chokehold until she goes limp. You step over her body and continue on your way. Gain 1 Sanity.<br><b>(Sanity 5+)</b> You scream at her to go to her room and she stomps out through the door in a huff. Gain 1 Might.",
-
+	// Do the initial shuffling and dividing, and get the game states for each player.
 	"startGame": (count) => {
 		/* 
 		* Rules for this game:
@@ -1286,11 +1284,14 @@ const betrayal = {
 		card.draw(events[Math.floor(rand() * events.length)]);
 	},
 
+	// Render the decks used in the game into #top-content.
 	"renderDeck": () => {
-		// Render the decks.
+		
+		// Render the find button.
 		if ($("#top-content div").length == 0) {
 			render.find();
 
+			// Render the decks.
 			$("#top-content")
 				.append(
 					$("<div>")
@@ -1318,12 +1319,12 @@ const betrayal = {
 				);
 
 			// Bind events.
-			$("#items").click(betrayal.drawItem);
-			$("#omens").click(betrayal.drawOmen);
-			$("#events").click(betrayal.drawEvent);
+			$("#items").click(betrayal_2E.drawItem);
+			$("#omens").click(betrayal_2E.drawOmen);
+			$("#events").click(betrayal_2E.drawEvent);
 			$("#discard").click(card.drawDiscard);
 
-			$("body").addClass("betrayal");
+			$("body").addClass("betrayal_2E");
 		}
 	},
 
@@ -1340,8 +1341,20 @@ const betrayal = {
 
 		return element;
 	},
+}; 
+const betrayal_2E_Dom = {
 
-	"init": () => {
-		return;
-	},
+	// All cards in the game.
+	"cards": betrayal_2E.cards.concat([]),
+
+	// "text": "<b>You feel a tickling sensation on the top of your head. You look up... and see a girl standing on the ceiling! She's staring down at you and her long messy hair is dangling just shy of your face. Before you can react she drops and lands on you.</b><br>You must attempt a Might or Sanity roll.<br><b>(Might 5+)</b> You pin her in a chokehold until she goes limp. You step over her body and continue on your way. Gain 1 Sanity.<br><b>(Sanity 5+)</b> You scream at her to go to her room and she stomps out through the door in a huff. Gain 1 Might.",
+
+	// Do the initial shuffling and dividing, and get the game states for each player.
+	"startGame": betrayal_2E.startGame,
+
+	// Render the decks used in the game into #top-content.
+	"renderDeck": betrayal_2E.renderDeck,
+
+	// Add card content to $(element).
+	"renderCard": betrayal_2E.renderCard,
 }; 

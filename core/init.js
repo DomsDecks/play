@@ -2,8 +2,7 @@
 let game = {};
 
 $(document).ready(() => {
-	game = betrayal;
-	game.init();
+	game = betrayal_2E_Dom;
 
 	// Sort the cards in case theyre in a random order in the game file.
 	game.cards = _.sortBy(_.flatten(game.cards), (c) => c.id);
