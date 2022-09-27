@@ -140,9 +140,7 @@ const render = {
 	},
 
 	"findCard": () => {
-		if ($(".menu").length > 0) {
-			return;
-		}
+		if (state.menu()) { return; }
 
 		render.menu();
 

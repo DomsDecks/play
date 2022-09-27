@@ -779,18 +779,21 @@ const betrayal = {
 
 	"drawItem": () => {
 		// Pick an item from the deck at random.
+		if (state.menu()) { return; }
 		const items = _.filter(state.deck, d => card.get(d)["type"] == "item");
 		card.draw(items[Math.floor(rand() * items.length)]);
 	},
 
 	"drawOmen": () => {
 		// Pick an omen from the deck at random.
+		if (state.menu()) { return; }
 		const omens = _.filter(state.deck, d => card.get(d)["type"] == "omen");
 		card.draw(omens[Math.floor(rand() * omens.length)]);
 	},
 
 	"drawEvent": () => {
 		// Pick an event from the deck at random.
+		if (state.menu()) { return; }
 		const events = _.filter(state.deck, d => card.get(d)["type"] == "event");
 		card.draw(events[Math.floor(rand() * events.length)]);
 	},

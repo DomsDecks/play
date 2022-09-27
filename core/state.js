@@ -19,6 +19,9 @@ const state = {
 	// Time the game was started.
 	"started": null,
 
+	// Is a menu open?
+	"menu": () => $(".menu").length > 0,
+
 	// Store to local storage.
 	"save": () => {
 		let gameData = {

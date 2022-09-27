@@ -43,6 +43,8 @@ const card = {
 
 	// Move a card between arrays.
 	"move": (id, target) => {
+		if (state.menu()) { return; }
+
 		if(state.drawnCardId == id) {
 			card.undraw();
 		}
