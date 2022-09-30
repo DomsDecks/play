@@ -11,6 +11,7 @@ const render = {
 			$("#top-content").append(
 				$("<div>")
 					.attr("id", "find")
+					.addClass("option")
 					.html($("<i class='material-icons'>search</i>"))
 					.click(render.findCard)
 			);
@@ -96,6 +97,7 @@ const render = {
 				.addClass("menu")
 				.append(content)
 		);
+		render.hideOptions();
 	},
 
 	"newGame": () => {
@@ -140,7 +142,7 @@ const render = {
 	},
 
 	"findCard": () => {
-		if (state.menu()) { return; }
+		if (state.menu() || !_.isNull(state.drawnCardId)) { return; }
 
 		render.menu();
 
@@ -165,8 +167,16 @@ const render = {
 			card.draw(id);
 			if (state.drawnCardId == id) {
 				$(".menu").remove();
+				render.showOptions();
 			}
 		});
 	},
 
+	"hideOptions": () => {
+		$(".option").css({ "visibility": "hidden" });
+	},
+
+	"showOptions": () => {
+		$(".option").css({ "visibility": "visible" });
+	},
 };

@@ -14,17 +14,18 @@ const card = {
 		if (!_.isNull(state.drawnCardId)) {
 			return;
 		}
-		if (_.isUndefined(id)) {
+		if (_.isUndefined(id) || _.isUndefined(card.get(id))) {
 			state.drawnCardId = null;
 			return;
 		}
 		state.drawnCardId = id;
+		render.hideOptions();
+		// Show new drawn card on screen, with relevant controls.
 		$("div.drawn").replaceWith(
 			render.card(id)
 				.addClass("drawn")
 				.css({ "display": "block" })
 		);
-		// Show new drawn card on screen, with relevant controls.
 	},
 
 	// Remove the drawn card from the GUI.
@@ -38,6 +39,7 @@ const card = {
 
 	// Draw from the top of the discard pile.
 	"drawDiscard": () => {
+		if (state.menu()) { return; }
 		card.draw(_.last(state.discard));
 	},
 
@@ -45,7 +47,7 @@ const card = {
 	"move": (id, target) => {
 		if (state.menu()) { return; }
 
-		if(state.drawnCardId == id) {
+		if (state.drawnCardId == id) {
 			card.undraw();
 		}
 
@@ -68,6 +70,10 @@ const card = {
 		state.save();
 
 		render.all();
+
+		if (_.isNull(state.drawnCardId)) {
+			render.showOptions();
+		}
 	},
 
 }; 
@@ -250,6 +256,7 @@ const render = {
 			$("#top-content").append(
 				$("<div>")
 					.attr("id", "find")
+					.addClass("option")
 					.html($("<i class='material-icons'>search</i>"))
 					.click(render.findCard)
 			);
@@ -335,6 +342,7 @@ const render = {
 				.addClass("menu")
 				.append(content)
 		);
+		render.hideOptions();
 	},
 
 	"newGame": () => {
@@ -379,7 +387,7 @@ const render = {
 	},
 
 	"findCard": () => {
-		if (state.menu()) { return; }
+		if (state.menu() || !_.isNull(state.drawnCardId)) { return; }
 
 		render.menu();
 
@@ -404,10 +412,18 @@ const render = {
 			card.draw(id);
 			if (state.drawnCardId == id) {
 				$(".menu").remove();
+				render.showOptions();
 			}
 		});
 	},
 
+	"hideOptions": () => {
+		$(".option").css({ "visibility": "hidden" });
+	},
+
+	"showOptions": () => {
+		$(".option").css({ "visibility": "visible" });
+	},
 }; 
 const state = {
 
