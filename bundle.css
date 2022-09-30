@@ -26,6 +26,7 @@ div#scroll {
 	font-weight: 800;
 	text-align: center;
 	white-space: nowrap;
+	font-size: small;
 }
 
 div#find {
@@ -186,7 +187,7 @@ body.betrayal-2e {
 }
 
 .betrayal-2e div.card .card-art {
-	width: 80%;
+	width: 60%;
 	height: auto;
 	border: 0.4vh solid black;
 	border-radius: 0.4vh;

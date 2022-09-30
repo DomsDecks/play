@@ -26,6 +26,7 @@ div#scroll {
 	font-weight: 800;
 	text-align: center;
 	white-space: nowrap;
+	font-size: small;
 }
 
 div#find {
