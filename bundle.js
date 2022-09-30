@@ -143,6 +143,15 @@ $(document).ready(() => {
 	}
 
 	link.cleanURL();
+
+	_.each(game.cards, c => {
+		$("body").append($(`<img src="${card.path(c)}">`)
+			.css({ "display": "none" })
+			.attr("id", `preload-${c.id}`));
+	});
+	_.each(game.cards, c => {
+		$(`#preload-${c.id}`).remove();
+	});
 }); 
 const link = {
 
