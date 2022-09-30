@@ -1,3 +1,9 @@
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
 body {
 	margin: 0;
 	display: flex;
@@ -26,7 +32,6 @@ div#scroll {
 	font-weight: 800;
 	text-align: center;
 	white-space: nowrap;
-	font-size: small;
 }
 
 div#find {
