@@ -143,15 +143,6 @@ $(document).ready(() => {
 	}
 
 	link.cleanURL();
-
-	_.each(game.cards, c => {
-		$("body").append($(`<img src="${card.path(c)}">`)
-			.css({ "display": "none" })
-			.attr("id", `preload-${c.id}`));
-	});
-	_.each(game.cards, c => {
-		$(`#preload-${c.id}`).remove();
-	});
 }); 
 const link = {
 
@@ -440,6 +431,14 @@ const render = {
 	"showOptions": () => {
 		$(".option").css({ "visibility": "visible" });
 	},
+
+	"preloadAssets": () => {
+		_.each(game.cards, c => {
+			$("#preload").append(
+				$(`<img src="${card.path(c)}">`)
+					.attr("id", `preload-${c.id}`));
+		});
+	}
 }; 
 const state = {
 
@@ -1364,6 +1363,8 @@ const betrayal_2e = {
 			$("#discard").click(card.drawDiscard);
 
 			$("body").addClass("betrayal-2e");
+
+			render.preloadAssets();
 		}
 	},
 

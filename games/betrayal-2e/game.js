@@ -842,6 +842,8 @@ const betrayal_2e = {
 			$("#discard").click(card.drawDiscard);
 
 			$("body").addClass("betrayal-2e");
+
+			render.preloadAssets();
 		}
 	},
 

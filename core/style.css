@@ -138,3 +138,7 @@ div#links {
 	width: 80%;
 	text-align: left;
 }
+
+#preload {
+	display: none;
+}

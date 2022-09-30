@@ -179,4 +179,12 @@ const render = {
 	"showOptions": () => {
 		$(".option").css({ "visibility": "visible" });
 	},
+
+	"preloadAssets": () => {
+		_.each(game.cards, c => {
+			$("#preload").append(
+				$(`<img src="${card.path(c)}">`)
+					.attr("id", `preload-${c.id}`));
+		});
+	}
 };
