@@ -1,8 +1,8 @@
-body.betrayal_2E {
+body.betrayal-2e {
 	background-color: rgb(56, 51, 51);
 }
 
-.betrayal_2E div#top-content {
+.betrayal-2e div#top-content {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -10,14 +10,14 @@ body.betrayal_2E {
 	gap: 2vw;
 }
 
-.betrayal_2E div.card {
+.betrayal-2e div.card {
 	width: calc(82% - 2vh);
 	max-width: 41vh;
 	border: 2vh solid black;
 	border-radius: 5vh;
 }
 
-.betrayal_2E div.deck {
+.betrayal-2e div.deck {
 	border: 0.5vh solid black;
 	border-radius: 1vh;
 	position: relative;
@@ -27,18 +27,18 @@ body.betrayal_2E {
 	max-width: 400px;
 }
 
-.betrayal_2E div.card.item {
+.betrayal-2e div.card.item {
 	background: yellow;
 }
 
-.betrayal_2E div.card.omen {
+.betrayal-2e div.card.omen {
 	background: green;
 }
 
-.betrayal_2E div.card.event {
+.betrayal-2e div.card.event {
 	background: brown;
 }
 
-div#scroll {
+.betrayal-2e div#scroll {
 	color: rgba(134, 132, 111, 0.664);
 }

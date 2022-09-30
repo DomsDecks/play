@@ -85,7 +85,7 @@ const card = {
 let game = {};
 
 $(document).ready(() => {
-	game = betrayal_2E_Dom;
+	game = betrayal_2e_dom;
 
 	// Sort the cards in case theyre in a random order in the game file.
 	game.cards = _.sortBy(_.flatten(game.cards), (c) => c.id);
@@ -508,11 +508,11 @@ const text = {
 
 	"draw": "Draw",
 }; 
-const betrayal_2E = {
+const betrayal_2e = {
 
 	"displayName": "Betrayal at House on the Hill (2nd Edition)",
 
-	"assetPath": "betrayal-2E",
+	"assetPath": "betrayal-2e",
 
 	// All cards in the game.
 	"cards": [
@@ -1346,12 +1346,12 @@ const betrayal_2E = {
 				);
 
 			// Bind events.
-			$("#items").click(betrayal_2E.drawItem);
-			$("#omens").click(betrayal_2E.drawOmen);
-			$("#events").click(betrayal_2E.drawEvent);
+			$("#items").click(betrayal_2e.drawItem);
+			$("#omens").click(betrayal_2e.drawOmen);
+			$("#events").click(betrayal_2e.drawEvent);
 			$("#discard").click(card.drawDiscard);
 
-			$("body").addClass("betrayal_2E");
+			$("body").addClass("betrayal-2e");
 		}
 	},
 
@@ -1370,23 +1370,23 @@ const betrayal_2E = {
 	},
 
 }; 
-const betrayal_2E_Dom = {
+const betrayal_2e_dom = {
 
 	"displayName": "Betrayal at House on the Hill (2nd Edition) (Dom's Expansion)",
 
-	"assetPath": betrayal_2E.assetPath,
+	"assetPath": betrayal_2e.assetPath,
 
 	// All cards in the game.
-	"cards": betrayal_2E.cards.concat([]),
+	"cards": betrayal_2e.cards.concat([]),
 
 	// "text": "<b>You feel a tickling sensation on the top of your head. You look up... and see a girl standing on the ceiling! She's staring down at you and her long messy hair is dangling just shy of your face. Before you can react she drops and lands on you.</b><br>You must attempt a Might or Sanity roll.<br><b>(Might 5+)</b> You pin her in a chokehold until she goes limp. You step over her body and continue on your way. Gain 1 Sanity.<br><b>(Sanity 5+)</b> You scream at her to go to her room and she stomps out through the door in a huff. Gain 1 Might.",
 
 	// Do the initial shuffling and dividing, and get the game states for each player.
-	"startGame": betrayal_2E.startGame,
+	"startGame": betrayal_2e.startGame,
 
 	// Render the decks used in the game into #top-content.
-	"renderDeck": betrayal_2E.renderDeck,
+	"renderDeck": betrayal_2e.renderDeck,
 
 	// Add card content to $(element).
-	"renderCard": betrayal_2E.renderCard,
+	"renderCard": betrayal_2e.renderCard,
 }; 

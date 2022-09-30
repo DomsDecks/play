@@ -1,8 +1,8 @@
-const betrayal_2E = {
+const betrayal_2e = {
 
 	"displayName": "Betrayal at House on the Hill (2nd Edition)",
 
-	"assetPath": "betrayal-2E",
+	"assetPath": "betrayal-2e",
 
 	// All cards in the game.
 	"cards": [
@@ -836,12 +836,12 @@ const betrayal_2E = {
 				);
 
 			// Bind events.
-			$("#items").click(betrayal_2E.drawItem);
-			$("#omens").click(betrayal_2E.drawOmen);
-			$("#events").click(betrayal_2E.drawEvent);
+			$("#items").click(betrayal_2e.drawItem);
+			$("#omens").click(betrayal_2e.drawOmen);
+			$("#events").click(betrayal_2e.drawEvent);
 			$("#discard").click(card.drawDiscard);
 
-			$("body").addClass("betrayal_2E");
+			$("body").addClass("betrayal-2e");
 		}
 	},
 
