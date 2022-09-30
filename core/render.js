@@ -12,7 +12,7 @@ const render = {
 				$("<div>")
 					.attr("id", "find")
 					.addClass("option")
-					.html($("<i class='material-icons'>search</i>"))
+					.html(text.search)
 					.click(render.findCard)
 			);
 		}

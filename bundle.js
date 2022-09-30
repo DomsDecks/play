@@ -266,7 +266,7 @@ const render = {
 				$("<div>")
 					.attr("id", "find")
 					.addClass("option")
-					.html($("<i class='material-icons'>search</i>"))
+					.html(text.search)
 					.click(render.findCard)
 			);
 		}
@@ -516,6 +516,8 @@ const text = {
 	"start": "Start",
 
 	"link": "Send one unique link to each player. Each player must use a different link to play the game.",
+
+	"search": "<i class='material-icons'>search</i>",
 
 	"find": "Enter a card ID number to find it and draw it, regardless of it's current location.",
 
