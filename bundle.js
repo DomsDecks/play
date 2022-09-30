@@ -147,8 +147,10 @@ const link = {
 	// Get an encoded string containing the deck and hand.
 	"getData": (deck, hand) => {
 
-		// The cards are sorted by their IDs.
-		// The deckBinary is 1100 if you have the first two cards but not the last two.
+		// The cards are sorted by their position in the array, not their IDs.
+		// So adding new cards doesn't break old saves, as long as they are at the end of the array. (Regardless of their IDs.)
+		// Values in the deckBinary are prepended.
+		// E.g. The deckBinary is 0011 if you have the first two cards but not the last two.
 		let deckBinary = "";
 		_.each(game.cards, (c, i) => {
 			deckBinary = (_.any(deck, d => d == c.id) ? "1" : "0") + deckBinary;
@@ -182,6 +184,7 @@ const link = {
 		state.hand.splice(0, state.hand.length);
 
 		// Parse the data into those binary numbers.
+		// The start of the binary number is padded in case there are leading 0s, possibly from newly added cards.
 		const deckBinary = parseBigInt(data.split("_")[0], 36).toString(2).padStart(game.cards.length, "0");
 		_.each(game.cards, (c, i) => {
 			// For each possible card, add to the deck it if it's a 1.
@@ -279,7 +282,7 @@ const render = {
 			);
 		}
 
-		const index = _.findIndex(state.discard, d => d.id);
+		const index = _.findIndex(state.discard, d => d == id);
 		if (c["discard"]) {
 			element.append(
 				$("<div>")

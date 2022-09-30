@@ -43,7 +43,7 @@ const render = {
 			);
 		}
 
-		const index = _.findIndex(state.discard, d => d.id);
+		const index = _.findIndex(state.discard, d => d == id);
 		if (c["discard"]) {
 			element.append(
 				$("<div>")
