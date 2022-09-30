@@ -24,8 +24,9 @@ const card = {
 		$("div.drawn").replaceWith(
 			render.card(id)
 				.addClass("drawn")
-				.css({ "display": "" })
+				.css({ "display": "flex" })
 		);
+		$("#darkener").css({ "display": "block" });
 	},
 
 	// Remove the drawn card from the GUI.
@@ -33,8 +34,9 @@ const card = {
 		state.drawnCardId = null;
 		$("div.card.drawn")
 			.removeAttr("id")
-			.css({ "display": "none" })
+			.css({ "display": "" })
 			.empty();
+		$("#darkener").css({ "display": "" });
 	},
 
 	// Draw from the top of the discard pile.

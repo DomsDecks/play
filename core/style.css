@@ -59,6 +59,19 @@ div.card.drawn {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 75;
+	box-shadow: 5vw 8vh 8vh black;
+	display: none;
+}
+
+#darkener {
+	z-index: 70;
+	display: none;
+	background-color: #00000050;
+	position: fixed;
+	top: -200vh;
+	left: -200vw;
+	height: 500vh;
+	width: 500vw;
 }
 
 div#hand {
@@ -71,6 +84,7 @@ div#hand {
 div#hand div.card {
 	margin-bottom: 3vh;
 	position: relative;
+	box-shadow: 1vw 1vh 1vh black;
 }
 
 i.material-icons {
