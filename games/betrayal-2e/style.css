@@ -27,6 +27,19 @@ body.betrayal-2e {
 	max-width: 400px;
 }
 
+.betrayal-2e div.card .card-art {
+	width: 80%;
+	height: auto;
+	border: 0.4vh solid black;
+	border-radius: 0.4vh;
+}
+
+.betrayal-2e div.card .card-title {
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: large;
+}
+
 .betrayal-2e div.card.item {
 	background: yellow;
 }

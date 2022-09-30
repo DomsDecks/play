@@ -24,7 +24,7 @@ const card = {
 		$("div.drawn").replaceWith(
 			render.card(id)
 				.addClass("drawn")
-				.css({ "display": "block" })
+				.css({ "display": "" })
 		);
 	},
 
@@ -76,8 +76,11 @@ const card = {
 		}
 	},
 
-	"path": (id) => {
-		return `/games/${game.assetPath}/${card.get(id).name}.png`;
+	"path": (card) => {
+		return `games/${game.assetPath}/images/${card.name
+			.replaceAll(" ", "-")
+			.replaceAll(/<br>|[^0-9a-z-]/ig, "")
+			}.png`;
 	}
 
 }; 
@@ -1313,7 +1316,7 @@ const betrayal_2e = {
 
 	// Render the decks used in the game into #top-content.
 	"renderDeck": () => {
-		
+
 		// Render the find button.
 		if ($("#top-content div").length == 0) {
 			render.find();
@@ -1362,9 +1365,11 @@ const betrayal_2e = {
 		element
 			.addClass(c["type"])
 			.html(c["text"])
-			.prepend($("<div></div>").
-				html(c["name"])
-				.css({ "margin-bottom": "20px" }));
+			.prepend($(`<img src="${card.path(c)}">`)
+				.addClass("card-art"))
+			.prepend($("<div>")
+			.addClass("card-title")
+				.html(c.name));
 
 		return element;
 	},

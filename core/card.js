@@ -24,7 +24,7 @@ const card = {
 		$("div.drawn").replaceWith(
 			render.card(id)
 				.addClass("drawn")
-				.css({ "display": "block" })
+				.css({ "display": "" })
 		);
 	},
 
@@ -76,8 +76,11 @@ const card = {
 		}
 	},
 
-	"path": (id) => {
-		return `/games/${game.assetPath}/${card.get(id).name}.png`;
+	"path": (card) => {
+		return `games/${game.assetPath}/images/${card.name
+			.replaceAll(" ", "-")
+			.replaceAll(/<br>|[^0-9a-z-]/ig, "")
+			}.png`;
 	}
 
 };
