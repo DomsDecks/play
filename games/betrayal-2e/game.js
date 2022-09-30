@@ -858,7 +858,10 @@ const betrayal_2e = {
 				.addClass("card-art"))
 			.prepend($("<div>")
 			.addClass("card-title")
-				.html(c.name));
+				.html(c.name))
+			.append($("<div>")
+				.addClass("card-id")
+				.html(c.id));
 
 		return element;
 	},

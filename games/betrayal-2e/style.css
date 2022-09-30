@@ -15,6 +15,8 @@ body.betrayal-2e {
 	max-width: 41vh;
 	border: 2vh solid black;
 	border-radius: 5vh;
+	background-image: url("games/betrayal-2e/images/texture.png");
+	background-repeat: repeat;
 }
 
 .betrayal-2e div.deck {
@@ -28,7 +30,7 @@ body.betrayal-2e {
 }
 
 .betrayal-2e div.card .card-art {
-	width: 60%;
+	width: 50%;
 	height: auto;
 	border: 0.4vh solid black;
 	border-radius: 0.4vh;
@@ -40,16 +42,24 @@ body.betrayal-2e {
 	font-size: large;
 }
 
+.betrayal-2e div.card .card-id {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	font-size: smaller;
+	color: #00000070;
+}
+
 .betrayal-2e div.card.item {
-	background: yellow;
+	background-color: #E2DDB1;
 }
 
 .betrayal-2e div.card.omen {
-	background: green;
+	background-color: #9FB79A;
 }
 
 .betrayal-2e div.card.event {
-	background: brown;
+	background-color: #B5AC9D;
 }
 
 .betrayal-2e div#scroll {
