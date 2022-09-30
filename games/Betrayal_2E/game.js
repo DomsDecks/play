@@ -1,5 +1,9 @@
 const betrayal_2E = {
 
+	"displayName": "Betrayal at House on the Hill (2nd Edition)",
+
+	"assetPath": "betrayal-2E",
+
 	// All cards in the game.
 	"cards": [
 		{
@@ -854,4 +858,5 @@ const betrayal_2E = {
 
 		return element;
 	},
+
 };

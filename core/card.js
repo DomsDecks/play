@@ -76,4 +76,8 @@ const card = {
 		}
 	},
 
+	"path": (id) => {
+		return `/games/${game.assetPath}/${card.get(id).name}.png`;
+	}
+
 };

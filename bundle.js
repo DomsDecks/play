@@ -76,6 +76,10 @@ const card = {
 		}
 	},
 
+	"path": (id) => {
+		return `/games/${game.assetPath}/${card.get(id).name}.png`;
+	}
+
 }; 
 // The object containing the game-specific functions.
 let game = {};
@@ -505,6 +509,10 @@ const text = {
 	"draw": "Draw",
 }; 
 const betrayal_2E = {
+
+	"displayName": "Betrayal at House on the Hill (2nd Edition)",
+
+	"assetPath": "betrayal-2E",
 
 	// All cards in the game.
 	"cards": [
@@ -1360,8 +1368,13 @@ const betrayal_2E = {
 
 		return element;
 	},
+
 }; 
 const betrayal_2E_Dom = {
+
+	"displayName": "Betrayal at House on the Hill (2nd Edition) (Dom's Expansion)",
+
+	"assetPath": betrayal_2E.assetPath,
 
 	// All cards in the game.
 	"cards": betrayal_2E.cards.concat([]),
