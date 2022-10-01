@@ -441,6 +441,7 @@ const render = {
 
 	"path": (name) => {
 		return `games/${game.assetPath}/images/${name
+			.toLowerCase()
 			.replaceAll(" ", "-")
 			.replaceAll(/<br>|[^0-9a-z-]/ig, "")
 			}.png`;
