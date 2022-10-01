@@ -4,6 +4,8 @@ const betrayal_2e_dom = {
 
 	"assetPath": betrayal_2e.assetPath,
 
+	"assets": betrayal_2e.assets,
+
 	// All cards in the game.
 	"cards": betrayal_2e.cards.concat([]),
 

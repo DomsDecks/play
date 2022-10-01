@@ -183,8 +183,20 @@ const render = {
 	"preloadAssets": () => {
 		_.each(game.cards, c => {
 			$("#preload").append(
-				$(`<img src="${card.path(c)}">`)
-					.attr("id", `preload-${c.id}`));
+				$(`<img src="${render.path(c.name)}">`)
+					.attr("id", `preload-${c.name}`));
 		});
+		_.each(game.assets, a => {
+			$("#preload").append(
+				$(`<img src="${render.path(a)}">`)
+					.attr("id", `preload-${a}`));
+		});
+	},
+
+	"path": (name) => {
+		return `games/${game.assetPath}/images/${name
+			.replaceAll(" ", "-")
+			.replaceAll(/<br>|[^0-9a-z-]/ig, "")
+			}.png`;
 	}
 };

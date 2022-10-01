@@ -194,6 +194,11 @@ body.betrayal-2e {
 	border-radius: 0.4vh;
 }
 
+.betrayal-2e div.card .card-icon {
+	width: 8%;
+	height: auto;
+}
+
 .betrayal-2e div.card .card-title {
 	text-transform: uppercase;
 	font-weight: bold;

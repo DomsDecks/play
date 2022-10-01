@@ -77,12 +77,4 @@ const card = {
 			render.showOptions();
 		}
 	},
-
-	"path": (card) => {
-		return `games/${game.assetPath}/images/${card.name
-			.replaceAll(" ", "-")
-			.replaceAll(/<br>|[^0-9a-z-]/ig, "")
-			}.png`;
-	}
-
 };
