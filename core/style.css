@@ -147,6 +147,16 @@ div.menu div {
 	text-align: center;
 }
 
+div.menu div#close {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	width: auto;
+	height: auto;
+	margin-top: auto;
+	cursor: pointer;
+}
+
 div#links {
 	overflow-y: scroll;
 	width: 80%;

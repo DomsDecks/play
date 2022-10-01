@@ -3,7 +3,8 @@ const render = {
 	"all": () => {
 		game.renderDeck();
 		render.hand();
-		text.setScroll();
+		$("div#scroll")
+			.html(_.isEmpty(state.hand) ? text("empty") : text("scroll"));
 	},
 
 	"find": () => {
@@ -12,7 +13,7 @@ const render = {
 				$("<div>")
 					.attr("id", "find")
 					.addClass("option")
-					.html(text.search)
+					.html(text("search"))
 					.click(render.findCard)
 			);
 		}
@@ -30,7 +31,7 @@ const render = {
 			element.append(
 				$("<div>")
 					.addClass("tab tab-hand")
-					.html(text.hand)
+					.html(text("hand"))
 					.click(() => card.move(id, state.hand))
 			);
 		}
@@ -39,7 +40,7 @@ const render = {
 			element.append(
 				$("<div>")
 					.addClass("tab tab-deck")
-					.html(text.deck)
+					.html(("deck"))
 					.click(() => card.move(id, state.deck))
 			);
 		}
@@ -49,7 +50,7 @@ const render = {
 			element.append(
 				$("<div>")
 					.addClass("tab tab-discard")
-					.html(index < 0 ? text.discard : text.discardCancel)
+					.html(index < 0 ? text("discard") : text("discardCancel"))
 					.click(() => card.move(id, state.discard))
 			);
 		}
@@ -59,7 +60,7 @@ const render = {
 				element.append(
 					$("<div>")
 						.addClass("tab tab-up")
-						.html(text.up)
+						.html(text("up"))
 						.click(() => card.draw(state.discard[index + 1], true))
 				);
 			}
@@ -67,7 +68,7 @@ const render = {
 				element.append(
 					$("<div>")
 						.addClass("tab tab-down")
-						.html(text.down)
+						.html(text("down"))
 						.click(() => card.draw(state.discard[index - 1], true))
 				);
 			}
@@ -100,6 +101,11 @@ const render = {
 		render.hideOptions();
 	},
 
+	"closeMenu": () => {
+		$(".menu").remove();
+		render.showOptions();
+	},
+
 	"newGame": () => {
 		render.menu();
 
@@ -108,7 +114,7 @@ const render = {
 			.append(
 				$("<div>")
 					.attr("class", "text")
-					.html(text.players)
+					.html(("players"))
 			)
 			.append(
 				$("<input type='number' min='1' max='6' value='1'>")
@@ -116,7 +122,7 @@ const render = {
 			).append(
 				$("<button type='button'>")
 					.attr("id", "start")
-					.html(text.start)
+					.html(text("start"))
 			).append(
 				$("<div>")
 					.attr("id", "links")
@@ -127,7 +133,7 @@ const render = {
 			const instanceId = Date.now();
 			$("#links")
 				.before($("<div>")
-					.html(text.link));
+					.html(text("link")));
 			_.each(states, (s, i) => {
 				const url = link.share(instanceId, "b", s);
 				$("#links")
@@ -150,8 +156,13 @@ const render = {
 			.attr("id", "menu-find")
 			.append(
 				$("<div>")
+					.attr("id", "close")
+					.html(text("x"))
+			)
+			.append(
+				$("<div>")
 					.attr("class", "text")
-					.html(text.find)
+					.html(text("find"))
 			)
 			.append(
 				$("<input type='number' min='1000' max='9999'>")
@@ -159,17 +170,18 @@ const render = {
 			).append(
 				$("<button type='button'>")
 					.attr("id", "draw")
-					.html(text.draw)
+					.html(text("draw"))
 			);
 
 		$("#draw").click(() => {
 			const id = parseInt($("#id").val());
 			card.draw(id);
 			if (state.drawnCardId == id) {
-				$(".menu").remove();
-				render.showOptions();
+				render.closeMenu();
 			}
 		});
+
+		$("#close").click(render.closeMenu);
 	},
 
 	"hideOptions": () => {
@@ -199,5 +211,5 @@ const render = {
 			.replaceAll(" ", "-")
 			.replaceAll(/<br>|[^0-9a-z-]/ig, "")
 			}.png`;
-	}
+	},
 };

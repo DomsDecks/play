@@ -147,6 +147,16 @@ div.menu div {
 	text-align: center;
 }
 
+div.menu div#close {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	width: auto;
+	height: auto;
+	margin-top: auto;
+	cursor: pointer;
+}
+
 div#links {
 	overflow-y: scroll;
 	width: 80%;
@@ -202,13 +212,28 @@ body.betrayal-2e {
 
 .betrayal-2e div.card .card-title {
 	text-transform: uppercase;
-	font-weight: bold;
+	font-weight: bolder;
 	font-size: large;
 }
 
 .betrayal-2e div.card .card-text {
-	text-align: center;
+	text-align: left;
 	font-size: small;
+}
+
+.betrayal-2e div.card .card-text .b {
+	text-align: center;
+	font-weight: bolder;
+}
+
+.betrayal-2e div.card .card-text .r {
+	display: flex;
+}
+
+.betrayal-2e div.card .card-text .n {
+	font-weight: 1000;
+	min-width: 2em;
+	padding-left: 0.25em;
 }
 
 .betrayal-2e div.card .card-id {

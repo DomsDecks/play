@@ -249,7 +249,8 @@ const render = {
 	"all": () => {
 		game.renderDeck();
 		render.hand();
-		text.setScroll();
+		$("div#scroll")
+			.html(_.isEmpty(state.hand) ? text("empty") : text("scroll"));
 	},
 
 	"find": () => {
@@ -258,7 +259,7 @@ const render = {
 				$("<div>")
 					.attr("id", "find")
 					.addClass("option")
-					.html(text.search)
+					.html(text("search"))
 					.click(render.findCard)
 			);
 		}
@@ -276,7 +277,7 @@ const render = {
 			element.append(
 				$("<div>")
 					.addClass("tab tab-hand")
-					.html(text.hand)
+					.html(text("hand"))
 					.click(() => card.move(id, state.hand))
 			);
 		}
@@ -285,7 +286,7 @@ const render = {
 			element.append(
 				$("<div>")
 					.addClass("tab tab-deck")
-					.html(text.deck)
+					.html(("deck"))
 					.click(() => card.move(id, state.deck))
 			);
 		}
@@ -295,7 +296,7 @@ const render = {
 			element.append(
 				$("<div>")
 					.addClass("tab tab-discard")
-					.html(index < 0 ? text.discard : text.discardCancel)
+					.html(index < 0 ? text("discard") : text("discardCancel"))
 					.click(() => card.move(id, state.discard))
 			);
 		}
@@ -305,7 +306,7 @@ const render = {
 				element.append(
 					$("<div>")
 						.addClass("tab tab-up")
-						.html(text.up)
+						.html(text("up"))
 						.click(() => card.draw(state.discard[index + 1], true))
 				);
 			}
@@ -313,7 +314,7 @@ const render = {
 				element.append(
 					$("<div>")
 						.addClass("tab tab-down")
-						.html(text.down)
+						.html(text("down"))
 						.click(() => card.draw(state.discard[index - 1], true))
 				);
 			}
@@ -346,6 +347,11 @@ const render = {
 		render.hideOptions();
 	},
 
+	"closeMenu": () => {
+		$(".menu").remove();
+		render.showOptions();
+	},
+
 	"newGame": () => {
 		render.menu();
 
@@ -354,7 +360,7 @@ const render = {
 			.append(
 				$("<div>")
 					.attr("class", "text")
-					.html(text.players)
+					.html(("players"))
 			)
 			.append(
 				$("<input type='number' min='1' max='6' value='1'>")
@@ -362,7 +368,7 @@ const render = {
 			).append(
 				$("<button type='button'>")
 					.attr("id", "start")
-					.html(text.start)
+					.html(text("start"))
 			).append(
 				$("<div>")
 					.attr("id", "links")
@@ -373,7 +379,7 @@ const render = {
 			const instanceId = Date.now();
 			$("#links")
 				.before($("<div>")
-					.html(text.link));
+					.html(text("link")));
 			_.each(states, (s, i) => {
 				const url = link.share(instanceId, "b", s);
 				$("#links")
@@ -396,8 +402,13 @@ const render = {
 			.attr("id", "menu-find")
 			.append(
 				$("<div>")
+					.attr("id", "close")
+					.html(text("x"))
+			)
+			.append(
+				$("<div>")
 					.attr("class", "text")
-					.html(text.find)
+					.html(text("find"))
 			)
 			.append(
 				$("<input type='number' min='1000' max='9999'>")
@@ -405,17 +416,18 @@ const render = {
 			).append(
 				$("<button type='button'>")
 					.attr("id", "draw")
-					.html(text.draw)
+					.html(text("draw"))
 			);
 
 		$("#draw").click(() => {
 			const id = parseInt($("#id").val());
 			card.draw(id);
 			if (state.drawnCardId == id) {
-				$(".menu").remove();
-				render.showOptions();
+				render.closeMenu();
 			}
 		});
+
+		$("#close").click(render.closeMenu);
 	},
 
 	"hideOptions": () => {
@@ -445,7 +457,7 @@ const render = {
 			.replaceAll(" ", "-")
 			.replaceAll(/<br>|[^0-9a-z-]/ig, "")
 			}.png`;
-	}
+	},
 }; 
 const state = {
 
@@ -491,42 +503,42 @@ const state = {
 	},
 
 }; 
-const text = {
+const text = (id) => {
+	switch(id) {
 
-	"scroll": "<i class='material-icons'>keyboard_double_arrow_down</i>\
+		case "scroll": return game.text.scroll || "<i class='material-icons'>keyboard_double_arrow_down</i>\
 		<span>Scroll down to see your hand of cards...<span>\
-		<i class='material-icons'>keyboard_double_arrow_down</i>",
+		<i class='material-icons'>keyboard_double_arrow_down</i>";
 
-	"empty": "<span>Your hand of cards is empty.<span>",
+		case "empty": return game.text.empty || "<span>Your hand of cards is empty.<span>";
 
-	"setScroll": () => {
-		$("div#scroll")
-			.html(_.isEmpty(state.hand) ? text.empty : text.scroll);
-	},
+		case "hand": return game.text.hand || "Keep in your hand";
 
-	"hand": "Keep in your hand",
+		case "deck": return game.text.deck || "Shuffle in to deck";
 
-	"deck": "Shuffle in to deck",
+		case "discard": return game.text.discard || "Place on discard pile";
 
-	"discard": "Place on discard pile",
+		case "discardCancel": return game.text.discardCancel || "Leave in discard pile";
 
-	"discardCancel": "Leave in discard pile",
+		case "up": return game.text.up || "<i class='material-icons'>keyboard_arrow_up</i>";
 
-	"up": "<i class='material-icons'>keyboard_arrow_up</i>",
+		case "down": return game.text.down || "<i class='material-icons'>keyboard_arrow_down</i>";
 
-	"down": "<i class='material-icons'>keyboard_arrow_down</i>",
+		case "players": return game.text.players || "Select the number of players in the game.";
 
-	"players": "Select the number of players in the game.",
+		case "start": return game.text.start || "Start";
 
-	"start": "Start",
+		case "link": return game.text.link || "Send one unique link to each player. Each player must use a different link to play the game.";
 
-	"link": "Send one unique link to each player. Each player must use a different link to play the game.",
+		case "search": return game.text.search || "<i class='material-icons'>search</i>";
 
-	"search": "<i class='material-icons'>search</i>",
+		case "find": return game.text.find || "Enter a card ID number to find it and draw it, regardless of it's current location.";
 
-	"find": "Enter a card ID number to find it and draw it, regardless of it's current location.",
+		case "draw": return game.text.draw || "Draw";
 
-	"draw": "Draw",
+		case "x": return game.text.x || "<i class='material-icons'>close</i>";
+
+	};
 }; 
 const betrayal_2e = {
 
@@ -537,13 +549,17 @@ const betrayal_2e = {
 	// Except for the card art, what other assets are there to preload?
 	"assets": ["omen", "item", "event", "texture"],
 
+	"text": {
+		"deck": "Shuffle in to stack"
+	},
+
 	// All cards in the game.
 	"cards": [
 		{
 			"id": 1001,
 			"type": "item",
 			"name": "Healing Salve",
-			"text": "<b>A sticky paste in a shallow bowl.</b><br><br>You can apply the Healing Salve to yourself or to another living explorer in the same room. If that explorer's Might or Speed is below its starting value, raise one or both traits to its starting value.<br><br>Discard this item after you use it.",
+			"text": "#bA sticky paste in a shallow bowl.#dYou can apply the Healing Salve to yourself or to another living explorer in the same room. If that explorer's Might or Speed is below its starting value, raise one or both traits to its starting value.#n#nDiscard this item after you use it.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -552,7 +568,7 @@ const betrayal_2e = {
 			"id": 1002,
 			"type": "item",
 			"name": "Amulet of the Ages",
-			"text": "<b>Ancient silver and inlaid gems, inscribed with blessings.</b><br><br>Gain 1 Might, 1 Speed, 1 Knowledge, and 1 Sanity now.<br><br>Lose 3 Might, 3 Speed, 3 Knowledge, and 3 Sanity if you lose the Amulet.",
+			"text": "#bAncient silver and inlaid gems, inscribed with blessings.#dGain 1 Might, 1 Speed, 1 Knowledge, and 1 Sanity now.#n#nLose 3 Might, 3 Speed, 3 Knowledge, and 3 Sanity if you lose the Amulet.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -561,7 +577,7 @@ const betrayal_2e = {
 			"id": 1003,
 			"type": "item",
 			"name": "Idol",
-			"text": "<b>Perhaps it's chosen you for some greater purpose. Like human sacrifice.</b><br><br>Once per turn, you can rub the Idol before making any trait, combat, or event roll to add 2 dice to the roll (to a maximum of 8 dice). Each time you do, lose 1 Sanity.",
+			"text": "#bPerhaps it's chosen you for some greater purpose. Like human sacrifice.#dOnce per turn, you can rub the Idol before making any trait, combat, or event roll to add 2 dice to the roll (to a maximum of 8 dice). Each time you do, lose 1 Sanity.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -570,7 +586,7 @@ const betrayal_2e = {
 			"id": 1004,
 			"type": "item",
 			"name": "Blood Dagger",
-			"text": "<b>WEAPON<br><br>A nasty weapon. Needles and tubes extend from the handle... and plunge right into your veins.</b><br><br>You roll 3 additional dice (maximum of 8 dice) when making a Might attack with this weapon. If you do, lose 1 Speed.<br><br>You can't use another weapon while you're using this one.<br><br>This item can't be traded or dropped. If it's stolen, take 2 dice of physical damage.",
+			"text": "#bWEAPON#n#nA nasty weapon. Needles and tubes extend from the handle... and plunge right into your veins.#dYou roll 3 additional dice (maximum of 8 dice) when making a Might attack with this weapon. If you do, lose 1 Speed.#n#nYou can't use another weapon while you're using this one.#n#nThis item can't be traded or dropped. If it's stolen, take 2 dice of physical damage.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -579,7 +595,7 @@ const betrayal_2e = {
 			"id": 1005,
 			"type": "item",
 			"name": "Rabbit's Foot",
-			"text": "<b>Not so lucky for the rabbit.</b><br><br>Once during your turn, you can reroll 1 die. You must keep the second roll.",
+			"text": "#bNot so lucky for the rabbit.#dOnce during your turn, you can reroll 1 die. You must keep the second roll.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -588,7 +604,7 @@ const betrayal_2e = {
 			"id": 1006,
 			"type": "item",
 			"name": "Axe",
-			"text": "<b>WEAPON<br><br>Very sharp.</b><br><br>You roll 1 additional die (maximum of 8 dice) when making a Might attack with this weapon.<br><br>You can't use another weapon while you're using this one.",
+			"text": "#bWEAPON#n#nVery sharp.#dYou roll 1 additional die (maximum of 8 dice) when making a Might attack with this weapon.#n#nYou can't use another weapon while you're using this one.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -597,7 +613,7 @@ const betrayal_2e = {
 			"id": 1007,
 			"type": "item",
 			"name": "Sacrificial Dagger",
-			"text": "<b>WEAPON<br><br>A twisted shard of iron covered in mysterious symbols and stained with blood.</b><br><br>When making a Might attack with this weapon, you roll 3 extra dice (maximum of 8 dice), but you must make a Knowledge roll first:<br><br>6+ No effect.<br><br>3-5 Lose 1 from a mental trait.<br><br>0-2 The dagger twists in your hand! Take 2 dice of physical damage. You can't attack this turn.<br><br>You can't use another weapon while you're using this one.",
+			"text": "#bWEAPON#n#nA twisted shard of iron covered in mysterious symbols and stained with blood.#dWhen making a Might attack with this weapon, you roll 3 extra dice (maximum of 8 dice), but you must make a Knowledge roll first:#n#n#r6+#tNo effect.#y#r3-5#tLose 1 from a mental trait.#y#r0-2#tThe dagger twists in your hand! Take 2 dice of physical damage. You can't attack this turn.#yYou can't use another weapon while you're using this one.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -606,7 +622,7 @@ const betrayal_2e = {
 			"id": 1008,
 			"type": "item",
 			"name": "Dynamite",
-			"text": "<b>The fuse isn't lit... yet.</b><br><br>Instead of attacking, you can throw the Dynamite through a connecting door into an adjacent room. Each explorer and monster with Might and Speed traits in that room must attempt a Speed roll:<br><br>5+ Take no damage from Dynamite.<br><br>0-4 Take 4 points of physical damage.<br><br>Discard this item after you use it.",
+			"text": "#bThe fuse isn't lit... yet.#dInstead of attacking, you can throw the Dynamite through a connecting door into an adjacent room. Each explorer and monster with Might and Speed traits in that room must attempt a Speed roll:#n#n#r5+#tTake no damage from Dynamite.#y#r0-4#tTake 4 points of physical damage.#yDiscard this item after you use it.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -615,7 +631,7 @@ const betrayal_2e = {
 			"id": 1009,
 			"type": "item",
 			"name": "Music Box",
-			"text": "<b>A hand-crafted antique.<br>It plays a haunting melody that gets stuck in your head.</b><br><br>Once per turn, you can open or close the Music Box.<br><br>While the Music Box is open, any explorer or monster with a Sanity trait that enters or starts its turn in the same room must make a Sanity roll of 4+. If the roll fails, the explorer or monster ends its turn as it is mesmerized by the music.<br><br>If an explorer or monster carrying the Music Box is mesmerized, it drops the Music Box. If the Music Box is open when it is dropped, it remains open.",
+			"text": "#bA hand-crafted antique.#nIt plays a haunting melody that gets stuck in your head.#dOnce per turn, you can open or close the Music Box.#n#nWhile the Music Box is open, any explorer or monster with a Sanity trait that enters or starts its turn in the same room must make a Sanity roll of 4+. If the roll fails, the explorer or monster ends its turn as it is mesmerized by the music.#n#nIf an explorer or monster carrying the Music Box is mesmerized, it drops the Music Box. If the Music Box is open when it is dropped, it remains open.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -624,7 +640,7 @@ const betrayal_2e = {
 			"id": 1010,
 			"type": "item",
 			"name": "Pickpocket's Gloves",
-			"text": "<b>Helping yourself has never seemed so easy.</b><br><br>When you are in the same room as another explorer, you can discard this item to take any item that explorer is carrying.",
+			"text": "#bHelping yourself has never seemed so easy.#dWhen you are in the same room as another explorer, you can discard this item to take any item that explorer is carrying.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -633,7 +649,7 @@ const betrayal_2e = {
 			"id": 1011,
 			"type": "item",
 			"name": "Medical Kit",
-			"text": "<b>A doctor's bag, depleted in some critical resources.</b><br><br> Once during your turn, you can attempt a Knowledge roll to heal yourself or another explorer in the same room:<br><br>8+ Gain up to 3 points of physical traits.<br><br>6-7 Gain up to 2 points of physical traits.<br><br>4-5 Gain 1 point in a physical trait.<br><br>0-3 Nothing happens.<br><br>You can't raise a trait above its starting value with the Medical Kit.",
+			"text": "#bA doctor's bag, depleted in some critical resources.#d Once during your turn, you can attempt a Knowledge roll to heal yourself or another explorer in the same room:#n#n#r8+#tGain up to 3 points of physical traits.#y#r6-7#tGain up to 2 points of physical traits.#y#r4-5#tGain 1 point in a physical trait.#y#r0-3#tNothing happens.#yYou can't raise a trait above its starting value with the Medical Kit.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -642,7 +658,7 @@ const betrayal_2e = {
 			"id": 1012,
 			"type": "item",
 			"name": "Bottle",
-			"text": "<b>An opaque vial containing a black liquid.</b><br><br>Once during your turn after the haunt is revealed, you can roll 3 dice and drink from the Bottle:<br><br>6 Choose a room and put your explorer there.<br><br>5 Gain 2 Might and 2 Speed.<br><br>4 Gain 2 Knowledge and 2 Sanity.<br><br>3 Gain 1 Knowledge and lose 1 Might.<br><br>2 Lose 2 Knowledge and 2 Sanity.<br><br>1 Lose 2 Might and 2 Speed.<br><br>0 Lose 2 from each trait.<br><br>Discard this item after you use it.",
+			"text": "#bAn opaque vial containing a black liquid.#dOnce during your turn after the haunt is revealed, you can roll 3 dice and drink from the Bottle:#n#n#r6#tChoose a room and put your explorer there.#y#r5#tGain 2 Might and 2 Speed.#y#r4#tGain 2 Knowledge and 2 Sanity.#y#r3#tGain 1 Knowledge and lose 1 Might.#y#r2#tLose 2 Knowledge and 2 Sanity.#y#r1#tLose 2 Might and 2 Speed.#y#r0#tLose 2 from each trait.#yDiscard this item after you use it.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -651,7 +667,7 @@ const betrayal_2e = {
 			"id": 1013,
 			"type": "item",
 			"name": "Revolver",
-			"text": "<b>WEAPON<br><br>An old, potent-looking weapon.</b><br><br>You can use the Revolver to attack with Speed instead of Might. (Your opponent then defends with Speed and takes physical damage.)<br><br>Roll 1 additional die on your Speed attack roll (maximum of 8 dice).<br><br>With the Revolver, you can attack anyone in the same room or within line of sight (through an uninterrupted straight line of doors). If you attack someone in another room and lose, you don't take damage.<br><br>You can't use another weapon while you're using this one.",
+			"text": "#bWEAPON#n#nAn old, potent-looking weapon.#dYou can use the Revolver to attack with Speed instead of Might. (Your opponent then defends with Speed and takes physical damage.)#n#nRoll 1 additional die on your Speed attack roll (maximum of 8 dice).#n#nWith the Revolver, you can attack anyone in the same room or within line of sight (through an uninterrupted straight line of doors). If you attack someone in another room and lose, you don't take damage.#n#nYou can't use another weapon while you're using this one.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -660,7 +676,7 @@ const betrayal_2e = {
 			"id": 1014,
 			"type": "item",
 			"name": "Armor",
-			"text": "<b>It's just prop armor from a Renaissance fair, but it's still metal.</b><br><br>Any time (not just once per turn) you take physical damage, take 1 less point of damage.<br><br>This item can't be stolen.",
+			"text": "#bIt's just prop armor from a Renaissance fair, but it's still metal.#dAny time (not just once per turn) you take physical damage, take 1 less point of damage.#n#nThis item can't be stolen.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -669,7 +685,7 @@ const betrayal_2e = {
 			"id": 1015,
 			"type": "item",
 			"name": "Dark Dice",
-			"text": "<b>Are you feeling lucky?</b><br><br>Once per turn, you can roll 3 dice:<br><br>6 Move to the location of any explorer not revealed as a traitor.<br><br>5 Move one other explorer in the same room into an adjacent room.<br><br>4 Gain 1 in a physical trait.<br><br>3 Immediately move into an adjacent room (no movement cost).<br><br>2 Gain 1 in a mental trait.<br><br>1 Draw an event card.<br><br>O Reduce all of your traits to the lowest value above the skull symbol. Discard the Dark Dice.",
+			"text": "#bAre you feeling lucky?#dOnce per turn, you can roll 3 dice:#n#n#r6#tMove to the location of any explorer not revealed as a traitor.#y#r5#tMove one other explorer in the same room into an adjacent room.#y#r4#tGain 1 in a physical trait.#y#r3#tImmediately move into an adjacent room (no movement cost).#y#r2#tGain 1 in a mental trait.#y#r1#tDraw an event card.#y#r0#tReduce all of your traits to the lowest value above the skull symbol.#yDiscard the Dark Dice.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -678,7 +694,7 @@ const betrayal_2e = {
 			"id": 1016,
 			"type": "item",
 			"name": "Angel Feather",
-			"text": "<b>A perfect feather fluttering in your hand.</b><br><br>When you attempt a roll of any kind, you can call out a number from 0 to 8. Use that number instead of rolling the dice.<br><br>Discard this item after you use it.",
+			"text": "#bA perfect feather fluttering in your hand.#dWhen you attempt a roll of any kind, you can call out a number from 0 to 8. Use that number instead of rolling the dice.#n#nDiscard this item after you use it.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -687,7 +703,7 @@ const betrayal_2e = {
 			"id": 1017,
 			"type": "item",
 			"name": "Lucky Stone",
-			"text": "<b>A smooth, ordinary-looking rock. You sense it will bring you good fortune.</b><br><br>After you attempt a roll of any kind, you can rub the stone once to reroll any number of those dice.<br><br>Discard this item after you use it.",
+			"text": "#bA smooth, ordinary-looking rock. You sense it will bring you good fortune.#dAfter you attempt a roll of any kind, you can rub the stone once to reroll any number of those dice.#n#nDiscard this item after you use it.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -696,7 +712,7 @@ const betrayal_2e = {
 			"id": 1018,
 			"type": "item",
 			"name": "Puzzle Box",
-			"text": "<b>There must be a way to open it.</b><br><br>Once during your turn, you can attempt a Knowledge roll to open the box:<br><br>6+ You open the box. Draw 2 item cards and discard the Puzzle Box.<br><br>0-5 You just can't get it open.",
+			"text": "#bThere must be a way to open it.#dOnce during your turn, you can attempt a Knowledge roll to open the box:#n#n#r6+#tYou open the box. Draw 2 item cards and discard the Puzzle Box.#y#r0-5#tYou just can't get it open.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -705,7 +721,7 @@ const betrayal_2e = {
 			"id": 1019,
 			"type": "item",
 			"name": "Smelling Salts",
-			"text": "<b>Whew, that's a lungful.</b><br><br>If your or another living explorer's Knowledge is below its starting value, and you're in the same room, you can raise that trait to its starting value by using the Smelling Salts.<br><br>Discard this item after you use it.",
+			"text": "#bWhew, that's a lungful.#dIf your or another living explorer's Knowledge is below its starting value, and you're in the same room, you can raise that trait to its starting value by using the Smelling Salts.#n#nDiscard this item after you use it.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -714,7 +730,7 @@ const betrayal_2e = {
 			"id": 1020,
 			"type": "item",
 			"name": "Candle",
-			"text": "<b>It makes the shadows move-at least, you hope it's doing that.</b><br><br>If you draw an event card, roll 1 additional die (maximum of 8 dice) for that event's trait rolls.<br><br>If you have the Bell, Book, and Candle, gain 2 in each trait. The first time you lose one of those 3 items later in the game, lose 2 from each trait.",
+			"text": "#bIt makes the shadows move-at least, you hope it's doing that.#dIf you draw an event card, roll 1 additional die (maximum of 8 dice) for that event's trait rolls.#n#nIf you have the Bell, Book, and Candle, gain 2 in each trait. The first time you lose one of those 3 items later in the game, lose 2 from each trait.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -723,7 +739,7 @@ const betrayal_2e = {
 			"id": 1021,
 			"type": "item",
 			"name": "Bell",
-			"text": "<b>A brass bell that makes a resonant clang.</b><br><br>Gain 1 Sanity now.<br><br>Lose 1 Sanity if you lose the Bell.<br><br>Once during your turn after the haunt is revealed, you can attempt a Sanity roll to use the Bell:<br><br>5+ Move any number of unimpeded heroes 1 space closer to you.<br><br>0-4 The traitor can move any number of monsters 1 space closer to you. (If you are the traitor, this result has no effect.) If there is no traitor, all monsters move 1 space closer to you.",
+			"text": "#bA brass bell that makes a resonant clang.#dGain 1 Sanity now.#n#nLose 1 Sanity if you lose the Bell.#n#nOnce during your turn after the haunt is revealed, you can attempt a Sanity roll to use the Bell:#n#n#r5+#tMove any number of unimpeded heroes 1 space closer to you.#y#r0-4#tThe traitor can move any number of monsters 1 space closer to you. (If you are the traitor, this result has no effect.) If there is no traitor, all monsters move 1 space closer to you.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -732,7 +748,7 @@ const betrayal_2e = {
 			"id": 1022,
 			"type": "item",
 			"name": "Adrenaline Shot",
-			"text": "<b>A syringe containing a strange fluorescent liquid.</b><br><br>Before you attempt a trait roll, you can use this item to add 4 to the result of that roll.<br><br>Discard this item after you use it.",
+			"text": "#bA syringe containing a strange fluorescent liquid.#dBefore you attempt a trait roll, you can use this item to add 4 to the result of that roll.#n#nDiscard this item after you use it.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -741,7 +757,7 @@ const betrayal_2e = {
 			"id": 2001,
 			"type": "event",
 			"name": "The Lost One",
-			"text": "<b>A woman wearing a Civil War dress beckons to you.<br>You fall into a trance.</b><br><br>You must attempt a Knowledge roll. If the result is 5 or more, you break out of your trance and gain 1 Knowledge; otherwise, roll 3 dice to see where the Lost One leads you:<br><br>6 Put your explorer in the Entrance Hall.<br><br>4-5 Put your explorer in the Upper Landing.<br><br>2-3 Draw room tiles until you find an upper floor room.<br><br>0-1 Draw room tiles until you find a basement room.<br><br>If this card requires you to draw a room tile for a specific floor, put that tile in the house, and put your explorer there. If you reach the end of the stack without drawing a room for the floor you rolled, put your explorer in the Entrance Hall instead.",
+			"text": "#bA woman wearing a Civil War dress beckons to you.#nYou fall into a trance.#d#nYou must attempt a Knowledge roll. If the result is 5 or more, you break out of your trance and gain 1 Knowledge; otherwise, roll 3 dice to see where the Lost One leads you:#n#n#r6#tPut your explorer in the Entrance Hall.#y#r4-5#tPut your explorer in the Upper Landing.#y#r2-3#tDraw room tiles until you find an upper floor room.#y#r0-1#tDraw room tiles until you find a basement room.#yIf this card requires you to draw a room tile for a specific floor, put that tile in the house, and put your explorer there. If you reach the end of the stack without drawing a room for the floor you rolled, put your explorer in the Entrance Hall instead.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -750,7 +766,7 @@ const betrayal_2e = {
 			"id": 2002,
 			"type": "event",
 			"name": "The Voice",
-			"text": "<b><i>\"I'm under the floor,<br>buried under the floor...\"<br><br>The voice whispers once, then is gone.</b><br><br>You must attempt a Knowledge roll:<br><br>4+ You find something under the floor. Draw an item card.<br><br>0-3 You dig and search for the voice, but to no avail.",
+			"text": "#b<i>\"I'm under the floor,#nburied under the floor...\"#n#nThe voice whispers once, then is gone.#dYou must attempt a Knowledge roll:#n#n#r4+#tYou find something under the floor. Draw an item card.#y#r0-3#tYou dig and search for the voice, but to no avail.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -759,7 +775,7 @@ const betrayal_2e = {
 			"id": 2003,
 			"type": "event",
 			"name": "The Walls",
-			"text": "<b>This room is warm.<br>Flesh-like walls pulse with a steady heartbeat. Your own heart beats with the rhythm of the house. You are drawn into the walls... and emerge somewhere else.</b><br><br>You must draw the next room tile and put it in the house. Put your explorer in that room.",
+			"text": "#bThis room is warm.#nFlesh-like walls pulse with a steady heartbeat. Your own heart beats with the rhythm of the house. You are drawn into the walls... and emerge somewhere else.#dYou must draw the next room tile and put it in the house. Put your explorer in that room.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -768,7 +784,7 @@ const betrayal_2e = {
 			"id": 2004,
 			"type": "event",
 			"name": "Webs",
-			"text": "<b>Casually, you reach up to brush some webs aside... but they won't brush away. They cling.</b><br><br>You must attempt a Might roll:<br><br>4+ You break free. Gain 1 Might and discard this card.<br><br>0-3 You're stuck. Keep this card.<br><br>If you're stuck, you can't do anything until you're freed. Once during an explorer's turn, any explorer can attempt a Might roll to free you. (You can also attempt this roll.) A 4+ succeeds, but you don't gain the 1 Might. Anyone failing an attempt can't move for the rest of that turn. After 3 unsuccessful attempts, you break free automatically on your next turn and take your turn normally.<br><br>When you're free, discard this event.",
+			"text": "#bCasually, you reach up to brush some webs aside... but they won't brush away. They cling.#dYou must attempt a Might roll:#n#nr#4+#tYou break free. Gain 1 Might and discard this card.#y#r0-3#tYou're stuck. Keep this card.#yIf you're stuck, you can't do anything until you're freed. Once during an explorer's turn, any explorer can attempt a Might roll to free you. (You can also attempt this roll.) A 4+ succeeds, but you don't gain the 1 Might. Anyone failing an attempt can't move for the rest of that turn. After 3 unsuccessful attempts, you break free automatically on your next turn and take your turn normally.#n#nWhen you're free, discard this event.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -777,7 +793,7 @@ const betrayal_2e = {
 			"id": 2005,
 			"type": "event",
 			"name": "Whoops!",
-			"text": "<b>You feel a body under your foot. Before you can leap away from it, you're knocked over. A giggling voice runs away from you.</b><br><br>One of the item cards (not omens) in your hand has been stolen. You may choose which one, because picking at random using dice makes this event too annoying. Discard it.<br><br>If you have no items, then take no action.",
+			"text": "#bYou feel a body under your foot. Before you can leap away from it, you're knocked over. A giggling voice runs away from you.#dOne of the item cards (not omens) in your hand has been stolen. You may choose which one, because picking at random using dice makes this event too annoying. Discard it.#n#nIf you have no items, then take no action.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -786,7 +802,7 @@ const betrayal_2e = {
 			"id": 2006,
 			"type": "event",
 			"name": "Silence",
-			"text": "<b>Underground, everything goes silent. Even the sound of breathing is gone.</b><br><br>Each explorer in the basement must attempt a Sanity roll.<br><br>4+ You wait calmly for your hearing to return.<br><br>1-3 You scream a silent scream.<br>Take 1 die of mental damage.<br><br>0 You freak out.<br>Take 2 dice of mental damage.<br><br>Each result affects only the explorer making that roll.",
+			"text": "#bUnderground, everything goes silent. Even the sound of breathing is gone.#dEach explorer in the basement must attempt a Sanity roll.#n#n#r4+#tYou wait calmly for your hearing to return.#y#r1-3#tYou scream a silent scream.#nTake 1 die of mental damage.#y#r0#tYou freak out.#nTake 2 dice of mental damage.#yEach result affects only the explorer making that roll.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -795,7 +811,7 @@ const betrayal_2e = {
 			"id": 2007,
 			"type": "event",
 			"name": "Skeletons",
-			"text": "<b>Mother and child, still embracing.</b><br><br>Put the Skeletons token in this room.<br>Take 1 die of mental damage.<br><br>Once during an explorer's turn, that explorer can attempt a Sanity roll to search the Skeletons:<br><br>5+ Draw an item card.<br>Remove the Skeletons token.<br><br>0-4 You dig around, but find nothing.<br>Take 1 die of mental damage.<br><br>Each result affects only the explorer making that roll.",
+			"text": "#bMother and child, still embracing.#dPut the Skeletons token in this room.#nTake 1 die of mental damage.#n#nOnce during an explorer's turn, that explorer can attempt a Sanity roll to search the Skeletons:#n#n#r5+#tDraw an item card.#nRemove the Skeletons token.#y#r0-4#tYou dig around, but find nothing.#nTake 1 die of mental damage.#yEach result affects only the explorer making that roll.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -804,7 +820,7 @@ const betrayal_2e = {
 			"id": 2008,
 			"type": "event",
 			"name": "Smoke",
-			"text": "<b>Smoke billows around you.<br>You cough, wiping away tears.</b><br><br>Put the Smoke token in this room. The Smoke blocks line of sight from adjacent rooms. An explorer rolls 2 fewer dice (minimum of 1 die) on all trait rolls while in this room.",
+			"text": "#bSmoke billows around you.#nYou cough, wiping away tears.#dPut the Smoke token in this room. The Smoke blocks line of sight from adjacent rooms. An explorer rolls 2 fewer dice (minimum of 1 die) on all trait rolls while in this room.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -813,7 +829,7 @@ const betrayal_2e = {
 			"id": 2009,
 			"type": "event",
 			"name": "Something hidden",
-			"text": "<b>There's something odd about this room, but what? It's tickling the back of your mind.</b><br><br>If you want to try to figure out what's odd, attempt a Knowledge roll:<br><br>4+ A section of wall slides away, revealing an alcove. Draw an item card.<br><br>0-3 You can't figure it out, and that makes you a bit crazy.<br>Lose 1 Sanity.",
+			"text": "#bThere's something odd about this room, but what? It's tickling the back of your mind.#dIf you want to try to figure out what's odd, attempt a Knowledge roll:#n#n#r4+#tA section of wall slides away, revealing an alcove. Draw an item card.#y#r0-3#tYou can't figure it out, and that makes you a bit crazy.#nLose 1 Sanity.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -822,7 +838,7 @@ const betrayal_2e = {
 			"id": 2010,
 			"type": "event",
 			"name": "Something Slimy",
-			"text": "<b>What's around your ankle?<br>A bug? A tentacle?<br>A dead hand clawing?</b><br><br>You must attempt a Speed roll:<br><br>4+ You break free. Gain 1 Speed.<br><br>1-3 Lose 1 Might.<br><br>O Lose 1 Might and 1 Speed.",
+			"text": "#bWhat's around your ankle?#nA bug? A tentacle?#nA dead hand clawing?#dYou must attempt a Speed roll:#n#n#r4+#tYou break free. Gain 1 Speed.#y#r1-3#tLose 1 Might.#y#r0#tLose 1 Might and 1 Speed.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -831,7 +847,7 @@ const betrayal_2e = {
 			"id": 2011,
 			"type": "event",
 			"name": "Spider",
-			"text": "<b>A spider the size of a fist lands on your shoulder... and crawls into your hair.</b><br><br>You must attempt a Speed roll to brush it away or a Sanity roll to stand still:<br><br>4+ It's gone. Gain 1 in the trait you used to attempt this roll.<br><br>1-3 It bites you. Take 1 die of physical damage.<br><br>O It takes a chunk out of you.<br>Take 2 dice of physical damage.",
+			"text": "#bA spider the size of a fist lands on your shoulder... and crawls into your hair.#dYou must attempt a Speed roll to brush it away or a Sanity roll to stand still:#n#n#r4+#tIt's gone. Gain 1 in the trait you used to attempt this roll.#y#r1-3#tIt bites you. Take 1 die of physical damage.#y#r0#tIt takes a chunk out of you.#nTake 2 dice of physical damage.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -840,7 +856,7 @@ const betrayal_2e = {
 			"id": 2012,
 			"type": "event",
 			"name": "The Beckoning",
-			"text": "<b>Outside.<br>You must get outside.<br>Fly to freedom!</b><br><br>Each explorer in the Gardens, Graveyard, Tower, on the Balcony, or in a room with an outside-facing window must attempt a Sanity roll:<br><br>3+ You back away from the ledge.<br><br>0-2 You jump to the Patio. (If it isn't in the house, search the room stack for it, put it in the house, and shuffle that stack.) Put your explorer there and take 1 die of physical damage.<br><br>Each result affects only the explorer making that roll.",
+			"text": "#bOutside.#nYou must get outside.#nFly to freedom!#dEach explorer in the Gardens, Graveyard, Tower, on the Balcony, or in a room with an outside-facing window must attempt a Sanity roll:#n#n#r3+#tYou back away from the ledge.#y#r0-2#tYou jump to the Patio. (If it isn't in the house, search the room stack for it, put it in the house, and shuffle that stack.) Put your explorer there and take 1 die of physical damage.#yEach result affects only the explorer making that roll.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -849,7 +865,7 @@ const betrayal_2e = {
 			"id": 2013,
 			"type": "event",
 			"name": "Night View",
-			"text": "<b>You see a vision of a ghostly couple walking the grounds, silently strolling in their wedding best.</b><br><br>You must attempt a Knowledge roll:<br><br>5+ You recognize the ghosts as former inhabitants of the house. You call their names, and they turn to you, whispering dark secrets of the house. Gain 1 Knowledge.<br><br>0-4 You pull back in horror, unable to watch.",
+			"text": "#bYou see a vision of a ghostly couple walking the grounds, silently strolling in their wedding best.#dYou must attempt a Knowledge roll:#n#n#r5+#tYou recognize the ghosts as former inhabitants of the house. You call their names, and they turn to you, whispering dark secrets of the house. Gain 1 Knowledge.#y#r0-4#tYou pull back in horror, unable to watch.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -858,7 +874,7 @@ const betrayal_2e = {
 			"id": 2014,
 			"type": "event",
 			"name": "Phone Call",
-			"text": "<b>A phone rings in the room.<br>You feel compelled to answer it.</b><br><br>Roll 2 dice. A sweet little granny voice says:<br><br>4 <i>\"Tea and cakes! Tea and cakes! You always were my favorite!\"</i><br>Gain 1 Sanity.<br><br>3 <i>\"I'm always here for you, Pattycakes. Watching...\"</i><br>Gain 1 Knowledge.<br><br>1-2 <i>\"I'm here, Sweetums! Give us a kiss!\"</i><br>Take 1 die of mental damage.<br><br>0 <i>\"Bad little children must be punished!\"</i><br>Take 2 dice of physical damage.",
+			"text": "#bA phone rings in the room.#nYou feel compelled to answer it.#dRoll 2 dice. A sweet little granny voice says:#n#n#r4#t<i>\"Tea and cakes! Tea and cakes! You always were my favorite!\"</i>#nGain 1 Sanity.#y#r3#t<i>\"I'm always here for you, Pattycakes. Watching...\"</i>#nGain 1 Knowledge.#y#r1-2#t<i>\"I'm here, Sweetums! Give us a kiss!\"</i>#nTake 1 die of mental damage.#y#r0#t<i>\"Bad little children must be punished!\"</i>#nTake 2 dice of physical damage.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -867,7 +883,7 @@ const betrayal_2e = {
 			"id": 2015,
 			"type": "event",
 			"name": "Posession",
-			"text": "<b>A shadow separates from the wall. As you stand in shock, the shadow surrounds you and chills you to the core.</b><br><br>You must choose any one trait and attempt a roll for that trait:<br><br>4+ You resist the shadow's corruption. Gain 1 in a trait of your choice.<br><br>0-3 The shadow drains your energy. The chosen trait drops to its lowest value. (It doesn't drop to the skull.) If that trait is already at its lowest value, lower a different trait to its lowest value.",
+			"text": "#bA shadow separates from the wall. As you stand in shock, the shadow surrounds you and chills you to the core.#dYou must choose any one trait and attempt a roll for that trait:#n#n#r4+#tYou resist the shadow's corruption. Gain 1 in a trait of your choice.#y#r0-3#tThe shadow drains your energy. The chosen trait drops to its lowest value. (It doesn't drop to the skull.) If that trait is already at its lowest value, lower a different trait to its lowest value.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -876,7 +892,7 @@ const betrayal_2e = {
 			"id": 2016,
 			"type": "event",
 			"name": "Revolving Wall",
-			"text": "<b>The wall spins to another place.</b><br><br>Place the Wall Switch token on a wall without an exit in this room or a corner of this room. If there isn't a room on the other side of the Wall Switch, draw room tiles until you find one for this floor, then put it in the house. (If there are no more rooms on this floor, discard this card.) Then put your explorer in that room.<br><br>Once during an explorer's turn, if that explorer is in either room, he or she can attempt a Knowledge roll to use the Wall Switch:<br><br>3+ That explorer finds the hidden switch and goes through. This doesn't count as moving a space.<br><br>0-2 That explorer can't find the hidden switch and can't go through.",
+			"text": "#bThe wall spins to another place.#dPlace the Wall Switch token on a wall without an exit in this room or a corner of this room. If there isn't a room on the other side of the Wall Switch, draw room tiles until you find one for this floor, then put it in the house. (If there are no more rooms on this floor, discard this card.) Then put your explorer in that room.#n#nOnce during an explorer's turn, if that explorer is in either room, he or she can attempt a Knowledge roll to use the Wall Switch:#n#n#r3+#tThat explorer finds the hidden switch and goes through. This doesn't count as moving a space.#y#r0-2#tThat explorer can't find the hidden switch and can't go through.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -885,7 +901,7 @@ const betrayal_2e = {
 			"id": 2017,
 			"type": "event",
 			"name": "Rotten",
-			"text": "<b>The smell in this room, it's horrible.<br>Smells like death, like blood.<br>A slaughterhouse smell.</b><br><br>You must attempt a Sanity roll:<br><br>5+ Troubling odors, nothing more.<br>Gain 1 Sanity.<br><br>2-4 Lose 1 Might.<br><br>1 Lose 1 Might and 1 Speed.<br><br>0 You double over with nausea.<br>Lose 1 Might, 1 Speed,1 Knowledge, and 1 Sanity.",
+			"text": "#bThe smell in this room, it's horrible.#nSmells like death, like blood.#nA slaughterhouse smell.#dYou must attempt a Sanity roll:#n#n#r5+#tTroubling odors, nothing more.#nGain 1 Sanity.#y#r2-4#tLose 1 Might.#y#r1#tLose 1 Might and 1 Speed.#y#r0#tYou double over with nausea.#nLose 1 Might, 1 Speed,1 Knowledge, and 1 Sanity.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -894,7 +910,7 @@ const betrayal_2e = {
 			"id": 2018,
 			"type": "event",
 			"name": "Secret Passage",
-			"text": "<b>A section of the wall slides away.<br>Behind it, a moldy tunnel awaits.</b><br><br>Put a Secret Passage token in this room. Roll 3 dice and place the second Secret Passage token in:<br><br>6 Any existing room.<br><br>4-5 Any existing upper floor room.<br><br>2-3 Any existing ground floor room.<br><br>0-1 Any existing basement room.<br><br>You can then use the Secret Passage, even if you don't have any movement left.<br><br>Moving from one Secret Passage token to the other counts as moving one space. (The passage itself doesn't count as a space.)<br><br>On later turns, any explorer can use the Secret Passage. An explorer can't end his or her turn in the passage.",
+			"text": "#bA section of the wall slides away.#nBehind it, a moldy tunnel awaits.#dPut a Secret Passage token in this room. Roll 3 dice and place the second Secret Passage token in:#n#n#r6#tAny existing room.#y#r4-5#tAny existing upper floor room.#y#r2-3#tAny existing ground floor room.#y#r0-1#tAny existing basement room.#yYou can then use the Secret Passage, even if you don't have any movement left.#n#nMoving from one Secret Passage token to the other counts as moving one space. (The passage itself doesn't count as a space.)#n#nOn later turns, any explorer can use the Secret Passage. An explorer can't end his or her turn in the passage.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -903,7 +919,7 @@ const betrayal_2e = {
 			"id": 2019,
 			"type": "event",
 			"name": "Secret Stairs",
-			"text": "<b>A horrible creaking sound echoes around you. You've discovered a secret stairwell.</b><br><br>Put one Secret Stairs token in this room and a second Secret Stairs token in an existing room on another floor. Moving from one Secret Stairs token to the other counts as moving one space. (The stairs don't count as a space.)<br><br>You can follow the stairs right now, even if you don't have any movement left. If you do follow them this turn, draw an event card in the new room.",
+			"text": "#bA horrible creaking sound echoes around you. You've discovered a secret stairwell.#dPut one Secret Stairs token in this room and a second Secret Stairs token in an existing room on another floor. Moving from one Secret Stairs token to the other counts as moving one space. (The stairs don't count as a space.)#n#nYou can follow the stairs right now, even if you don't have any movement left. If you do follow them this turn, draw an event card in the new room.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -912,7 +928,7 @@ const betrayal_2e = {
 			"id": 2020,
 			"type": "event",
 			"name": "Shrieking Wind",
-			"text": "<b>The wind picks up, a slow crescendo to a screeching howl.</b><br><br>Each explorer in the Gardens, Graveyard, Patio, Tower, on the Balcony, or in a room with an outside-facing window, must attempt a Might roll:<br><br>5+ You keep your footing.<br><br>3-4 The wind knocks you down.<br>Take 1 die of physical damage.<br><br>1-2 The wind chills your soul.<br>Take 1 die of mental damage.<br><br>0 The wind knocks you down hard. Discard one of your items, or if you don't have any, take 1 die of physical damage.<br><br>Each result affects only the explorer making that roll.",
+			"text": "#bThe wind picks up, a slow crescendo to a screeching howl.#dEach explorer in the Gardens, Graveyard, Patio, Tower, on the Balcony, or in a room with an outside-facing window, must attempt a Might roll:#n#n#r5+#tYou keep your footing.#y#r3-4#tThe wind knocks you down.#nTake 1 die of physical damage.#y#r1-2#tThe wind chills your soul.#nTake 1 die of mental damage.#y#r0#tThe wind knocks you down hard. Discard one of your items, or if you don't have any, take 1 die of physical damage.#yEach result affects only the explorer making that roll.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -921,7 +937,7 @@ const betrayal_2e = {
 			"id": 2021,
 			"type": "event",
 			"name": "Jonah's Turn", // TODO: Puzzle box will get rarer, so include another item or two in this.
-			"text": "<b>Two boys are playing with a wooden top. <i>\"Would you like a turn, Jonah?\"</i> one asks.<br><br><i>\"No,\"</i> says Jonah, <i>\"I want all the turns.\"</i> Jonah takes the top and hits the other boy in the face. The boy falls. Jonah keeps hitting him as they fade from view.</b><br><br>If an explorer has the Puzzle Box, that explorer discards that item and draws a replacement item for it. If this happens, you gain 1 Sanity; otherwise, you take 1 die of mental damage.",
+			"text": "#bTwo boys are playing with a wooden top. <i>\"Would you like a turn, Jonah?\"</i> one asks.#n#n<i>\"No,\"</i> says Jonah, <i>\"I want all the turns.\"</i> Jonah takes the top and hits the other boy in the face. The boy falls. Jonah keeps hitting him as they fade from view.#dIf an explorer has the Puzzle Box, that explorer discards that item and draws a replacement item for it. If this happens, you gain 1 Sanity; otherwise, you take 1 die of mental damage.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -930,7 +946,7 @@ const betrayal_2e = {
 			"id": 2022,
 			"type": "event",
 			"name": "Lights Out", // TODO: Candle will get rarer, so include another item or two in this.
-			"text": "<b>Your flashlight goes out.<br>Don't worry, someone else has batteries.</b><br><br>Keep this card. You can move only 1 space each turn until you end your turn in the same room as another explorer. At the end of that turn, discard this card. Then you can move normally again.<br><br>If you have the Candle or end your turn in the Furnace Room, discard this card.",
+			"text": "#bYour flashlight goes out.#nDon't worry, someone else has batteries.#dKeep this card. You can move only 1 space each turn until you end your turn in the same room as another explorer. At the end of that turn, discard this card. Then you can move normally again.#n#nIf you have the Candle or end your turn in the Furnace Room, discard this card.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -939,7 +955,7 @@ const betrayal_2e = {
 			"id": 2023,
 			"type": "event",
 			"name": "Locked Safe",
-			"text": "<b>Behind a portrait is a wall safe.<br>It is trapped, of course.</b><br><br>Put the Safe token in this room.<br><br>Once during an explorer's turn, that explorer can attempt a Knowledge roll to open the Safe:<br><br>5+ Draw 2 item cards and remove the Safe token.<br><br>2-4 Take 1 die of physical damage.<br>The Safe won't open.<br><br>0-1 Take 2 dice of physical damage.<br>The Safe won't open.",
+			"text": "#bBehind a portrait is a wall safe.#nIt is trapped, of course.#dPut the Safe token in this room.#n#nOnce during an explorer's turn, that explorer can attempt a Knowledge roll to open the Safe:#r5+#tDraw 2 item cards and remove the Safe token.#y#r2-4#tTake 1 die of physical damage.#nThe Safe won't open.#y#r0-1#tTake 2 dice of physical damage.#nThe Safe won't open.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -948,7 +964,7 @@ const betrayal_2e = {
 			"id": 2024,
 			"type": "event",
 			"name": "Mists from the Walls",
-			"text": "<b>Mists pour out from the walls.<br>There are faces in the mist, human and... inhuman.</b><br><br>Each explorer in the basement must attempt a Sanity roll:<br><br>4+ The faces are tricks of light and shadow. All is well.<br><br>1-3 Take 1 die of mental damage (and 1 additional die of damage if that explorer is in a room with an event symbol).<br><br>0 Take 1 die of mental damage (and 2 additional dice of damage if that explorer is in a room with an event symbol).<br><br>Each result affects only the explorer making that roll.",
+			"text": "#bMists pour out from the walls.#nThere are faces in the mist, human and... inhuman.#dEach explorer in the basement must attempt a Sanity roll:#n#n#r4+#tThe faces are tricks of light and shadow. All is well.#y#r1-3#tTake 1 die of mental damage (and 1 additional die of damage if that explorer is in a room with an event symbol).#y#r0#tTake 1 die of mental damage (and 2 additional dice of damage if that explorer is in a room with an event symbol).#yEach result affects only the explorer making that roll.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -957,7 +973,7 @@ const betrayal_2e = {
 			"id": 2025,
 			"type": "event",
 			"name": "Mystic Slide",
-			"text": "<b>IF YOU'RE IN THE BASEMENT, THIS EVENT AFFECTS THE NEXT EXPLORER TO YOUR LEFT NOT IN THE BASEMENT. DISCARD THIS CARD IF ALL OF THE EXPLORERS ARE IN THE BASEMENT.<br><br>The floor falls from under you.</b><br><br>Place the Slide token in this room, then attempt a Might roll to use the Slide.<br><br>5+ You control the Slide. Put yourself in any explored room on any floor below the Slide.<br><br>0-4 Draw tiles from the room stack until you draw a basement room. Place the room tile. (If no basement rooms are in the stack, choose a basement room in play.) You fall to that room and take 1 die of physical damage. If it's not your turn, don't draw a card for that room.<br><br>Keep this card. On later turns, any explorer can attempt this roll to use the Slide.",
+			"text": "#bIF YOU'RE IN THE BASEMENT, THIS EVENT AFFECTS THE NEXT EXPLORER TO YOUR LEFT NOT IN THE BASEMENT. DISCARD THIS CARD IF ALL OF THE EXPLORERS ARE IN THE BASEMENT.#n#nThe floor falls from under you.#dPlace the Slide token in this room, then attempt a Might roll to use the Slide.#n#n#r5+#tYou control the Slide. Put yourself in any explored room on any floor below the Slide.#y#r0-4#tDraw tiles from the room stack until you draw a basement room. Place the room tile. (If no basement rooms are in the stack, choose a basement room in play.) You fall to that room and take 1 die of physical damage. If it's not your turn, don't draw a card for that room.#yKeep this card. On later turns, any explorer can attempt this roll to use the Slide.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -966,7 +982,7 @@ const betrayal_2e = {
 			"id": 2026,
 			"type": "event",
 			"name": "Grave Dirt",
-			"text": "<b>This room is covered in a thick layer of dirt. You cough as it gets on your skin and in your lungs.</b><br><br>You must attempt a Might roll:<br><br>4+ You shake it off. Gain 1 Might.<br><br>0-3 Something is wrong. Keep this card. Take 1 point of physical damage at the start of each of your turns. Discard this card if an item card increases one of your traits or if you end your turn in the Balcony, Gardens, Graveyard, Gymnasium, Larder, Patio, or Tower.",
+			"text": "#bThis room is covered in a thick layer of dirt. You cough as it gets on your skin and in your lungs.#dYou must attempt a Might roll:#n#n#r4+#tYou shake it off. Gain 1 Might.#y#r0-3#tSomething is wrong. Keep this card. Take 1 point of physical damage at the start of each of your turns. Discard this card if an item card increases one of your traits or if you end your turn in the Balcony, Gardens, Graveyard, Gymnasium, Larder, Patio, or Tower.##y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -975,7 +991,7 @@ const betrayal_2e = {
 			"id": 2027,
 			"type": "event",
 			"name": "Groundskeeper",
-			"text": "<b>You turn to see a man in groundskeeper clothing.<br>He raises his shovel and charges. Inches from your face, he disappears, leaving muddy footprints, and nothing more.</b><br><br>You must attempt a Knowledge roll. (An explorer in the Gardens rolls 2 fewer dice on this roll.)<br><br>4+ You find something in the mud.<br>Draw an item card.<br><br>0-3 The groundskeeper reappears and strikes you in the face with the shovel. The player on your right rolls a Might 4 attack for the Groundskeeper. You defend against this attack as normal, by rolling dice equal to your Might.",
+			"text": "#bYou turn to see a man in groundskeeper clothing.#nHe raises his shovel and charges. Inches from your face, he disappears, leaving muddy footprints, and nothing more.#dYou must attempt a Knowledge roll. (An explorer in the Gardens rolls 2 fewer dice on this roll.)#n#n#r4+#tYou find something in the mud.#nDraw an item card.#y#r0-3#tThe groundskeeper reappears and strikes you in the face with the shovel. The player on your right rolls a Might 4 attack for the Groundskeeper. You defend against this attack as normal, by rolling dice equal to your Might.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -984,7 +1000,7 @@ const betrayal_2e = {
 			"id": 2028,
 			"type": "event",
 			"name": "Hanged Men",
-			"text": "<b>A breeze chills the room.<br>Before you, three men hang from frayed ropes. They stare at you with cold, dead eyes.<br>The trio swing silently, then fade into dust that falls to the ground. You start to choke.<br><br>You must attempt a roll for each trait:<br><br>2+ That trait is unaffected.<br><br>0-1 Lose 1 from that trait.<br><br>If you roll a 2+ on all 4 rolls, gain 1 additional point in a trait of your choice.",
+			"text": "#bA breeze chills the room.#nBefore you, three men hang from frayed ropes. They stare at you with cold, dead eyes.#nThe trio swing silently, then fade into dust that falls to the ground. You start to choke.#n#nYou must attempt a roll for each trait:#n#n#r2+#tThat trait is unaffected.#y#r0-1#tLose 1 from that trait.#yIf you roll a 2+ on all 4 rolls, gain 1 additional point in a trait of your choice.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -993,7 +1009,7 @@ const betrayal_2e = {
 			"id": 2029,
 			"type": "event",
 			"name": "Hideous Shriek",
-			"text": "<b>It starts like a whisper, but ends in a soul-rending shriek.</b><br><br>Each explorer must attempt a Sanity roll:<br><br>4+ You resist the sound.<br><br>1-3 Take 1 die of mental damage.<br><br>O Take 2 dice of mental damage.<br><br>Each result affects only the explorer making that roll.",
+			"text": "#bIt starts like a whisper, but ends in a soul-rending shriek.#dEach explorer must attempt a Sanity roll:#n#n#r4+#tYou resist the sound.#y#r1-3#tTake 1 die of mental damage.#y#r0#tTake 2 dice of mental damage.#yEach result affects only the explorer making that roll.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1002,7 +1018,7 @@ const betrayal_2e = {
 			"id": 2030,
 			"type": "event",
 			"name": "Image in the Mirror",
-			"text": "<b>IF YOU DON'T HAVE ANY ITEM CARDS, THIS EVENT AFFECTS THE NEXT EXPLORER TO YOUR LEFT WITH AN ITEM CARD. DISCARD THIS CARD IF NO EXPLORER HAS AN ITEM CARD.<br><br>There is an old mirror in this room.<br>Your frightened reflection moves on its own. You realize it is you from another time. You need to help your reflection, so you write on the mirror:<br><br><i>THIS WILL HELP</i><br><br>You then hand an item through the mirror.</b><br><br>Choose one of your item cards (not an omen card) and shuffle it into the item stack. Gain 1 Knowledge.",
+			"text": "#bIF YOU DON'T HAVE ANY ITEM CARDS, THIS EVENT AFFECTS THE NEXT EXPLORER TO YOUR LEFT WITH AN ITEM CARD. DISCARD THIS CARD IF NO EXPLORER HAS AN ITEM CARD.#n#nThere is an old mirror in this room.#nYour frightened reflection moves on its own. You realize it is you from another time. You need to help your reflection, so you write on the mirror:#n#n<i>THIS WILL HELP</i>#n#nYou then hand an item through the mirror.#dChoose one of your item cards (not an omen card) and shuffle it into the item stack. Gain 1 Knowledge.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1011,7 +1027,7 @@ const betrayal_2e = {
 			"id": 2031,
 			"type": "event",
 			"name": "Image in the Mirror", // TODO: It's great when both mirror cards are used in the game. Add a third mirror card somehow. Maybe you witness the handover from afar. But then it's not mirror related? Maybe you meet a man polishing a mirror, who tells you it's secret, and you can choose to smash it?
-			"text": "<b>There is an old mirror in this room.<br>Your frightened reflection moves on its own. You realize it is you from another time. Your reflection writes on the mirror:<br><br><i>THIS WILL HELP</i><br><br>Then it hands you an item through the mirror.</b><br><br>Draw an item card.",
+			"text": "#bThere is an old mirror in this room.#nYour frightened reflection moves on its own. You realize it is you from another time. Your reflection writes on the mirror:#n#n<i>THIS WILL HELP</i>#n#nThen it hands you an item through the mirror.#dDraw an item card.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1020,7 +1036,7 @@ const betrayal_2e = {
 			"id": 2032,
 			"type": "event",
 			"name": "It is Meant to Be",
-			"text": "<b>You collapse to the floor, visions of future events pouring through your head.</b><br><br>Choose one of these 2 options:<br><br>&bull; Draw cards from the item, omen or event stack until you find a card of your choice. Shuffle the unwanted cards back into the stack. Keep the chosen card in you hand and don't tell anyone what it is. The next time anyone should draw that type of card, they draw your chosen card. (Ask them to manually draw the card with that number, then discard yours.)<br><br>&bull; You can choose instead to roll 4 dice and write down the result. For one future die roll of your choice that you attempt, you can use that number instead of rolling. If that number is higher than the maximum possible result, use the maximum possible result instead.",
+			"text": "#bYou collapse to the floor, visions of future events pouring through your head.#dChoose one of these 2 options:#n#n&bull; Draw cards from the item, omen or event stack until you find a card of your choice. Shuffle the unwanted cards back into the stack. Keep the chosen card in you hand and don't tell anyone what it is. The next time anyone should draw that type of card, they draw your chosen card. (Ask them to manually draw the card with that number, then discard yours.)#n#n&bull; You can choose instead to roll 4 dice and write down the result. For one future die roll of your choice that you attempt, you can use that number instead of rolling. If that number is higher than the maximum possible result, use the maximum possible result instead.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1029,7 +1045,7 @@ const betrayal_2e = {
 			"id": 2033,
 			"type": "event",
 			"name": "Creepy Crawlies",
-			"text": "<b>Exactly one thousand bugs spill out on your skin, under your clothes, and in your hair.</b><br><br>You must attempt a Sanity roll:<br><br>5+ You blink, and they're gone.<br>Gain 1 Sanity.<br><br>1-4 Lose 1 Sanity.<br><br>O Lose 2 Sanity.",
+			"text": "#bExactly one thousand bugs spill out on your skin, under your clothes, and in your hair.#dYou must attempt a Sanity roll:#n#n#r5+#tYou blink, and they're gone.#nGain 1 Sanity.#y#r1-4#tLose 1 Sanity.#y#r0#tLose 2 Sanity.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1038,7 +1054,7 @@ const betrayal_2e = {
 			"id": 2034,
 			"type": "event",
 			"name": "Creepy Puppet", // TODO: Add another item to affect.
-			"text": "<b>You see one of those dolls that give you the willies.<br>It jumps at you with a tiny spear.</b><br><br>The player on your right rolls a Might 4 attack for the Creepy Puppet. You defend against this attack as normal, by rolling dice equal to your Might.<br><br>If you take any damage from this attack, the explorer with the Spear gains 2 Might (unless you have the Spear).",
+			"text": "#bYou see one of those dolls that give you the willies.#nIt jumps at you with a tiny spear.#dThe player on your right rolls a Might 4 attack for the Creepy Puppet. You defend against this attack as normal, by rolling dice equal to your Might.#n#nIf you take any damage from this attack, the explorer with the Spear gains 2 Might (unless you have the Spear).",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1047,7 +1063,7 @@ const betrayal_2e = {
 			"id": 2035,
 			"type": "event",
 			"name": "Debris",
-			"text": "<b>Plaster falls from the walls and ceiling.</b><br><br>You must attempt a Speed roll:<br><br>3+ You dodge the plaster.<br>Gain 1 Speed.<br><br>1-2 You're buried in debris.<br>Take 1 die of physical damage.<br><br>0 You're buried in debris.<br>Take 2 dice of physical damage.<br><br>If you're buried, keep this card. You can't do anything until you're freed. Once during an explorer's turn, that explorer can attempt a Might roll to free you. (You can also attempt this roll.) A 4+ succeeds. After 3 unsuccessful attempts, you break free automatically on your next turn and take your turn normally.<br><br>Discard this card when you're free.",
+			"text": "#bPlaster falls from the walls and ceiling.#dYou must attempt a Speed roll:#n#n#r3+#tYou dodge the plaster.#nGain 1 Speed.#y#r1-2#tYou're buried in debris.#nTake 1 die of physical damage.#y#r0#tYou're buried in debris.#nTake 2 dice of physical damage.#yIf you're buried, keep this card. You can't do anything until you're freed. Once during an explorer's turn, that explorer can attempt a Might roll to free you. (You can also attempt this roll.) A 4+ succeeds. After 3 unsuccessful attempts, you break free automatically on your next turn and take your turn normally.#n#nDiscard this card when you're free.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1056,7 +1072,7 @@ const betrayal_2e = {
 			"id": 2036,
 			"type": "event",
 			"name": "Disquieting Sounds",
-			"text": "<b>A baby's cry, lost and abandoned.<br>A scream.<br>The crack of breaking glass.<br>Then silence.</b><br><br>Roll 6 dice. If you roll equal to or more than the number of omens that have been revealed, you gain Sanity. If not, take 1 die of mental damage.<br><br>(Note from the editor: aren't all sounds <i>disquieting</i>?)",
+			"text": "#bA baby's cry, lost and abandoned.#nA scream.#nThe crack of breaking glass.#nThen silence.#dRoll 6 dice. If you roll equal to or more than the number of omens that have been revealed, you gain Sanity. If not, take 1 die of mental damage.#n#n(Note from the editor: aren't all sounds <i>disquieting</i>?)",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1064,8 +1080,8 @@ const betrayal_2e = {
 		{
 			"id": 2037,
 			"type": "event",
-			"name": "Drip...<br>Drip...<br>Drip...",
-			"text": "<b>A rhythmic sound that needles at your brain.</b><br><br>Put the Drip token in this room.<br><br>Each explorer rolls 1 fewer die (minimum of 1) on all trait rolls while in this room.",
+			"name": "Drip...#nDrip...#nDrip...",
+			"text": "#bA rhythmic sound that needles at your brain.#dPut the Drip token in this room.#n#nEach explorer rolls 1 fewer die (minimum of 1) on all trait rolls while in this room.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1074,7 +1090,7 @@ const betrayal_2e = {
 			"id": 2038,
 			"type": "event",
 			"name": "Footsteps",
-			"text": "<b>The floorboards slowly creak.<br>Dust rises. Footprints appear on the dirty floor. And then, as they reach you, they are gone.</b><br><br>Roll 1 die. (An explorer in the Chapel rolls 1 additional die on this roll.)<br><br>4 You and the nearest explorer gain 1 Might.<br><br>3 You gain 1 Might, and the nearest explorer loses 1 Sanity.<br><br>2 Lose 1 Sanity.<br><br>1 Lose 1 Speed.<br><br>0 Each explorer loses 1 point from a trait of his or her choice.",
+			"text": "#bThe floorboards slowly creak.#nDust rises. Footprints appear on the dirty floor. And then, as they reach you, they are gone.#dRoll 1 die. (An explorer in the Chapel rolls 1 additional die on this roll.)#n#n#r4#tYou and the nearest explorer gain 1 Might.#y#r3#tYou gain 1 Might, and the nearest explorer loses 1 Sanity.#n#n2 Lose 1 Sanity.#y#r1#tLose 1 Speed.#y#r0#tEach explorer loses 1 point from a trait of his or her choice.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1083,7 +1099,7 @@ const betrayal_2e = {
 			"id": 2039,
 			"type": "event",
 			"name": "Funeral",
-			"text": "<b>You see an open coffin.<br>You're inside it.</b><br><br>You must attempt a Sanity roll:<br><br>4+ You blink, and it's gone.<br>Gain 1 Sanity.<br><br>2-3 The vision disturbs you.<br>Lose 1 Sanity.<br><br>0-1 You're really in that coffin.<br>Lose 1 Sanity and 1 Might as you dig yourself out. If the Graveyard or the Crypt has been found, put your explorer in one of those rooms (you choose which one).",
+			"text": "#bYou see an open coffin.#nYou're inside it.#dYou must attempt a Sanity roll:#n#n#r4+#tYou blink, and it's gone.#nGain 1 Sanity.#y#r2-3#tThe vision disturbs you.#nLose 1 Sanity.#y#r0-1#tYou're really in that coffin.#nLose 1 Sanity and 1 Might as you dig yourself out. If the Graveyard or the Crypt has been found, put your explorer in one of those rooms (you choose which one).#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1092,7 +1108,7 @@ const betrayal_2e = {
 			"id": 2040,
 			"type": "event",
 			"name": "A Moment	of Hope",
-			"text": "<b>Something feels strangely right about this room. Something is resisting the evil of the house.</b><br><br>Place the Blessing token in this room.<br><br>Each hero rolls 1 additional die (maximum of 8 dice) on all trait rolls while in this room.",
+			"text": "#bSomething feels strangely right about this room. Something is resisting the evil of the house.#dPlace the Blessing token in this room.#n#nEach hero rolls 1 additional die (maximum of 8 dice) on all trait rolls while in this room.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1101,7 +1117,7 @@ const betrayal_2e = {
 			"id": 2041,
 			"type": "event",
 			"name": "Angry Being",
-			"text": "<b>It emerges from the slime on the wall next to you.</b><br><br>You must attempt a Speed roll:<br><br>5+ You get away. Gain 1 Speed.<br><br>2-4 Take 1 die of mental damage.<br><br>0-1 Take 1 die of mental damage and 1 die of physical damage.",
+			"text": "#bIt emerges from the slime on the wall next to you.#dYou must attempt a Speed roll:#n#n#r5+#tYou get away. Gain 1 Speed.#y#r2-4#tTake 1 die of mental damage.#y#r0-1#tTake 1 die of mental damage and 1 die of physical damage.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1110,7 +1126,7 @@ const betrayal_2e = {
 			"id": 2042,
 			"type": "event",
 			"name": "Bloody Vision",
-			"text": "<b>The walls of this room are damp with blood.<br>The blood drips from the ceiling, down the walls, over the furniture, and onto your shoes.<br>In a blink, it is gone.</b><br><br>You must attempt a Sanity roll:<br><br>4+ You steel yourself. Gain 1 Sanity.<br><br>2-3 Lose 1 Sanity.<br><br>0-1 If an explorer or monster is in your room or an adjacent one, you must attack it (if you can). Choose the explorer with the lowest Might, if possible.",
+			"text": "#bThe walls of this room are damp with blood.#nThe blood drips from the ceiling, down the walls, over the furniture, and onto your shoes.#nIn a blink, it is gone.#dYou must attempt a Sanity roll:#n#n#r4+#tYou steel yourself. Gain 1 Sanity.#y#r2-3#tLose 1 Sanity.#y#r0-1#tIf an explorer or monster is in your room or an adjacent one, you must attack it (if you can). Choose the explorer with the lowest Might, if possible.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1119,7 +1135,7 @@ const betrayal_2e = {
 			"id": 2043,
 			"type": "event",
 			"name": "Burning Man",
-			"text": "<b>A man on fire runs through the room. His skin bubbles and cracks, falling away from him and leaving a fiery skull that clatters to the ground, bounces, rolls, and disappears.</b><br><br>You must attempt a Sanity roll:<br><br>4+ You feel a little hot under the collar, but otherwise fine.<br>Gain 1 Sanity.<br><br>2-3 Out, out, you must get out.<br>Put your explorer in the Entrance Hall.<br><br>0-1 You burst into flames!<br>Take 1 die of physical damage. Then take 1 die of mental damage as you put out the flames.",
+			"text": "#bA man on fire runs through the room. His skin bubbles and cracks, falling away from him and leaving a fiery skull that clatters to the ground, bounces, rolls, and disappears.#dYou must attempt a Sanity roll:#n#n#r4+#tYou feel a little hot under the collar, but otherwise fine.#nGain 1 Sanity.#y#r2-3#tOut, out, you must get out.#nPut your explorer in the Entrance Hall.#y#r0-1#tYou burst into flames!#nTake 1 die of physical damage. Then take 1 die of mental damage as you put out the flames.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1128,7 +1144,7 @@ const betrayal_2e = {
 			"id": 2044,
 			"type": "event",
 			"name": "Closet Door",
-			"text": "<b>That closet door is open... just a crack. There must be something inside.<br><br>Put the Closet token in this room.<br><br>Once during an explorer's turn, that explorer can roll 2 dice to open the Closet:<br><br>4 Draw an item card.<br><br>2-3 Draw an event card.<br><br>0-1 Draw an event card and remove the Closet token.",
+			"text": "#bThat closet door is open... just a crack. There must be something inside.#n#nPut the Closet token in this room.#n#nOnce during an explorer's turn, that explorer can roll 2 dice to open the Closet:#n#n4 Draw an item card.#n#n2-3 Draw an event card.#n#n0-1 Draw an event card and remove the Closet token.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1137,7 +1153,7 @@ const betrayal_2e = {
 			"id": 2045,
 			"type": "event",
 			"name": "What The...?",
-			"text": "<b>As you look back the way you came, you see... nothing.<br>Just empty fog and mist where a room used to be.</b><br><br>Pick up the tile for the room you are in. Put it somewhere else on the same floor of the house so its door is attached to a different unexplored doorway. If there isn't an unexplored doorway on this floor, move the room to a different floor.",
+			"text": "#bAs you look back the way you came, you see... nothing.#nJust empty fog and mist where a room used to be.#dPick up the tile for the room you are in. Put it somewhere else on the same floor of the house so its door is attached to a different unexplored doorway. If there isn't an unexplored doorway on this floor, move the room to a different floor.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1146,7 +1162,7 @@ const betrayal_2e = {
 			"id": 3001,
 			"type": "omen",
 			"name": "Spirit Board",
-			"text": "<b>A board with letters and numbers to call the dead.</b><br><br>Before you move during your turn, you can look at the top tile of the room stack.<br><br>If you use the Spirit Board after the haunt has been revealed, the traitor can move any number of monsters 1 space closer to you. (If you are the If the traitor, you don't have to move those monsters.) If there is no traitor, all monsters move 1 space closer to you.",
+			"text": "#bA board with letters and numbers to call the dead.#dBefore you move during your turn, you can look at the top tile of the room stack.#n#nIf you use the Spirit Board after the haunt has been revealed, the traitor can move any number of monsters 1 space closer to you. (If you are the If the traitor, you don't have to move those monsters.) If there is no traitor, all monsters move 1 space closer to you.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1155,7 +1171,7 @@ const betrayal_2e = {
 			"id": 3002,
 			"type": "omen",
 			"name": "Spear",
-			"text": "<b>WEAPON<br><br>A weapon pulsing with power.</b><br><br>You roll 2 additional dice (maximum of 8 dice) when making a Might attack with this weapon.<br><br>You can't use another weapon while you're using this one.",
+			"text": "#bWEAPON#n#nA weapon pulsing with power.#dYou roll 2 additional dice (maximum of 8 dice) when making a Might attack with this weapon.#n#nYou can't use another weapon while you're using this one.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1164,7 +1180,7 @@ const betrayal_2e = {
 			"id": 3003,
 			"type": "omen",
 			"name": "Skull",
-			"text": "<b>A skull, cracked and missing teeth.</b><br><br>If you take mental damage, you can take all of it as physical damage instead.",
+			"text": "#bA skull, cracked and missing teeth.#dIf you take mental damage, you can take all of it as physical damage instead.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1173,7 +1189,7 @@ const betrayal_2e = {
 			"id": 3004,
 			"type": "omen",
 			"name": "Ring",
-			"text": "<b>A battered ring with an incomprehensible inscription.</b><br><br>If you attack an opponent that has a Sanity trait, you can attack with Sanity instead of Might. (Your opponent then defends with Sanity, and damage is mental instead of physical.)",
+			"text": "#bA battered ring with an incomprehensible inscription.#dIf you attack an opponent that has a Sanity trait, you can attack with Sanity instead of Might. (Your opponent then defends with Sanity, and damage is mental instead of physical.)",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1182,7 +1198,7 @@ const betrayal_2e = {
 			"id": 3005,
 			"type": "omen",
 			"name": "Medallion",
-			"text": "<b>A medallion inscribed with a pentagram.</b><br><br>You are immune to the effects of the Pentagram Chamber, Crypt, and Graveyard.",
+			"text": "#bA medallion inscribed with a pentagram.#dYou are immune to the effects of the Pentagram Chamber, Crypt, and Graveyard.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1191,7 +1207,7 @@ const betrayal_2e = {
 			"id": 3006,
 			"type": "omen",
 			"name": "Mask",
-			"text": "<b>A somber mask to hide your intentions.</b><br><br>Once during your turn, you can attempt a Sanity roll to use the Mask:<br><br>4+ You can put on or take off the Mask.<br><br>If you put on the Mask, gain 2 Knowledge and lose 2 Sanity.<br><br>If you take off the Mask, gain 2 Sanity and lose 2 Knowledge.<br><br>0-3 You can't use the Mask this turn.",
+			"text": "#bA somber mask to hide your intentions.#dOnce during your turn, you can attempt a Sanity roll to use the Mask:#n#n#r4+#tYou can put on or take off the Mask.#yIf you put on the Mask, gain 2 Knowledge and lose 2 Sanity.#n#nIf you take off the Mask, gain 2 Sanity and lose 2 Knowledge.#n#n#r0-3#tYou can't use the Mask this turn.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1200,7 +1216,7 @@ const betrayal_2e = {
 			"id": 3007,
 			"type": "omen",
 			"name": "Madman",
-			"text": "<b>COMPANION<br><br>A raving, frothing madman.</b><br><br>Gain 2 Might and lose 1 Sanity now.<br><br>Lose 2 Might and gain 1 Sanity if you lose custody of the Madman.<br><br>This omen can't be dropped, traded, or stolen.",
+			"text": "#bCOMPANION#n#nA raving, frothing madman.#dGain 2 Might and lose 1 Sanity now.#n#nLose 2 Might and gain 1 Sanity if you lose custody of the Madman.#n#nThis omen can't be dropped, traded, or stolen.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1209,7 +1225,7 @@ const betrayal_2e = {
 			"id": 3008,
 			"type": "omen",
 			"name": "Holy Symbol",
-			"text": "<b>A symbol of calm in an unsettling world.</b><br><br>Gain 2 Sanity now.<br><br>Lose 2 Sanity if you lose the Holy Symbol.",
+			"text": "#bA symbol of calm in an unsettling world.#dGain 2 Sanity now.#n#nLose 2 Sanity if you lose the Holy Symbol.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1218,7 +1234,7 @@ const betrayal_2e = {
 			"id": 3009,
 			"type": "omen",
 			"name": "Girl",
-			"text": "<b>COMPANION<br><br>A girl.<br><br>Trapped.<br><br>Alone.<br><br>You free her!</b><br><br>Gain 1 Sanity and 1 Knowledge now.<br><br>Lose 1 Sanity and 1 Knowledge if you lose custody of the Girl.<br><br>This omen can't be dropped, traded, or stolen.",
+			"text": "#bCOMPANION#n#nA girl.#n#nTrapped.#n#nAlone.#n#nYou free her!#dGain 1 Sanity and 1 Knowledge now.#n#nLose 1 Sanity and 1 Knowledge if you lose custody of the Girl.#n#nThis omen can't be dropped, traded, or stolen.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1227,7 +1243,7 @@ const betrayal_2e = {
 			"id": 3010,
 			"type": "omen",
 			"name": "Dog",
-			"text": "<b>COMPANION<br><br>This mangy dog seems friendly.<br>At least you hope it is.</b><br><br>Gain 1 Might and 1 Sanity now.<br><br>Lose 1 Might and 1 Sanity if you lose custody of the Dog.<br><br>Take a small monster token to represent the Dog. Put it in your room. (Use a token of a different color from other monsters, if any.) Once during your turn, the Dog can move to any explored room up to 6 spaces away, using doors and stairs, and then return. It can pick up, carry, and/or drop 1 item before it returns.<br><br>The Dog isn't slowed by opponents. It can't use one-way passages or rooms that require a roll. It can't carry items that slow movement.<br><br>This omen can't be dropped, traded, or stolen.",
+			"text": "#bCOMPANION#n#nThis mangy dog seems friendly.#nAt least you hope it is.#dGain 1 Might and 1 Sanity now.#n#nLose 1 Might and 1 Sanity if you lose custody of the Dog.#n#nTake a small monster token to represent the Dog. Put it in your room. (Use a token of a different color from other monsters, if any.) Once during your turn, the Dog can move to any explored room up to 6 spaces away, using doors and stairs, and then return. It can pick up, carry, and/or drop 1 item before it returns.#n#nThe Dog isn't slowed by opponents. It can't use one-way passages or rooms that require a roll. It can't carry items that slow movement.#n#nThis omen can't be dropped, traded, or stolen.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1236,7 +1252,7 @@ const betrayal_2e = {
 			"id": 3011,
 			"type": "omen",
 			"name": "Crystal Ball",
-			"text": "<b>Hazy images appear in the glass.</b><br><br>Once during your turn after the haunt is revealed, you can attempt a Knowledge roll to peer into the Crystal Ball:<br><br>4+ You see the truth. Draw cards from the item or event stack until you find a card of your choice. Shuffle the unwanted cards back into the stack. Keep the chosen card in you hand and don't tell anyone what it is. The next time anyone should draw that type of card, they draw your chosen card. (Ask them to manually draw the card with that ID number, then discard yours.)<br><br>1-3 You avert your eyes.<br>Lose 1 Sanity.<br><br>0 You stare into Hell.<br>Lose 2 Sanity.",
+			"text": "#bHazy images appear in the glass.#dOnce during your turn after the haunt is revealed, you can attempt a Knowledge roll to peer into the Crystal Ball:#n#n#r4+#tYou see the truth. Draw cards from the event stack until you find a card of your choice. Shuffle the unwanted cards back into the stack. Keep the chosen card in you hand and don't tell anyone what it is. The next time anyone should draw an event card, they draw your chosen card. (Ask them to manually draw the card with that ID number, then discard yours.)#y#r1-3#tYou avert your eyes.#nLose 1 Sanity.#y#r0#tYou stare into Hell.#nLose 2 Sanity.#y",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1245,7 +1261,7 @@ const betrayal_2e = {
 			"id": 3012,
 			"type": "omen",
 			"name": "Book",
-			"text": "<b>A diary or lab notes?<br>Ancient script or modern ravings?</b><br><br>Gain 2 Knowledge now.<br><br>Lose 2 Knowledge if you lose the Book.",
+			"text": "#bA diary or lab notes?#nAncient script or modern ravings?#dGain 2 Knowledge now.#n#nLose 2 Knowledge if you lose the Book.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1254,7 +1270,7 @@ const betrayal_2e = {
 			"id": 3013,
 			"type": "omen",
 			"name": "Bite",
-			"text": "<b>A growl, the scent of death.<br>Pain. Darkness. Gone.</b><br><br>When you draw this card, something bites you. The player on your right rolls a Might 4 attack against you for the mysterious something (before it runs away into the darkness). You defend against this attack as normal, by rolling dice equal to your Might.<br><br>This omen can't be dropped, traded, or stolen.",
+			"text": "#bA growl, the scent of death.#nPain. Darkness. Gone.#dWhen you draw this card, something bites you. The player on your right rolls a Might 4 attack against you for the mysterious something (before it runs away into the darkness). You defend against this attack as normal, by rolling dice equal to your Might.#n#nThis omen can't be dropped, traded, or stolen.",
 			"hand": true,
 			"discard": true,
 			"deck": true,
@@ -1398,7 +1414,14 @@ const betrayal_2e = {
 				.html(c.name))
 			.append($("<div>")
 				.addClass("card-text")
-				.html(c.text))
+				.html(c.text
+					.replaceAll("#b", "<div class='b'>")
+					.replaceAll("#d", "</div><br>")
+					.replaceAll("#r", "<div class='r'><div class='n'>")
+					.replaceAll("#t", "</div><div class='o'>")
+					.replaceAll("#y", "</div></div><br>")
+					.replaceAll("#n", "<br>")
+					.replace(/(<br>)+$/, "")))
 			.append($(`<img src="${render.path(c.type)}">`)
 				.addClass("card-icon"));
 
@@ -1418,6 +1441,8 @@ const betrayal_2e_dom = {
 	"assetPath": betrayal_2e.assetPath,
 
 	"assets": betrayal_2e.assets,
+
+	"text": betrayal_2e.text,
 
 	// All cards in the game.
 	"cards": betrayal_2e.cards.concat([]),
