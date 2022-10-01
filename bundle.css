@@ -77,8 +77,8 @@ div.card.drawn {
 div#hand {
 	width: calc(100% - 16px);
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-around;
 }
 
 div#hand div.card {

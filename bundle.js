@@ -333,7 +333,7 @@ const render = {
 	"hand": () => {
 		// If there's a card on the page not in the hand...
 		$("#hand div.card").each((i, c) => {
-			if (!_.some(state.hand, h => c.id)) {
+			if (!_.some(state.hand, h => h.id == c.id)) {
 				c.remove();
 			}
 		});
