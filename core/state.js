@@ -52,5 +52,6 @@ const state = {
 				game = betrayal_2e_dom;
 				break;
 		}
+		document.title = game.displayName;
 	},
 };
