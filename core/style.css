@@ -120,33 +120,33 @@ div.tab {
 }
 
 div.tab-actions {
-	bottom: 2em;
+	bottom: 4em;
 }
 
 div.tab-hand {
 	right: calc(-2vw + 3em);
-	bottom: 5em;
+	bottom: 7em;
 	display: none;
 }
 
 div.tab-deck {
 	right: calc(-2vw + 3em);
-	bottom: 2em;
+	bottom: 4em;
 	display: none;
 }
 
 div.tab-discard {
 	right: calc(-2vw + 3em);
-	bottom: -1em;
+	bottom: 1em;
 	display: none;
 }
 
 div.tab-down {
-	bottom: -1em;
+	bottom: 1em;
 }
 
 div.tab-up {
-	bottom: 5em;
+	bottom: 7em;
 }
 
 div.menu {
