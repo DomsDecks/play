@@ -948,7 +948,7 @@ const betrayal_2e = {
 	},
 
 	"updateDecks": () => {
-		let itemCount = _.filter(state.deck, c => card.get(c).type == "item").length,
+		const itemCount = _.filter(state.deck, c => card.get(c).type == "item").length,
 			eventCount = _.filter(state.deck, c => card.get(c).type == "event").length,
 			omenCount = _.filter(state.deck, c => card.get(c).type == "omen").length,
 			discardCount = state.discard.length;

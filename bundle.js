@@ -82,27 +82,8 @@ const card = {
 let game = {};
 
 $(document).ready(() => {
+	// I think the game has to be something to avoid errors, so just set it here.
 	game = betrayal_2e_dom;
-
-	/*
-	if theres instance in QS
-		if instance is already stored.
-			set instance
-			load state
-			render all
-			clean QS
-		else if QS also contains game and data
-			set deck and hand from data
-			set game
-			set instance
-			save state
-			render all
-		else
-			main menu and clear QS
-	else
-		main menu and clear QS
-
-	*/
 
 	// Load the instanceId.
 	let instanceMatch = window.location.search.match(/i[=]([^&#]+)([&#]|$)/);
@@ -255,7 +236,7 @@ const render = {
 			$("#top-content").append(
 				$("<div>")
 					.attr("id", "find")
-					.addClass("option")
+					.addClass("option round shadow")
 					.html(text("search"))
 					.click(render.findCard)
 			);
@@ -269,6 +250,15 @@ const render = {
 			.addClass("card");
 
 		const c = card.get(id);
+
+		element.append(
+			$("<div>")
+				.addClass("round shadow")
+				.html(text("actions"))
+				.click(() => card.move(id, state.hand))
+		);
+
+		return element;
 
 		if (c["hand"] && !_.some(state.hand, h => h == id)) {
 			element.append(
@@ -370,18 +360,23 @@ const render = {
 				.attr("id", "players"))
 			.append($("<button type='button'>")
 				.attr("id", "start")
-				.html(text("start")))
-			.append($("<div>")
-				.attr("id", "links"));
+				.html(text("start")));
 
 		$("#start").click(() => {
+			state.setGame($("#game").val());
 			const states = game.startGame(parseInt($("#players").val()));
 			const instanceId = Date.now();
-			$("#links")
-				.before($("<div>")
-					.html(text("link")));
+			$("#menu-new")
+				.html("");
+			$("#menu-new")
+				.append($("<div>")
+					.html(text("link")))
+				.append(
+					$("<div>")
+						.attr("id", "links"));
+
 			_.each(states, (s, i) => {
-				const url = link.share(instanceId, $("#game").val(), s);
+				const url = link.share(instanceId, game.code, s);
 				$("#links")
 					.append($("<span>")
 						.html(`${i + 1}. `))
@@ -546,6 +541,8 @@ const text = (id) => {
 		case "draw": return game.text.draw || "Draw";
 
 		case "x": return game.text.x || "<i class='material-icons'>close</i>";
+
+		case "actions": return game.text.x || "<i class='material-icons'>back_hand</i>";
 
 	};
 }; 
@@ -1499,7 +1496,7 @@ const betrayal_2e = {
 	},
 
 	"updateDecks": () => {
-		let itemCount = _.filter(state.deck, c => card.get(c).type == "item").length,
+		const itemCount = _.filter(state.deck, c => card.get(c).type == "item").length,
 			eventCount = _.filter(state.deck, c => card.get(c).type == "event").length,
 			omenCount = _.filter(state.deck, c => card.get(c).type == "omen").length,
 			discardCount = state.discard.length;

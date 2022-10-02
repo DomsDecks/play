@@ -12,7 +12,7 @@ const render = {
 			$("#top-content").append(
 				$("<div>")
 					.attr("id", "find")
-					.addClass("option")
+					.addClass("option round shadow")
 					.html(text("search"))
 					.click(render.findCard)
 			);
@@ -26,6 +26,15 @@ const render = {
 			.addClass("card");
 
 		const c = card.get(id);
+
+		element.append(
+			$("<div>")
+				.addClass("tab round shadow")
+				.html(text("actions"))
+				.click(() => card.move(id, state.hand))
+		);
+
+		return element;
 
 		if (c["hand"] && !_.some(state.hand, h => h == id)) {
 			element.append(
@@ -127,18 +136,23 @@ const render = {
 				.attr("id", "players"))
 			.append($("<button type='button'>")
 				.attr("id", "start")
-				.html(text("start")))
-			.append($("<div>")
-				.attr("id", "links"));
+				.html(text("start")));
 
 		$("#start").click(() => {
+			state.setGame($("#game").val());
 			const states = game.startGame(parseInt($("#players").val()));
 			const instanceId = Date.now();
-			$("#links")
-				.before($("<div>")
-					.html(text("link")));
+			$("#menu-new")
+				.html("");
+			$("#menu-new")
+				.append($("<div>")
+					.html(text("link")))
+				.append(
+					$("<div>")
+						.attr("id", "links"));
+
 			_.each(states, (s, i) => {
-				const url = link.share(instanceId, $("#game").val(), s);
+				const url = link.share(instanceId, game.code, s);
 				$("#links")
 					.append($("<span>")
 						.html(`${i + 1}. `))

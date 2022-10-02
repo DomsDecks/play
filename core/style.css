@@ -16,6 +16,19 @@ div#top {
 	align-items: center;
 }
 
+.shadow {
+	box-shadow: 1px 2px 2px black;
+}
+
+.round {
+	border-radius: 50%;
+	width: 2em;
+	height: 2em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 div#top-content {
 	flex-grow: 100;
 }
@@ -33,6 +46,7 @@ div#find {
 	top: 1em;
 	right: 1em;
 	cursor: pointer;
+	background-color: #00000030;
 }
 
 div.deck {
@@ -159,6 +173,7 @@ div.menu div#close {
 }
 
 div#links {
+	overflow-x: clip;
 	overflow-y: scroll;
 	width: 80%;
 	text-align: left;

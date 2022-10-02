@@ -2,27 +2,8 @@
 let game = {};
 
 $(document).ready(() => {
+	// I think the game has to be something to avoid errors, so just set it here.
 	game = betrayal_2e_dom;
-
-	/*
-	if theres instance in QS
-		if instance is already stored.
-			set instance
-			load state
-			render all
-			clean QS
-		else if QS also contains game and data
-			set deck and hand from data
-			set game
-			set instance
-			save state
-			render all
-		else
-			main menu and clear QS
-	else
-		main menu and clear QS
-
-	*/
 
 	// Load the instanceId.
 	let instanceMatch = window.location.search.match(/i[=]([^&#]+)([&#]|$)/);
