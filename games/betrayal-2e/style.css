@@ -40,12 +40,14 @@ body.betrayal-2e {
 .betrayal-2e div.card .card-icon {
 	width: 20%;
 	height: auto;
+	margin-bottom: -1em;
 }
 
 .betrayal-2e div.card .card-title {
 	text-transform: uppercase;
 	font-weight: bolder;
 	font-size: large;
+	text-align: center;
 }
 
 .betrayal-2e div.card .card-text {
@@ -56,6 +58,10 @@ body.betrayal-2e {
 .betrayal-2e div.card .card-text .b {
 	text-align: center;
 	font-weight: bolder;
+}
+
+.betrayal-2e div.card .card-text .c {
+	margin: 0.6em;
 }
 
 .betrayal-2e div.card .card-text .r {
