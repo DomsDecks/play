@@ -31,7 +31,13 @@ const render = {
 			$("<div>")
 				.addClass("tab round shadow tab-actions")
 				.html(text("actions"))
-				.click(() => card.move(id, state.discard))
+				.click(() => {
+					const show = element.find(".tab-deck").css("display") == "none";
+					$(".tab-deck, .tab-hand, .tab-discard").css({"display": ""});
+					if (show) {
+						element.find(".tab-deck, .tab-hand, .tab-discard").css({"display": "flex"});
+					}
+				})
 		);
 
 		if (c["hand"] && !_.some(state.hand, h => h == id)) {

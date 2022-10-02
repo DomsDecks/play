@@ -126,16 +126,19 @@ div.tab-actions {
 div.tab-hand {
 	right: calc(-2vw + 3em);
 	bottom: 5em;
+	display: none;
 }
 
 div.tab-deck {
 	right: calc(-2vw + 3em);
 	bottom: 2em;
+	display: none;
 }
 
 div.tab-discard {
 	right: calc(-2vw + 3em);
 	bottom: -1em;
+	display: none;
 }
 
 div.tab-down {
