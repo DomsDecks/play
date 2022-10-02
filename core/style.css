@@ -20,13 +20,19 @@ div#top {
 	box-shadow: 1px 2px 2px black;
 }
 
-.round {
-	border-radius: 50%;
+.round, .round-wide {
+	border-radius: 1em;
 	width: 2em;
 	height: 2em;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.round-wide {
+	width: auto;
+	padding-left: 1em;
+	padding-right: 1em;
 }
 
 div#top-content {
@@ -43,8 +49,8 @@ div#scroll {
 
 div#find {
 	position: absolute;
-	top: 1em;
-	right: 1em;
+	top: 0.5em;
+	right: 0.5em;
 	cursor: pointer;
 	background-color: #00000030;
 }
@@ -107,35 +113,37 @@ i.material-icons {
 
 div.tab {
 	background-color: gray;
-	width: 50%;
-	height: 2em;
 	position: absolute;
 	cursor: pointer;
+	right: -2vw;
+	font-size: larger;
+}
+
+div.tab-actions {
+	bottom: 2em;
 }
 
 div.tab-hand {
-	bottom: 7em;
-	right: 2vw;
+	right: calc(-2vw + 3em);
+	bottom: 5em;
 }
 
 div.tab-deck {
-	bottom: 4em;
-	right: 2vw;
+	right: calc(-2vw + 3em);
+	bottom: 2em;
 }
 
 div.tab-discard {
-	bottom: 1em;
-	right: 2vw;
+	right: calc(-2vw + 3em);
+	bottom: -1em;
 }
 
 div.tab-down {
-	bottom: 1em;
-	left: 2vw;
+	bottom: -1em;
 }
 
 div.tab-up {
-	bottom: 4em;
-	left: 2vw;
+	bottom: 5em;
 }
 
 div.menu {

@@ -29,17 +29,15 @@ const render = {
 
 		element.append(
 			$("<div>")
-				.addClass("tab round shadow")
+				.addClass("tab round shadow tab-actions")
 				.html(text("actions"))
-				.click(() => card.move(id, state.hand))
+				.click(() => card.move(id, state.discard))
 		);
-
-		return element;
 
 		if (c["hand"] && !_.some(state.hand, h => h == id)) {
 			element.append(
 				$("<div>")
-					.addClass("tab tab-hand")
+					.addClass("tab round-wide shadow tab-hand")
 					.html(text("hand"))
 					.click(() => card.move(id, state.hand))
 			);
@@ -48,8 +46,8 @@ const render = {
 		if (c["deck"]) {
 			element.append(
 				$("<div>")
-					.addClass("tab tab-deck")
-					.html(("deck"))
+					.addClass("tab round-wide shadow tab-deck")
+					.html(text("deck"))
 					.click(() => card.move(id, state.deck))
 			);
 		}
@@ -58,7 +56,7 @@ const render = {
 		if (c["discard"]) {
 			element.append(
 				$("<div>")
-					.addClass("tab tab-discard")
+					.addClass("tab round-wide shadow tab-discard")
 					.html(index < 0 ? text("discard") : text("discardCancel"))
 					.click(() => card.move(id, state.discard))
 			);
@@ -68,7 +66,7 @@ const render = {
 			if (_.last(state.discard) != id) {
 				element.append(
 					$("<div>")
-						.addClass("tab tab-up")
+						.addClass("tab round shadow tab-up")
 						.html(text("up"))
 						.click(() => card.draw(state.discard[index + 1], true))
 				);
@@ -76,7 +74,7 @@ const render = {
 			if (_.first(state.discard) != id) {
 				element.append(
 					$("<div>")
-						.addClass("tab tab-down")
+						.addClass("tab round shadow tab-down")
 						.html(text("down"))
 						.click(() => card.draw(state.discard[index - 1], true))
 				);
