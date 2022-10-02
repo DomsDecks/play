@@ -10,7 +10,8 @@ const betrayal_2e = {
 	"assets": ["omen", "item", "event", "texture"],
 
 	"text": {
-		"deck": "Shuffle in to stack"
+		"deck": "Shuffle in to stack",
+		"hauntRoll": "Make a haunt roll now.",
 	},
 
 	// All cards in the game.
@@ -903,26 +904,33 @@ const betrayal_2e = {
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "items")
-						.html("items")
-				)
-				.append(
-					$("<div>")
-						.addClass("deck")
-						.attr("id", "omens")
-						.html("omens")
-				)
+						.append($(`<img src="${render.path("item")}">`))
+						.append($("<div>")
+							.html("ITEM"))
+						.append($("<div class='count' id='item-count'>")))
 				.append(
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "events")
-						.html("events")
-				)
+						.append($(`<img src="${render.path("event")}">`))
+						.append($("<div>")
+							.html("EVENT"))
+						.append($("<div class='count' id='event-count'>")))
+				.append(
+					$("<div>")
+						.addClass("deck")
+						.attr("id", "omens")
+						.append($(`<img src="${render.path("omen")}">`))
+						.append($("<div>")
+							.html("OMEN"))
+						.append($("<div class='count' id='omen-count'>")))
 				.append(
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "discard")
-						.html("discard")
-				);
+						.append($("<div>")
+							.html("DISCARD<br>PILE"))
+						.append($("<div class='count' id='discard-count'>")));
 
 			// Bind events.
 			$("#items").click(betrayal_2e.drawItem);
@@ -932,11 +940,48 @@ const betrayal_2e = {
 
 			$("body").addClass("betrayal-2e");
 
+			betrayal_2e.updateDecks();
 			render.preloadAssets();
+		} else {
+			betrayal_2e.updateDecks();
 		}
 	},
 
-	"hauntRoll": "Make a haunt roll now.",
+	"updateDecks": () => {
+		let itemCount = _.filter(state.deck, c => card.get(c).type == "item").length,
+			eventCount = _.filter(state.deck, c => card.get(c).type == "event").length,
+			omenCount = _.filter(state.deck, c => card.get(c).type == "omen").length,
+			discardCount = state.discard.length;
+
+		$("#item-count").html(`(${itemCount >= 10 ? "10+" : itemCount})`);
+		$("#event-count").html(`(${eventCount >= 10 ? "10+" : eventCount})`);
+		$("#omen-count").html(`(${omenCount >= 10 ? "10+" : omenCount})`);
+		$("#discard-count").html(`(${discardCount >= 10 ? "10+" : discardCount})`);
+
+		if (itemCount == 0) {
+			$("#items").addClass("empty");
+		} else {
+			$("#items").removeClass("empty");
+		}
+
+		if (eventCount == 0) {
+			$("#events").addClass("empty");
+		} else {
+			$("#events").removeClass("empty");
+		}
+
+		if (omenCount == 0) {
+			$("#omens").addClass("empty");
+		} else {
+			$("#omens").removeClass("empty");
+		}
+
+		if (discardCount == 0) {
+			$("#discard").addClass("empty");
+		} else {
+			$("#discard").removeClass("empty");
+		}
+	},
 
 	// Add card content to $(element).
 	"renderCard": (element) => {
@@ -970,7 +1015,7 @@ const betrayal_2e = {
 		if (c.type == "omen") {
 			element.append($("<div>")
 				.addClass("card-suffix")
-				.html(betrayal_2e.hauntRoll));
+				.html(betrayal_2e.text.hauntRoll));
 		}
 
 		return element;

@@ -11,6 +11,29 @@ body.betrayal-2e {
 	gap: 2vw;
 }
 
+.betrayal-2e div.deck {
+	background-image: url("games/betrayal-2e/images/texture.png");
+	background-repeat: repeat;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: larger;
+	font-weight: bolder;
+	text-align: center;
+}
+
+.betrayal-2e div.deck img {
+	width: 80%;
+	height: auto;
+	margin-bottom: 1em;
+}
+
+.betrayal-2e div.deck div.count {
+	font-size: small;
+	font-weight: default;
+}
+
 .betrayal-2e div.card {
 	width: calc(82% - 2vh);
 	max-width: 41vh;
@@ -70,7 +93,7 @@ body.betrayal-2e {
 	margin-top: 0.5em;
 }
 
-.betrayal-2e div.card .card-text .r ~ .r {
+.betrayal-2e div.card .card-text .r~.r {
 	margin-top: 0;
 }
 
@@ -88,16 +111,40 @@ body.betrayal-2e {
 	color: #00000070;
 }
 
-.betrayal-2e div.card.item {
+.betrayal-2e div.card.item,
+.betrayal-2e div.deck#items {
 	background-color: #E2DDB1;
 }
 
-.betrayal-2e div.card.omen {
+.betrayal-2e div.deck#items.empty {
+	background-color: #3e3d30;
+}
+
+.betrayal-2e div.card.omen,
+.betrayal-2e div.deck#omens {
 	background-color: #9FB79A;
 }
 
-.betrayal-2e div.card.event {
+.betrayal-2e div.deck#omens.empty {
+	background-color: #272d25;
+}
+
+.betrayal-2e div.card.event,
+.betrayal-2e div.deck#events {
 	background-color: #B5AC9D;
+}
+
+.betrayal-2e div.deck#events.empty {
+	background-color: #2d2b27;
+}
+
+.betrayal-2e div.deck#discard {
+	background-color: #4f4e4c;
+}
+
+.betrayal-2e div.deck#discard.empty {
+	background-color: #00000000;
+	background-image: none;
 }
 
 .betrayal-2e div#scroll {
