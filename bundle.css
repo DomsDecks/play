@@ -140,6 +140,7 @@ div.menu {
 }
 
 div.menu input,
+div.menu select,
 div.menu button,
 div.menu div {
 	margin-top: 2em;

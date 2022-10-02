@@ -4,6 +4,8 @@ const betrayal_2e = {
 
 	"assetPath": "betrayal-2e",
 
+	"code": "b",
+
 	// Except for the card art, what other assets are there to preload?
 	"assets": ["omen", "item", "event", "texture"],
 

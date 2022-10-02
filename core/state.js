@@ -28,17 +28,29 @@ const state = {
 			"deck": state.deck,
 			"hand": state.hand,
 			"discard": state.discard,
-			"started": state.started,
+			"started": state.started || new Date().toLocaleString(),
+			"game": game.code,
 		};
 		localStorage.setItem(state.instanceId, JSON.stringify(gameData));
 	},
 
 	"load": () => {
 		let gameData = JSON.parse(localStorage.getItem(state.instanceId));
+		state.setGame(gameData.game || "b");
 		state.deck = gameData.deck || [];
 		state.hand = gameData.hand || {};
 		state.discard = gameData.discard || [];
 		state.started = gameData.started || new Date().toLocaleString();
 	},
 
+	"setGame": (g) => {
+		switch (g) {
+			case betrayal_2e.code:
+				game = betrayal_2e;
+				break;
+			case betrayal_2e_dom.code:
+				game = betrayal_2e_dom;
+				break;
+		}
+	},
 };

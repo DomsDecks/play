@@ -111,22 +111,25 @@ const render = {
 
 		$(".menu")
 			.attr("id", "menu-new")
-			.append(
-				$("<div>")
-					.attr("class", "text")
-					.html(("players"))
-			)
-			.append(
-				$("<input type='number' min='1' max='6' value='1'>")
-					.attr("id", "players")
-			).append(
-				$("<button type='button'>")
-					.attr("id", "start")
-					.html(text("start"))
-			).append(
-				$("<div>")
-					.attr("id", "links")
-			);
+			.append($("<div>")
+				.html(text("intro")))
+			.append($("<div>")
+				.html(text("game")))
+			.append($("<select>")
+				.attr("id", "game")
+				.append($(`<option value='${betrayal_2e.code}'>`)
+					.html(betrayal_2e.displayName))
+				.append($(`<option value='${betrayal_2e_dom.code}'>`)
+					.html(betrayal_2e_dom.displayName)))
+			.append($("<div>")
+				.html(text("players")))
+			.append($("<input type='number' min='1' max='6' value='1'>")
+				.attr("id", "players"))
+			.append($("<button type='button'>")
+				.attr("id", "start")
+				.html(text("start")))
+			.append($("<div>")
+				.attr("id", "links"));
 
 		$("#start").click(() => {
 			const states = game.startGame(parseInt($("#players").val()));
@@ -135,7 +138,7 @@ const render = {
 				.before($("<div>")
 					.html(text("link")));
 			_.each(states, (s, i) => {
-				const url = link.share(instanceId, "b", s);
+				const url = link.share(instanceId, $("#game").val(), s);
 				$("#links")
 					.append($("<span>")
 						.html(`${i + 1}. `))
@@ -154,24 +157,17 @@ const render = {
 
 		$(".menu")
 			.attr("id", "menu-find")
-			.append(
-				$("<div>")
-					.attr("id", "close")
-					.html(text("x"))
-			)
-			.append(
-				$("<div>")
-					.attr("class", "text")
-					.html(text("find"))
-			)
-			.append(
-				$("<input type='number' min='1000' max='9999'>")
-					.attr("id", "id")
-			).append(
-				$("<button type='button'>")
-					.attr("id", "draw")
-					.html(text("draw"))
-			);
+			.append($("<div>")
+				.attr("id", "close")
+				.html(text("x")))
+			.append($("<div>")
+				.attr("class", "text")
+				.html(text("find")))
+			.append($("<input type='number' min='1000' max='9999'>")
+				.attr("id", "id"))
+			.append($("<button type='button'>")
+				.attr("id", "draw")
+				.html(text("draw")));
 
 		$("#draw").click(() => {
 			const id = parseInt($("#id").val());

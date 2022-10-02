@@ -4,9 +4,6 @@ let game = {};
 $(document).ready(() => {
 	game = betrayal_2e_dom;
 
-	// Sort the cards in case theyre in a random order in the game file.
-	game.cards = _.sortBy(_.flatten(game.cards), (c) => c.id);
-
 	/*
 	if theres instance in QS
 		if instance is already stored.
@@ -45,7 +42,7 @@ $(document).ready(() => {
 			render.all();
 		} else if (!_.isEmpty(gameMatch) && !_.isEmpty(dataMatch)) {
 			// New game from data.
-			// TODO: Set game from gameMatch here.
+			state.setGame(gameMatch[1]);
 			link.setStateFromData(dataMatch[1]);
 			state.save();
 			render.all();
@@ -55,6 +52,6 @@ $(document).ready(() => {
 	} else {
 		render.newGame();
 	}
-
+	
 	link.cleanURL();
 });

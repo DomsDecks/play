@@ -1,6 +1,8 @@
 const text = (id) => {
 	switch(id) {
 
+		case "intro": return game.text.intro || "Welcome to Dom's Decks. Use this page to play board games with custom digital cards."
+
 		case "scroll": return game.text.scroll || "<i class='material-icons'>keyboard_double_arrow_down</i>\
 		<span>Scroll down to see your hand of cards...<span>\
 		<i class='material-icons'>keyboard_double_arrow_down</i>";
@@ -19,7 +21,9 @@ const text = (id) => {
 
 		case "down": return game.text.down || "<i class='material-icons'>keyboard_arrow_down</i>";
 
-		case "players": return game.text.players || "Select the number of players in the game.";
+		case "game": return game.text.game || "Select which game to play:";
+
+		case "players": return game.text.players || "Select the number of players for the game:";
 
 		case "start": return game.text.start || "Start";
 
@@ -27,7 +31,7 @@ const text = (id) => {
 
 		case "search": return game.text.search || "<i class='material-icons'>search</i>";
 
-		case "find": return game.text.find || "Enter a card ID number to find it and draw it, regardless of it's current location.";
+		case "find": return game.text.find || "Enter an card ID number (from the top-right of a card) to find and draw it, regardless of it's current location.";
 
 		case "draw": return game.text.draw || "Draw";
 

@@ -4,6 +4,8 @@ const betrayal_2e_dom = {
 
 	"assetPath": betrayal_2e.assetPath,
 
+	"code": "d",
+
 	"assets": betrayal_2e.assets,
 
 	"text": betrayal_2e.text,

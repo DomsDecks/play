@@ -84,9 +84,6 @@ let game = {};
 $(document).ready(() => {
 	game = betrayal_2e_dom;
 
-	// Sort the cards in case theyre in a random order in the game file.
-	game.cards = _.sortBy(_.flatten(game.cards), (c) => c.id);
-
 	/*
 	if theres instance in QS
 		if instance is already stored.
@@ -125,7 +122,7 @@ $(document).ready(() => {
 			render.all();
 		} else if (!_.isEmpty(gameMatch) && !_.isEmpty(dataMatch)) {
 			// New game from data.
-			// TODO: Set game from gameMatch here.
+			state.setGame(gameMatch[1]);
 			link.setStateFromData(dataMatch[1]);
 			state.save();
 			render.all();
@@ -135,7 +132,7 @@ $(document).ready(() => {
 	} else {
 		render.newGame();
 	}
-
+	
 	link.cleanURL();
 }); 
 const link = {
@@ -357,22 +354,25 @@ const render = {
 
 		$(".menu")
 			.attr("id", "menu-new")
-			.append(
-				$("<div>")
-					.attr("class", "text")
-					.html(("players"))
-			)
-			.append(
-				$("<input type='number' min='1' max='6' value='1'>")
-					.attr("id", "players")
-			).append(
-				$("<button type='button'>")
-					.attr("id", "start")
-					.html(text("start"))
-			).append(
-				$("<div>")
-					.attr("id", "links")
-			);
+			.append($("<div>")
+				.html(text("intro")))
+			.append($("<div>")
+				.html(text("game")))
+			.append($("<select>")
+				.attr("id", "game")
+				.append($(`<option value='${betrayal_2e.code}'>`)
+					.html(betrayal_2e.displayName))
+				.append($(`<option value='${betrayal_2e_dom.code}'>`)
+					.html(betrayal_2e_dom.displayName)))
+			.append($("<div>")
+				.html(text("players")))
+			.append($("<input type='number' min='1' max='6' value='1'>")
+				.attr("id", "players"))
+			.append($("<button type='button'>")
+				.attr("id", "start")
+				.html(text("start")))
+			.append($("<div>")
+				.attr("id", "links"));
 
 		$("#start").click(() => {
 			const states = game.startGame(parseInt($("#players").val()));
@@ -381,7 +381,7 @@ const render = {
 				.before($("<div>")
 					.html(text("link")));
 			_.each(states, (s, i) => {
-				const url = link.share(instanceId, "b", s);
+				const url = link.share(instanceId, $("#game").val(), s);
 				$("#links")
 					.append($("<span>")
 						.html(`${i + 1}. `))
@@ -400,24 +400,17 @@ const render = {
 
 		$(".menu")
 			.attr("id", "menu-find")
-			.append(
-				$("<div>")
-					.attr("id", "close")
-					.html(text("x"))
-			)
-			.append(
-				$("<div>")
-					.attr("class", "text")
-					.html(text("find"))
-			)
-			.append(
-				$("<input type='number' min='1000' max='9999'>")
-					.attr("id", "id")
-			).append(
-				$("<button type='button'>")
-					.attr("id", "draw")
-					.html(text("draw"))
-			);
+			.append($("<div>")
+				.attr("id", "close")
+				.html(text("x")))
+			.append($("<div>")
+				.attr("class", "text")
+				.html(text("find")))
+			.append($("<input type='number' min='1000' max='9999'>")
+				.attr("id", "id"))
+			.append($("<button type='button'>")
+				.attr("id", "draw")
+				.html(text("draw")));
 
 		$("#draw").click(() => {
 			const id = parseInt($("#id").val());
@@ -489,22 +482,36 @@ const state = {
 			"deck": state.deck,
 			"hand": state.hand,
 			"discard": state.discard,
-			"started": state.started,
+			"started": state.started || new Date().toLocaleString(),
+			"game": game.code,
 		};
 		localStorage.setItem(state.instanceId, JSON.stringify(gameData));
 	},
 
 	"load": () => {
 		let gameData = JSON.parse(localStorage.getItem(state.instanceId));
+		state.setGame(gameData.game || "b");
 		state.deck = gameData.deck || [];
 		state.hand = gameData.hand || {};
 		state.discard = gameData.discard || [];
 		state.started = gameData.started || new Date().toLocaleString();
 	},
 
+	"setGame": (g) => {
+		switch (g) {
+			case betrayal_2e.code:
+				game = betrayal_2e;
+				break;
+			case betrayal_2e_dom.code:
+				game = betrayal_2e_dom;
+				break;
+		}
+	},
 }; 
 const text = (id) => {
 	switch(id) {
+
+		case "intro": return game.text.intro || "Welcome to Dom's Decks. Use this page to play board games with custom digital cards."
 
 		case "scroll": return game.text.scroll || "<i class='material-icons'>keyboard_double_arrow_down</i>\
 		<span>Scroll down to see your hand of cards...<span>\
@@ -524,7 +531,9 @@ const text = (id) => {
 
 		case "down": return game.text.down || "<i class='material-icons'>keyboard_arrow_down</i>";
 
-		case "players": return game.text.players || "Select the number of players in the game.";
+		case "game": return game.text.game || "Select which game to play:";
+
+		case "players": return game.text.players || "Select the number of players for the game:";
 
 		case "start": return game.text.start || "Start";
 
@@ -532,7 +541,7 @@ const text = (id) => {
 
 		case "search": return game.text.search || "<i class='material-icons'>search</i>";
 
-		case "find": return game.text.find || "Enter a card ID number to find it and draw it, regardless of it's current location.";
+		case "find": return game.text.find || "Enter an card ID number (from the top-right of a card) to find and draw it, regardless of it's current location.";
 
 		case "draw": return game.text.draw || "Draw";
 
@@ -545,6 +554,8 @@ const betrayal_2e = {
 	"displayName": "Betrayal at House on the Hill (2nd Edition)",
 
 	"assetPath": "betrayal-2e",
+
+	"code": "b",
 
 	// Except for the card art, what other assets are there to preload?
 	"assets": ["omen", "item", "event", "texture"],
@@ -1521,6 +1532,8 @@ const betrayal_2e_dom = {
 	"displayName": "Betrayal at House on the Hill (2nd Edition) (Dom's Expansion)",
 
 	"assetPath": betrayal_2e.assetPath,
+
+	"code": "d",
 
 	"assets": betrayal_2e.assets,
 
