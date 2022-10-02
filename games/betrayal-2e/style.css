@@ -60,6 +60,12 @@ body.betrayal-2e {
 
 .betrayal-2e div.card .card-text .r {
 	display: flex;
+	margin-bottom: 0.5em;
+	margin-top: 0.5em;
+}
+
+.betrayal-2e div.card .card-text .r ~ .r {
+	margin-top: 0;
 }
 
 .betrayal-2e div.card .card-text .n {
@@ -70,8 +76,8 @@ body.betrayal-2e {
 
 .betrayal-2e div.card .card-id {
 	position: absolute;
-	top: 1em;
-	right: 1em;
+	top: 0.7vh;
+	right: 1.5vh;
 	font-size: smaller;
 	color: #00000070;
 }
