@@ -53,7 +53,7 @@ div#find {
 	right: 1em;
 	cursor: pointer;
 	background-color: gray;
-	z-index: 50;
+	z-index: 90;
 }
 
 div.deck {
