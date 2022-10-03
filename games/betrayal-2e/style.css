@@ -59,15 +59,18 @@ body.betrayal-2e {
 	height: auto;
 	border: 0.4vh solid black;
 	border-radius: 0.4vh;
-	/*aspect-ratio: 1 / 1;*/
 	justify-self: flex-start;
 	object-fit: contain;
+	height: intrinsic !important;
 }
 
 .betrayal-2e div.card .card-icon {
 	width: 20%;
 	height: auto;
 	margin-bottom: -1em;
+	justify-self: flex-start;
+	object-fit: contain;
+	height: intrinsic !important;
 }
 
 .betrayal-2e div.card .card-title {
