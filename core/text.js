@@ -37,7 +37,7 @@ const text = (id) => {
 
 		case "x": return game.text.x || "<i class='material-icons'>close</i>";
 
-		case "actions": return game.text.x || "<i class='material-icons'>back_hand</i>";
+		case "actions": return game.text.x || "<i class='material-icons'>more_horiz</i>";
 
 	};
 };

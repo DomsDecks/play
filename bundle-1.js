@@ -20,6 +20,7 @@ const card = {
 		}
 		state.drawnCardId = id;
 		render.hideOptions();
+		render.clearTabs();
 		// Show new drawn card on screen, with relevant controls.
 		$("div.drawn").replaceWith(
 			render.card(id)
@@ -257,7 +258,7 @@ const render = {
 				.html(text("actions"))
 				.click(() => {
 					const show = element.find(".tab-deck").css("display") == "none";
-					$(".tab-deck, .tab-hand, .tab-discard").css({"display": ""});
+					render.clearTabs();
 					if (show) {
 						element.find(".tab-deck, .tab-hand, .tab-discard").css({"display": "flex"});
 					}
@@ -312,6 +313,10 @@ const render = {
 		}
 
 		return element;
+	},
+
+	"clearTabs": () => {
+		$(".tab-deck, .tab-hand, .tab-discard").css({"display": ""});
 	},
 
 	"hand": () => {
@@ -547,7 +552,7 @@ const text = (id) => {
 
 		case "x": return game.text.x || "<i class='material-icons'>close</i>";
 
-		case "actions": return game.text.x || "<i class='material-icons'>back_hand</i>";
+		case "actions": return game.text.x || "<i class='material-icons'>more_horiz</i>";
 
 	};
 }; 

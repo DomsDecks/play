@@ -33,7 +33,7 @@ const render = {
 				.html(text("actions"))
 				.click(() => {
 					const show = element.find(".tab-deck").css("display") == "none";
-					$(".tab-deck, .tab-hand, .tab-discard").css({"display": ""});
+					render.clearTabs();
 					if (show) {
 						element.find(".tab-deck, .tab-hand, .tab-discard").css({"display": "flex"});
 					}
@@ -88,6 +88,10 @@ const render = {
 		}
 
 		return element;
+	},
+
+	"clearTabs": () => {
+		$(".tab-deck, .tab-hand, .tab-discard").css({"display": ""});
 	},
 
 	"hand": () => {

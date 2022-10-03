@@ -20,6 +20,7 @@ const card = {
 		}
 		state.drawnCardId = id;
 		render.hideOptions();
+		render.clearTabs();
 		// Show new drawn card on screen, with relevant controls.
 		$("div.drawn").replaceWith(
 			render.card(id)
