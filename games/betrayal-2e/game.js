@@ -904,7 +904,9 @@ const betrayal_2e = {
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "items")
-						.append($(`<img src="${render.path("item")}">`))
+						.append($("<div>")
+							.addClass("card-icon")
+							.css({ "background-image": `url("${render.path("item")}")` }))
 						.append($("<div>")
 							.html("ITEM"))
 						.append($("<div class='count' id='item-count'>")))
@@ -912,7 +914,9 @@ const betrayal_2e = {
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "events")
-						.append($(`<img src="${render.path("event")}">`))
+						.append($("<div>")
+							.addClass("card-icon")
+							.css({ "background-image": `url("${render.path("event")}")` }))
 						.append($("<div>")
 							.html("EVENT"))
 						.append($("<div class='count' id='event-count'>")))
@@ -920,7 +924,9 @@ const betrayal_2e = {
 					$("<div>")
 						.addClass("deck")
 						.attr("id", "omens")
-						.append($(`<img src="${render.path("omen")}">`))
+						.append($("<div>")
+							.addClass("card-icon")
+							.css({ "background-image": `url("${render.path("omen")}")` }))
 						.append($("<div>")
 							.html("OMEN"))
 						.append($("<div class='count' id='omen-count'>")))
@@ -994,7 +1000,7 @@ const betrayal_2e = {
 				.html(c.id))
 			.prepend(c.art ? $(`<div>`)
 				.addClass("card-art")
-				.css({"background-image": `url("${render.path(c.name)}")`}) : null)
+				.css({ "background-image": `url("${render.path(c.name)}")` }) : null)
 			.prepend($("<div>")
 				.addClass("card-title")
 				.html(c.name
@@ -1010,8 +1016,9 @@ const betrayal_2e = {
 					.replaceAll("#n", "<br>")
 					.replaceAll("#c", "<div class='b c'>- OR -</div>")
 					.replace(/(<br>)+$/, "")))
-			.append($(`<img src="${render.path(c.type)}">`)
-				.addClass("card-icon"));
+			.append($("<div>")
+				.addClass("card-icon")
+				.css({ "background-image": `url("${render.path(c.type)}")` }));
 
 		if (c.type == "omen") {
 			element.append($("<div>")

@@ -221,12 +221,6 @@ body.betrayal-2e {
 	box-shadow: 1px 2px 2px black;
 }
 
-.betrayal-2e div.deck img {
-	width: 80%;
-	height: auto;
-	margin-bottom: 1em;
-}
-
 .betrayal-2e div.deck div.count {
 	font-size: small;
 	font-weight: default;
@@ -251,6 +245,13 @@ body.betrayal-2e {
 	max-width: 400px;
 }
 
+.betrayal-2e div.deck .card-icon {
+	width: 80%;
+	padding-bottom: 80%;
+	margin-bottom: 1em;
+	background-size: cover;
+}
+
 .betrayal-2e div.card .card-art {
 	width: 50%;
 	padding-bottom: 50%;
@@ -261,11 +262,9 @@ body.betrayal-2e {
 
 .betrayal-2e div.card .card-icon {
 	width: 20%;
-	height: auto;
+	padding-bottom: 20%;
 	margin-bottom: -1em;
-	justify-self: flex-start;
-	object-fit: contain;
-	height: intrinsic !important;
+	background-size: cover;
 }
 
 .betrayal-2e div.card .card-title {
