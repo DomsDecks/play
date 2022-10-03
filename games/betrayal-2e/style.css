@@ -7,7 +7,7 @@ body.betrayal-2e {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	align-content: flex-end;
+	align-content: center;
 	gap: 2vw;
 }
 

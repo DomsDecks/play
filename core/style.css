@@ -49,10 +49,11 @@ div#scroll {
 
 div#find {
 	position: absolute;
-	top: 0.5em;
-	right: 0.5em;
+	top: 1em;
+	right: 1em;
 	cursor: pointer;
-	background-color: #00000030;
+	background-color: gray;
+	z-index: 50;
 }
 
 div.deck {
