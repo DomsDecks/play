@@ -451,6 +451,7 @@ const render = {
 	"path": (name) => {
 		return `games/${game.assetPath}/images/${name
 			.toLowerCase()
+			.replaceAll("#n", "-")
 			.replaceAll(" ", "-")
 			.replaceAll(/<br>|[^0-9a-z-]/ig, "")
 			}.png`;
@@ -1550,7 +1551,7 @@ const betrayal_2e = {
 			.append($("<div>")
 				.addClass("card-id")
 				.html(c.id))
-			.prepend(c.art ? $(`<img src="${render.path(c.name.replaceAll("#n", " "))}">`)
+			.prepend(c.art ? $(`<img src="${render.path(c.name)}">`)
 				.addClass("card-art") : null)
 			.prepend($("<div>")
 				.addClass("card-title")
