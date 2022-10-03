@@ -73,6 +73,7 @@ div.card {
 	align-items: center;
 	align-content: center;
 	gap: 1em;
+	overflow: hidden;
 }
 
 div.card.drawn {

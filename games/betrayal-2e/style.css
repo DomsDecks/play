@@ -56,12 +56,10 @@ body.betrayal-2e {
 
 .betrayal-2e div.card .card-art {
 	width: 50%;
-	height: auto;
+	padding-bottom: 50%;
 	border: 0.4vh solid black;
 	border-radius: 0.4vh;
-	justify-self: flex-start;
-	object-fit: contain;
-	height: intrinsic !important;
+	background-size: cover;
 }
 
 .betrayal-2e div.card .card-icon {
