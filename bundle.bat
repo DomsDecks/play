@@ -1,4 +1,4 @@
-set /A n = 5
+set /A n = 6
 
 del "bundle-*.js"
 type "core\card.js" >> "bundle-%n%.js"

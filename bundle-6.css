@@ -53,7 +53,7 @@ div#find {
 	right: 1em;
 	cursor: pointer;
 	background-color: gray;
-	z-index: 90;
+	z-index: 50;
 }
 
 div.deck {
@@ -119,6 +119,7 @@ div.tab {
 	position: absolute;
 	cursor: pointer;
 	right: -2vw;
+	z-index: 80;
 }
 
 div.tab-actions {
