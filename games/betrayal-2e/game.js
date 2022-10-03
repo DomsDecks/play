@@ -629,7 +629,7 @@ const betrayal_2e = {
 		{
 			"id": 2040,
 			"type": "event",
-			"name": "A Moment	of Hope",
+			"name": "A Moment of Hope",
 			"text": "#bSomething feels strangely right about this room. Something is resisting the evil of the house.#dPlace the Blessing token in this room.#n#nEach hero rolls 1 additional die (maximum of 8 dice) on all trait rolls while in this room.",
 			"hand": true,
 			"discard": true,
@@ -992,7 +992,7 @@ const betrayal_2e = {
 			.append($("<div>")
 				.addClass("card-id")
 				.html(c.id))
-			.prepend(c.art ? $(`<img src="${render.path(c.name)}">`)
+			.prepend(c.art ? $(`<img src="${render.path(c.name.replaceAll("#n", " "))}">`)
 				.addClass("card-art") : null)
 			.prepend($("<div>")
 				.addClass("card-title")
