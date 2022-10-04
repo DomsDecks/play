@@ -35,7 +35,7 @@ const render = {
 					const show = element.find(".tab-deck").css("display") == "none";
 					render.clearTabs();
 					if (show) {
-						element.find(".tab-deck, .tab-hand, .tab-discard").css({"display": "flex"});
+						element.find(".tab-deck, .tab-hand, .tab-discard").css({ "display": "flex" });
 					}
 				})
 		);
@@ -91,7 +91,7 @@ const render = {
 	},
 
 	"clearTabs": () => {
-		$(".tab-deck, .tab-hand, .tab-discard").css({"display": ""});
+		$(".tab-deck, .tab-hand, .tab-discard").css({ "display": "" });
 	},
 
 	"hand": () => {
@@ -142,8 +142,9 @@ const render = {
 				.html(text("players")))
 			.append($("<input type='number' min='1' max='6' value='1'>")
 				.attr("id", "players"))
-			.append($("<button type='button'>")
+			.append($("<div>")
 				.attr("id", "start")
+				.addClass("button shadow")
 				.html(text("start")));
 
 		$("#start").click(() => {
@@ -187,8 +188,9 @@ const render = {
 				.html(text("find")))
 			.append($("<input type='number' min='1000' max='9999'>")
 				.attr("id", "id"))
-			.append($("<button type='button'>")
+			.append($("<div>")
 				.attr("id", "draw")
+				.addClass("button shadow")
 				.html(text("draw")));
 
 		$("#draw").click(() => {
