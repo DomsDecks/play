@@ -1,6 +1,9 @@
-set /A n = 7
+set /p o=<version.txt
+set /a n=%o%+1
+>version.txt echo %n%
+powershell -Command "(Get-Content index.html) -replace 'bundle-"%o%"', 'bundle-"%n%"' | Out-File index.html"
 
-del "bundle-*.js"
+del "bundle-"%o%".js"
 type "core\card.js" >> "bundle-%n%.js"
 echo. >> "bundle-%n%.js"
 type "core\init.js" >> "bundle-%n%.js"
@@ -20,7 +23,7 @@ echo. >> "bundle-%n%.js"
 type "games\Betrayal-2e-dom\game.js" >> "bundle-%n%.js"
 echo. >> "bundle-%n%.js"
 
-del "bundle-*.css"
+del "bundle-"%o%".css"
 type "core\style.css" >> "bundle-%n%.css"
 echo. >> "bundle-%n%.css"
 type "games\Betrayal-2e\style.css" >> "bundle-%n%.css"

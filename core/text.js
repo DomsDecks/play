@@ -11,7 +11,7 @@ const text = (id) => {
 
 		case "hand": return game.text.hand || "Keep in your hand";
 
-		case "deck": return game.text.deck || "Shuffle in to deck";
+		case "deck": return game.text.deck || "Shuffle back into deck";
 
 		case "discard": return game.text.discard || "Place on discard pile";
 

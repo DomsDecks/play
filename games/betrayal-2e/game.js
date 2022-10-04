@@ -10,8 +10,8 @@ const betrayal_2e = {
 	"assets": ["omen", "item", "event", "texture"],
 
 	"text": {
-		"deck": "Shuffle in to stack",
-		"hauntRoll": "Make a haunt roll now.",
+		"deck": "Shuffle back into stack",
+		"haunt": "Make a haunt roll now.",
 	},
 
 	// All cards in the game.
@@ -1023,7 +1023,7 @@ const betrayal_2e = {
 		if (c.type == "omen") {
 			element.append($("<div>")
 				.addClass("card-suffix")
-				.html(betrayal_2e.text.hauntRoll));
+				.html(betrayal_2e.text.haunt));
 		}
 
 		return element;

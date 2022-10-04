@@ -274,6 +274,10 @@ body.betrayal-2e {
 	text-align: center;
 }
 
+.betrayal-2e div.card .card-suffix {
+	font-size: small;
+}
+
 .betrayal-2e div.card .card-text {
 	text-align: left;
 	font-size: small;
