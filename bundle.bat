@@ -1,7 +1,7 @@
 set /p o=<version.txt
 set /a n=%o%+1
 >version.txt echo %n%
-powershell -Command "(Get-Content index.html) -replace 'bundle-"%o%"', 'bundle-"%n%"' | Out-File index.html"
+powershell -Command "$file = (Get-Content index.html) -replace 'bundle-"%o%"', 'bundle-"%n%"'; [System.IO.File]::WriteAllLines( 'index.html', $file)"
 
 del "bundle-"%o%".js"
 type "core\card.js" >> "bundle-%n%.js"
