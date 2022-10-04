@@ -6,8 +6,9 @@ const betrayal_2e = {
 
 	"code": "b",
 
-	// Except for the card art, what other assets are there to preload?
-	"assets": ["omen", "item", "event", "texture"],
+	// What assets are there to preload?
+	"assets": () => ["item", "event", "omen", "texture"]
+		.concat(_.map(_.filter(game.cards, c => c.art), c => c.name)),
 
 	"text": {
 		"deck": "Shuffle back into stack",

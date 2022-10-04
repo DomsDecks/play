@@ -213,12 +213,7 @@ const render = {
 	},
 
 	"preloadAssets": () => {
-		_.each(game.cards, c => {
-			$("#preload").append(
-				$(`<img src="${render.path(c.name)}">`)
-					.attr("id", `preload-${c.name}`));
-		});
-		_.each(game.assets, a => {
+		_.each(game.assets(), a => {
 			$("#preload").append(
 				$(`<img src="${render.path(a)}">`)
 					.attr("id", `preload-${a}`));
