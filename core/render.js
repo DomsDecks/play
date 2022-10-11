@@ -22,7 +22,7 @@ const render = {
 	"card": (id) => {
 		// Render a card generically, and then fill it with the game's content.
 		const element = game.renderCard($("<div>")
-			.attr("id", id))
+			.attr("id", `card-${id}`))
 			.addClass("card");
 
 		const c = card.get(id);
@@ -209,7 +209,9 @@ const render = {
 	},
 
 	"showOptions": () => {
-		$(".option").css({ "visibility": "visible" });
+		if (_.isNull(state.drawnCardId)) {
+			$(".option").css({ "visibility": "visible" });
+		}
 	},
 
 	"preloadAssets": () => {
