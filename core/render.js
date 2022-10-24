@@ -40,7 +40,7 @@ const render = {
 				})
 		);
 
-		if (c["hand"] && !_.some(state.hand, h => h == id)) {
+		if (!c.noHand && !_.some(state.hand, h => h == id)) {
 			element.append(
 				$("<div>")
 					.addClass("tab round-wide shadow tab-hand")
@@ -49,7 +49,7 @@ const render = {
 			);
 		}
 
-		if (c["deck"]) {
+		if (!c.noDeck) {
 			element.append(
 				$("<div>")
 					.addClass("tab round-wide shadow tab-deck")
@@ -59,7 +59,7 @@ const render = {
 		}
 
 		const index = _.findIndex(state.discard, d => d == id);
-		if (c["discard"]) {
+		if (!c.noDiscard) {
 			element.append(
 				$("<div>")
 					.addClass("tab round-wide shadow tab-discard")
