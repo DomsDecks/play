@@ -1,13 +1,13 @@
 const render = {
 
-	"all": () => {
+	all: () => {
 		game.renderDeck();
 		render.hand();
 		$("div#scroll")
 			.html(_.isEmpty(state.hand) ? text("empty") : text("scroll"));
 	},
 
-	"find": () => {
+	find: () => {
 		if ($("#find").length == 0) {
 			$("#top-content").append(
 				$("<div>")
@@ -19,7 +19,7 @@ const render = {
 		}
 	},
 
-	"card": (id) => {
+	card: (id) => {
 		// Render a card generically, and then fill it with the game's content.
 		const element = game.renderCard($("<div>")
 			.attr("id", `card-${id}`))
@@ -90,11 +90,11 @@ const render = {
 		return element;
 	},
 
-	"clearTabs": () => {
+	clearTabs: () => {
 		$(".tab-deck, .tab-hand, .tab-discard").css({ "display": "" });
 	},
 
-	"hand": () => {
+	hand: () => {
 		// If there's a card on the page not in the hand...
 		$("#hand div.card").each((i, c) => {
 			if (!_.some(state.hand, h => h.id == c.id)) {
@@ -108,7 +108,7 @@ const render = {
 		});
 	},
 
-	"menu": (content) => {
+	menu: (content) => {
 		// Show a menu with any content.
 		$("#top").append(
 			$("<div>")
@@ -118,12 +118,12 @@ const render = {
 		render.hideOptions();
 	},
 
-	"closeMenu": () => {
+	closeMenu: () => {
 		$(".menu").remove();
 		render.showOptions();
 	},
 
-	"newGame": () => {
+	newGame: () => {
 		render.menu();
 
 		$(".menu")
@@ -173,7 +173,7 @@ const render = {
 		});
 	},
 
-	"findCard": () => {
+	findCard: () => {
 		if (state.menu() || !_.isNull(state.drawnCardId)) { return; }
 
 		render.menu();
@@ -204,17 +204,17 @@ const render = {
 		$("#close").click(render.closeMenu);
 	},
 
-	"hideOptions": () => {
+	hideOptions: () => {
 		$(".option").css({ "visibility": "hidden" });
 	},
 
-	"showOptions": () => {
+	showOptions: () => {
 		if (_.isNull(state.drawnCardId)) {
 			$(".option").css({ "visibility": "visible" });
 		}
 	},
 
-	"preloadAssets": () => {
+	preloadAssets: () => {
 		_.each(game.assets(), a => {
 			$("#preload").append(
 				$(`<img src="${render.path(a)}">`)
@@ -222,7 +222,7 @@ const render = {
 		});
 	},
 
-	"path": (name) => {
+	path: (name) => {
 		return `games/${game.assetPath}/images/${name
 			.toLowerCase()
 			.replaceAll("#n", "-")

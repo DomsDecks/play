@@ -1,13 +1,13 @@
 const card = {
 
-	"get": (id) => {
+	get: (id) => {
 		return _.find(game.cards, c => c.id == id);
 	},
 
 	// Bring a card from the deck into the foreground.
 	// In terms of the data it is still in whatever area it was drawn from.
 	// So that, if you close the window with a card drawn, it isn't lost.
-	"draw": (id, replace = false) => {
+	draw: (id, replace = false) => {
 		if (replace) {
 			card.undraw();
 		}
@@ -31,7 +31,7 @@ const card = {
 	},
 
 	// Remove the drawn card from the GUI.
-	"undraw": () => {
+	undraw: () => {
 		state.drawnCardId = null;
 		$("div.card.drawn")
 			.removeAttr("id")
@@ -41,13 +41,13 @@ const card = {
 	},
 
 	// Draw from the top of the discard pile.
-	"drawDiscard": () => {
+	drawDiscard: () => {
 		if (state.menu()) { return; }
 		card.draw(_.last(state.discard));
 	},
 
 	// Move a card between arrays.
-	"move": (id, target) => {
+	move: (id, target) => {
 		if (state.menu()) { return; }
 
 		if (state.drawnCardId == id) {

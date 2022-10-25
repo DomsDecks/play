@@ -1,29 +1,29 @@
 const state = {
 
 	// Unique ID of the instance of a game.
-	"instanceId": "",
+	instanceId: "",
 
 	// Card IDs currently in hand.
-	"hand": [],
+	hand: [],
 
 	// Card IDs currently in all combined decks.
-	"deck": [],
+	deck: [],
 
 	// Card IDs currently in discard pile.
 	// The last element is the top of the pile.
-	"discard": [],
+	discard: [],
 
 	// The currently drawn card.
-	"drawnCardId": null,
+	drawnCardId: null,
 
 	// Time the game was started.
-	"started": null,
+	started: null,
 
 	// Is a menu open?
-	"menu": () => $(".menu").length > 0,
+	menu: () => $(".menu").length > 0,
 
 	// Store to local storage.
-	"save": () => {
+	save: () => {
 		let gameData = {
 			"deck": state.deck,
 			"hand": state.hand,
@@ -34,7 +34,7 @@ const state = {
 		localStorage.setItem(state.instanceId, JSON.stringify(gameData));
 	},
 
-	"load": () => {
+	load: () => {
 		let gameData = JSON.parse(localStorage.getItem(state.instanceId));
 		state.setGame(gameData.game || "b");
 		state.deck = gameData.deck || [];
@@ -43,7 +43,7 @@ const state = {
 		state.started = gameData.started || new Date().toLocaleString();
 	},
 
-	"setGame": (g) => {
+	setGame: (g) => {
 		switch (g) {
 			case betrayal_2e.code:
 				game = betrayal_2e;

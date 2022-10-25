@@ -1,18 +1,18 @@
 const link = {
 
 	// Clean the URL.
-	"cleanURL": () => {
+	cleanURL: () => {
 		const newUrl =`${window.location.protocol}//${window.location.host}${window.location.pathname}${!_.isEmpty(state.instanceId) ? ("?i=" + state.instanceId) : ""}`;
 		window.history.pushState({ path: newUrl }, "", newUrl);
 	},
 
 	// Get the sharing URL.
-	"share": (instanceId, game, data) => {
+	share: (instanceId, game, data) => {
 		return `${window.location.protocol}//${window.location.host}${window.location.pathname}?i=${instanceId}&g=${game}&d=${data}`;
 	},
 
 	// Get an encoded string containing the deck and hand.
-	"getData": (deck, hand) => {
+	getData: (deck, hand) => {
 
 		// The cards are sorted by their position in the array, not their IDs.
 		// So adding new cards doesn't break old saves, as long as they are at the end of the array. (Regardless of their IDs.)
@@ -38,7 +38,7 @@ const link = {
 	},
 
 	// Set the game state from the string.
-	"setStateFromData": (data) => {
+	setStateFromData: (data) => {
 
 		// Add everything to deck for testing.
 		const all = data == "*";
