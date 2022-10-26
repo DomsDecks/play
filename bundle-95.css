@@ -21,7 +21,8 @@ div#top {
 	box-shadow: 1px 2px 2px black;
 }
 
-.round, .round-wide {
+.round,
+.round-wide {
 	border-radius: 1em;
 	width: 2em;
 	height: 2em;
@@ -64,7 +65,8 @@ div.deck {
 div.card {
 	width: calc(97% - 2vh);
 	max-width: 60vh;
-	height: 80vh;
+	min-height: 80vh;
+	height: auto;
 	border: 1vh solid black;
 	border-radius: 2vh;
 	background: white;
@@ -78,9 +80,9 @@ div.card {
 
 div.card.drawn {
 	position: absolute;
-	top: 50%;
+	top: 5vh;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%);
 	z-index: 75;
 	box-shadow: 5vw 8vh 8vh black;
 	display: none;
@@ -91,10 +93,10 @@ div.card.drawn {
 	display: none;
 	background-color: #00000050;
 	position: fixed;
-	top: -200vh;
-	left: -200vw;
-	height: 500vh;
-	width: 500vw;
+	top: -1000vh;
+	left: -1000vw;
+	height: 2000vh;
+	width: 2000vw;
 }
 
 div#hand {
@@ -199,12 +201,12 @@ div#links {
 
 .button {
 	background-color: gray;
-  height: 2em;
-  border-radius: 1em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+	height: 2em;
+	border-radius: 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
 } 
 body.betrayal-2e {
 	background-color: rgb(56, 51, 51);
@@ -365,4 +367,8 @@ body.betrayal-2e {
 
 .betrayal-2e div#scroll {
 	color: rgba(134, 132, 111, 0.664);
+}
+
+.betrayal-2e div.card#card-2101 {
+	height: auto;
 } 

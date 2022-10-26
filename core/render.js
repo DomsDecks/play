@@ -32,7 +32,7 @@ const render = {
 				.addClass("tab round shadow tab-actions")
 				.html(text("actions"))
 				.click(() => {
-					const show = element.find(".tab-deck").css("display") == "none";
+					const show = element.find(".round-wide").css("display") == "none";
 					render.clearTabs();
 					if (show) {
 						element.find(".tab-deck, .tab-hand, .tab-discard").css({ "display": "flex" });
@@ -40,7 +40,7 @@ const render = {
 				})
 		);
 
-		if (!c.noHand && !_.some(state.hand, h => h == id)) {
+		if (!c.noHand && (!_.some(state.hand, h => h == id) || state.drawnCardId == id)) {
 			element.append(
 				$("<div>")
 					.addClass("tab round-wide shadow tab-hand")
@@ -146,6 +146,8 @@ const render = {
 				.attr("id", "start")
 				.addClass("button shadow")
 				.html(text("start")));
+				
+		$("#players")[0].focus();
 
 		$("#start").click(() => {
 			state.setGame($("#game").val());
@@ -192,6 +194,8 @@ const render = {
 				.attr("id", "draw")
 				.addClass("button shadow")
 				.html(text("draw")));
+				
+		$("#id")[0].focus();
 
 		$("#draw").click(() => {
 			const id = parseInt($("#id").val());

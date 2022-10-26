@@ -153,13 +153,13 @@ const betrayal_2e = {
 			id: 2001,
 			type: "event",
 			name: "The Lost One",
-			text: "#bA woman wearing a Civil War dress beckons to you.#nYou fall into a trance.#dYou must attempt a Knowledge roll. If the result is 5 or more, you break out of your trance and gain 1 Knowledge; otherwise, roll 3 dice to see where the Lost One leads you:#r6#tMove to the Entrance Hall.#y#r4-5#tMove to the Upper Landing.#y#r2-3#tMove to a new upper floor room.#y#r0-1#tMove to a new basement room.#yFor new rooms, draw from the stack, or move to the Entrance Hall if there are no rooms left.",
+			text: "#bA woman wearing a Civil War dress beckons to you.#nYou fall into a trance.#dMake a Knowledge roll. If the result is 5 or more, you break out of your trance and gain 1 Knowledge; otherwise, roll 3 dice to see where the Lost One leads you:#r6#tMove to the Entrance Hall.#y#r4-5#tMove to the Upper Landing.#y#r2-3#tMove to a new upper floor room.#y#r0-1#tMove to a new basement room.#yFor new rooms, draw from the stack, or move to the Entrance Hall if there are no rooms left.",
 		},
 		{
 			id: 2002,
 			type: "event",
 			name: "The Voice",
-			text: "#b<i>\"I'm under the floor,#nburied under the floor...\"#n#nThe voice whispers once, then is gone.#dYou must attempt a Knowledge roll:#r4+#tYou find something under the floor. Draw an item card.#y#r0-3#tYou dig and search for the voice, but to no avail.#y",
+			text: "#b<i>\"I'm under the floor,#nburied under the floor...\"#n#nThe voice whispers once, then is gone.#dMake a Knowledge roll:#r4+#tYou find something under the floor. Draw an item card.#y#r0-3#tYou dig and search for the voice, but to no avail.#y",
 		},
 		{
 			id: 2003,
@@ -171,7 +171,7 @@ const betrayal_2e = {
 			id: 2004,
 			type: "event",
 			name: "Webs",
-			text: "#bCasually, you reach up to brush some webs aside... but they won't brush away. They cling.#dYou must attempt a Might roll:#r4+#tYou break free. Gain 1 Might and discard this card.#y#r0-3#tYou're stuck. Keep this card.#yIf you're stuck, you can't do anything until you're freed. Once during any explorer's turn (including you), they can attempt a Might roll to free you. A 4+ succeeds, but you don't gain the 1 Might. Anyone failing an attempt can't move for the rest of that turn. After 3 unsuccessful attempts, you break free automatically. Discard this event once freed.",
+			text: "#bCasually, you reach up to brush some webs aside... but they won't brush away. They cling.#dMake a Might roll:#r4+#tYou break free. Gain 1 Might and discard this card.#y#r0-3#tYou're stuck. Keep this card.#yIf you're stuck, you can't do anything until you're freed. Once during any explorer's turn (including you), they can attempt a Might roll to free you. A 4+ succeeds, but you don't gain the 1 Might. Anyone failing an attempt can't move for the rest of that turn. After 3 unsuccessful attempts, you break free automatically. Discard this event once freed.",
 		},
 		{
 			id: 2005,
@@ -207,13 +207,13 @@ const betrayal_2e = {
 			id: 2010,
 			type: "event",
 			name: "Something Slimy",
-			text: "#bWhat's around your ankle?#nA bug? A tentacle?#nA dead hand clawing?#dYou must attempt a Speed roll:#r4+#tYou break free. Gain 1 Speed.#y#r1-3#tLose 1 Might.#y#r0#tLose 1 Might and 1 Speed.#y",
+			text: "#bWhat's around your ankle?#nA bug? A tentacle?#nA dead hand clawing?#dMake a Speed roll:#r4+#tYou break free. Gain 1 Speed.#y#r1-3#tLose 1 Might.#y#r0#tLose 1 Might and 1 Speed.#y",
 		},
 		{
 			id: 2011,
 			type: "event",
 			name: "Spider",
-			text: "#bA spider the size of a fist lands on your shoulder... and crawls into your hair.#dYou must attempt a Speed roll to brush it away or a Sanity roll to stand still:#r4+#tIt's gone. Gain 1 in the trait you used to attempt this roll.#y#r1-3#tIt bites you. Take 1 die of physical damage.#y#r0#tIt takes a chunk out of you.#nTake 2 dice of physical damage.#y",
+			text: "#bA spider the size of a fist lands on your shoulder... and crawls into your hair.#dMake a Speed roll to brush it away or a Sanity roll to stand still:#r4+#tIt's gone. Gain 1 in the trait you used to attempt this roll.#y#r1-3#tIt bites you. Take 1 die of physical damage.#y#r0#tIt takes a chunk out of you.#nTake 2 dice of physical damage.#y",
 		},
 		{
 			id: 2012,
@@ -225,7 +225,7 @@ const betrayal_2e = {
 			id: 2013,
 			type: "event",
 			name: "Night View",
-			text: "#bYou see a vision of a ghostly couple walking the grounds, silently strolling in their wedding best.#dYou must attempt a Knowledge roll:#r5+#tYou recognize the ghosts as former inhabitants of the house. You call their names, and they turn to you, whispering dark secrets of the house. Gain 1 Knowledge.#y#r0-4#tYou pull back in horror, unable to watch.#y",
+			text: "#bYou see a vision of a ghostly couple walking the grounds, silently strolling in their wedding best.#dMake a Knowledge roll:#r5+#tYou recognize the ghosts as former inhabitants of the house. You call their names, and they turn to you, whispering dark secrets of the house. Gain 1 Knowledge.#y#r0-4#tYou pull back in horror, unable to watch.#y",
 		},
 		{
 			id: 2014,
@@ -249,7 +249,7 @@ const betrayal_2e = {
 			id: 2017,
 			type: "event",
 			name: "Rotten",
-			text: "#bThe smell in this room, it's horrible.#nSmells like death, like blood.#nA slaughterhouse smell.#dYou must attempt a Sanity roll:#r5+#tTroubling odors, nothing more.#nGain 1 Sanity.#y#r2-4#tLose 1 Might.#y#r1#tLose 1 Might and 1 Speed.#y#r0#tYou double over with nausea.#nLose 1 Might, 1 Speed,1 Knowledge, and 1 Sanity.#y",
+			text: "#bThe smell in this room, it's horrible.#nSmells like death, like blood.#nA slaughterhouse smell.#dMake a Sanity roll:#r5+#tTroubling odors, nothing more.#nGain 1 Sanity.#y#r2-4#tLose 1 Might.#y#r1#tLose 1 Might and 1 Speed.#y#r0#tYou double over with nausea.#nLose 1 Might, 1 Speed,1 Knowledge, and 1 Sanity.#y",
 		},
 		{
 			id: 2018,
@@ -303,19 +303,19 @@ const betrayal_2e = {
 			id: 2026,
 			type: "event",
 			name: "Grave Dirt",
-			text: "#bThis room is covered in a thick layer of dirt. You cough as it gets on your skin and in your lungs.#dYou must attempt a Might roll:#r4+#tYou shake it off. Gain 1 Might.#y#r0-3#tSomething is wrong. Keep this card. Take 1 point of physical damage at the start of each of your turns. Discard this card if an item card increases one of your traits or if you end your turn in the Balcony, Gardens, Graveyard, Gymnasium, Larder, Patio, or Tower.##y",
+			text: "#bThis room is covered in a thick layer of dirt. You cough as it gets on your skin and in your lungs.#dMake a Might roll:#r4+#tYou shake it off. Gain 1 Might.#y#r0-3#tSomething is wrong. Keep this card. Take 1 point of physical damage at the start of each of your turns. Discard this card if an item card increases one of your traits or if you end your turn in the Balcony, Gardens, Graveyard, Gymnasium, Larder, Patio, or Tower.##y",
 		},
 		{
 			id: 2027,
 			type: "event",
 			name: "Groundskeeper",
-			text: "#bYou turn to see a man in groundskeeper clothing.#nHe raises his shovel and charges. Inches from your face, he disappears, leaving muddy footprints, and nothing more.#dYou must attempt a Knowledge roll. (An explorer in the Gardens rolls 2 fewer dice on this roll.)#r4+#tYou find something in the mud.#nDraw an item card.#y#r0-3#tThe groundskeeper reappears and strikes you in the face with the shovel. The player on your right rolls a Might 4 attack for the Groundskeeper. You defend against this attack as normal, by rolling dice equal to your Might.#y",
+			text: "#bYou turn to see a man in groundskeeper clothing.#nHe raises his shovel and charges. Inches from your face, he disappears, leaving muddy footprints, and nothing more.#dMake a Knowledge roll. (An explorer in the Gardens rolls 2 fewer dice on this roll.)#r4+#tYou find something in the mud.#nDraw an item card.#y#r0-3#tThe groundskeeper reappears and strikes you in the face with the shovel. The player on your right rolls a Might 4 attack for the Groundskeeper. You defend against this attack as normal, by rolling dice equal to your Might.#y",
 		},
 		{
 			id: 2028,
 			type: "event",
 			name: "Hanged Men",
-			text: "#bA breeze chills the room.#nBefore you, three men hang from frayed ropes. They stare at you with cold, dead eyes.#nThe trio swing silently, then fade into dust that falls to the ground. You start to choke.#n#nYou must attempt a roll for each trait:#r2+#tThat trait is unaffected.#y#r0-1#tLose 1 from that trait.#yIf you roll a 2+ on all 4 rolls, gain 1 additional point in a trait of your choice.",
+			text: "#bA breeze chills the room.#nBefore you, three men hang from frayed ropes. They stare at you with cold, dead eyes.#nThe trio swing silently, then fade into dust that falls to the ground. You start to choke.#n#nMake a roll for each trait:#r2+#tThat trait is unaffected.#y#r0-1#tLose 1 from that trait.#yIf you roll a 2+ on all 4 rolls, gain 1 additional point in a trait of your choice.",
 		},
 		{
 			id: 2029,
@@ -345,7 +345,7 @@ const betrayal_2e = {
 			id: 2033,
 			type: "event",
 			name: "Creepy Crawlies",
-			text: "#bExactly one thousand bugs spill out on your skin, under your clothes, and in your hair.#dYou must attempt a Sanity roll:#r5+#tYou blink, and they're gone.#nGain 1 Sanity.#y#r1-4#tLose 1 Sanity.#y#r0#tLose 2 Sanity.#y",
+			text: "#bExactly one thousand bugs spill out on your skin, under your clothes, and in your hair.#dMake a Sanity roll:#r5+#tYou blink, and they're gone.#nGain 1 Sanity.#y#r1-4#tLose 1 Sanity.#y#r0#tLose 2 Sanity.#y",
 		},
 		{
 			id: 2034,
@@ -357,7 +357,7 @@ const betrayal_2e = {
 			id: 2035,
 			type: "event",
 			name: "Debris",
-			text: "#bPlaster falls from the walls and ceiling.#dYou must attempt a Speed roll:#r3+#tYou dodge the plaster.#nGain 1 Speed.#y#r1-2#tYou're buried in debris.#nTake 1 die of physical damage.#y#r0#tYou're buried in debris.#nTake 2 dice of physical damage.#yIf you're buried, you can't do anything until you're freed. Once during any explorer's turn (including you), they can attempt a Might roll to free you. A 4+ succeeds. After 3 unsuccessful attempts, you break free automatically. Discard this event once freed.",
+			text: "#bPlaster falls from the walls and ceiling.#dMake a Speed roll:#r3+#tYou dodge the plaster.#nGain 1 Speed.#y#r1-2#tYou're buried in debris.#nTake 1 die of physical damage.#y#r0#tYou're buried in debris.#nTake 2 dice of physical damage.#yIf you're buried, you can't do anything until you're freed. Once during any explorer's turn (including you), they can attempt a Might roll to free you. A 4+ succeeds. After 3 unsuccessful attempts, you break free automatically. Discard this event once freed.",
 		},
 		{
 			id: 2036,
@@ -381,7 +381,7 @@ const betrayal_2e = {
 			id: 2039,
 			type: "event",
 			name: "Funeral",
-			text: "#bYou see an open coffin.#nYou're inside it.#dYou must attempt a Sanity roll:#r4+#tYou blink, and it's gone.#nGain 1 Sanity.#y#r2-3#tThe vision disturbs you.#nLose 1 Sanity.#y#r0-1#tYou're really in that coffin.#nLose 1 Sanity and 1 Might as you dig yourself out. If the Graveyard or the Crypt has been found, put your explorer in one of those rooms (you choose which one).#y",
+			text: "#bYou see an open coffin.#nYou're inside it.#dMake a Sanity roll:#r4+#tYou blink, and it's gone.#nGain 1 Sanity.#y#r2-3#tThe vision disturbs you.#nLose 1 Sanity.#y#r0-1#tYou're really in that coffin.#nLose 1 Sanity and 1 Might as you dig yourself out. If the Graveyard or the Crypt has been found, put your explorer in one of those rooms (you choose which one).#y",
 		},
 		{
 			id: 2040,
@@ -393,19 +393,19 @@ const betrayal_2e = {
 			id: 2041,
 			type: "event",
 			name: "Angry Being",
-			text: "#bIt emerges from the slime on the wall next to you.#dYou must attempt a Speed roll:#r5+#tYou get away. Gain 1 Speed.#y#r2-4#tTake 1 die of mental damage.#y#r0-1#tTake 1 die of mental damage and 1 die of physical damage.#y",
+			text: "#bIt emerges from the slime on the wall next to you.#dMake a Speed roll:#r5+#tYou get away. Gain 1 Speed.#y#r2-4#tTake 1 die of mental damage.#y#r0-1#tTake 1 die of mental damage and 1 die of physical damage.#y",
 		},
 		{
 			id: 2042,
 			type: "event",
 			name: "Bloody Vision",
-			text: "#bThe walls of this room are damp with blood.#nThe blood drips from the ceiling, down the walls, over the furniture, and onto your shoes.#nIn a blink, it is gone.#dYou must attempt a Sanity roll:#r4+#tYou steel yourself. Gain 1 Sanity.#y#r2-3#tLose 1 Sanity.#y#r0-1#tIf an explorer or monster is in your room or an adjacent one, you must attack it (if you can). Choose the explorer with the lowest Might, if possible.#y",
+			text: "#bThe walls of this room are damp with blood.#nThe blood drips from the ceiling, down the walls, over the furniture, and onto your shoes.#nIn a blink, it is gone.#dMake a Sanity roll:#r4+#tYou steel yourself. Gain 1 Sanity.#y#r2-3#tLose 1 Sanity.#y#r0-1#tIf an explorer or monster is in your room or an adjacent one, you must attack it (if you can). Choose the explorer with the lowest Might, if possible.#y",
 		},
 		{
 			id: 2043,
 			type: "event",
 			name: "Burning Man",
-			text: "#bA man on fire runs through the room. His skin bubbles and cracks, falling away from him and leaving a fiery skull that clatters to the ground, bounces, rolls, and disappears.#dYou must attempt a Sanity roll:#r4+#tYou feel a little hot under the collar, but otherwise fine.#nGain 1 Sanity.#y#r2-3#tOut, out, you must get out.#nPut your explorer in the Entrance Hall.#y#r0-1#tYou burst into flames!#nTake 1 die of physical damage. Then take 1 die of mental damage as you put out the flames.#y",
+			text: "#bA man on fire runs through the room. His skin bubbles and cracks, falling away from him and leaving a fiery skull that clatters to the ground, bounces, rolls, and disappears.#dMake a Sanity roll:#r4+#tYou feel a little hot under the collar, but otherwise fine.#nGain 1 Sanity.#y#r2-3#tOut, out, you must get out.#nPut your explorer in the Entrance Hall.#y#r0-1#tYou burst into flames!#nTake 1 die of physical damage. Then take 1 die of mental damage as you put out the flames.#y",
 		},
 		{
 			id: 2044,
@@ -554,31 +554,26 @@ const betrayal_2e = {
 	drawItem: () => {
 		// Pick an item from the deck at random.
 		if (state.menu()) { return; }
-		const items = _.filter(state.deck, d => {
-			const c = card.get(d);
-			return c.type == "item" && !c.noDraw;
-		});
+		const items = _.filter(state.deck, d => card.get(d).type == "item");
 		card.draw(items[Math.floor(rand() * items.length)]);
 	},
 
 	drawOmen: () => {
 		// Pick an omen from the deck at random.
 		if (state.menu()) { return; }
-		const omens = _.filter(state.deck, d => {
-			const c = card.get(d);
-			return c.type == "omen" && !c.noDraw;
-		});
+		const omens = _.filter(state.deck, d => card.get(d).type == "omen");
 		card.draw(omens[Math.floor(rand() * omens.length)]);
 	},
 
 	drawEvent: () => {
 		// Pick an event from the deck at random.
 		if (state.menu()) { return; }
-		const events = _.filter(state.deck, d => {
-			const c = card.get(d);
-			return c.type == "event" && !c.noDraw;
-		});
+		const events = _.filter(state.deck, d => card.get(d).type == "event");
 		card.draw(events[Math.floor(rand() * events.length)]);
+
+		if (state.drawnCardId == 2102 && _.some(state.hand, x => x == 1135)) {
+			state.hand.push(1135);
+		}
 	},
 
 	// Render the decks used in the game into #top-content.
