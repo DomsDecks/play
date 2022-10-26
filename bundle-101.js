@@ -1133,7 +1133,7 @@ const betrayal_2e = {
 		const events = _.filter(state.deck, d => card.get(d).type == "event");
 		card.draw(events[Math.floor(rand() * events.length)]);
 
-		if (state.drawnCardId == 2102) {
+		if (state.drawnCardId == 2102 && _.some(state.hand, x => x == 1135)) {
 			state.hand.push(1135);
 		}
 	},
@@ -1438,7 +1438,7 @@ const betrayal_2e_dom = {
 		{
 			id: 1125,
 			type: "item",
-			name: "Nice Trinket",
+			name: "Nice Thingy",
 			text: "#bYou're not sure what it is, but you like it.#dWhile you are in the Pentagram Chamber, Laboratory or Caverns, you may fondle this to reassure yourself and gain 1 Sanity.#n#nThis does not end your turn and you may continue to move if possible.#nDiscard this item after you use it.",
 		},
 		{
@@ -1462,7 +1462,7 @@ const betrayal_2e_dom = {
 		{
 			id: 1129,
 			type: "item",
-			name: "Sledgehammer ",
+			name: "Sledgehammer",
 			text: "#bIt's hammer time.#dOnce during your turn, you may destroy an adjacent room. Move everything in that room into the one you are currently in, and shuffle it back into the room stack. You may not use the Sledgehammer on the Foyer, the Basement Landing or the Upstairs Landing.",
 		},
 		{
@@ -1592,7 +1592,7 @@ const betrayal_2e_dom = {
 		{
 			id: 2114,
 			type: "event",
-			name: "Flagilation",
+			name: "Self-Flagellation",
 			text: "#b<i>\"We are all sinners in the eyes of the lord.\"</i>#dA man kneels before you, whipping his back until it's raw. He invites you to join him in his act of penitence.#n#n#bYOU MUST CHOOSE...#dJoin him and absolve yourself of you sins. Gain 1 die of Sanity and take 1 physical damage.#cBack away and leave this freak alone.",
 		},
 		{
@@ -1618,7 +1618,6 @@ const betrayal_2e_dom = {
 			type: "event",
 			name: "Wake Up",
 			text: "Rain lashes down outside. A broken mirror repairs itself before you eyes. Upon touching the mirror, reality starts to fall apart. You feel a force on the back of your skull, not pulling you backwards, but pulling you out of this world. Gasping and spluttering you wake up in a gooey pod on an impossibly tall tower. Lightning crackles as countless human bodies are harvested for their energy by ruthless machines. As a spider-bot approaches, you panic and jab the headjack back into your brain, lie down and pretend to be asleep. You're back in the house, and hopefully your little awakening wasn't noticed by our A.I. overlords.#n#n#bYOU MUST CHOOSE...#dRemember that the air you're breathing isn't real. Gain 1 Speed.#cForget about what happened to you. Trust in your perception of reality and gain 1 Sanity.",
-			noArt: true,
 		},
 		{
 			id: 2119,
@@ -1672,7 +1671,7 @@ const betrayal_2e_dom = {
 			id: 2127,
 			type: "event",
 			name: "Crone's Riddle",
-			text: "#bRiddle me this, you young whippersnapper.#dYou are accosted by an impossibly old woman, leaning heavily on a walking stick and hunched over so far she faces the ground instead of you. <i>\"You younger folks aren't wise enough, I say. Can you prove yourself to me? Aheh heh heh? Answer my riddle or prepare for a damn good thrashing.\"</i> Make a Knowledge roll:#r4+#tIn a battle of wits, you exchange riddles and come out on top. She dies. You walk away.#r0-3#tShe humiliates you with tricksy riddles and you are wallopped. Talke 1 physical damage.#y",
+			text: "#bRiddle me this.#dYou are accosted by an impossibly old woman, leaning heavily on a walking stick and hunched over so far she faces the ground instead of you. <i>\"You younger folks aren't wise enough, I say. Can you prove yourself to me? Aheh heh heh? Answer my riddle or prepare for a damn good thrashing.\"</i> Make a Knowledge roll:#r4+#tIn a battle of wits, you exchange riddles and come out on top. She dies. You walk away.#y#r0-3#tShe humiliates you with tricksy riddles and you are wallopped. Talke 1 physical damage.#y",
 		},
 		{
 			id: 2128,
