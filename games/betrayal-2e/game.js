@@ -11,8 +11,9 @@ const betrayal_2e = {
 		.concat(_.map(_.filter(game.cards, c => !c.noArt), c => c.asset || c.name))),
 
 	text: {
-		deck: "Shuffle back into stack",
+		deck: "<i class='material-icons'>layers</i> Shuffle back into stack",
 		haunt: "Make a haunt roll now.",
+		trinket: "Draw a Trinket",
 	},
 
 	// All cards in the game.
@@ -63,7 +64,7 @@ const betrayal_2e = {
 			id: 1008,
 			type: "item",
 			name: "Dynamite",
-			text: "#bThe fuse isn't lit... yet.#dInstead of attacking, you can throw the Dynamite through a connecting door into an adjacent room. Each explorer and monster with Might and Speed traits in that room must attempt a Speed roll:#r5+#tTake no damage from Dynamite.#y#r0-4#tTake 4 points of physical damage.#yDiscard this item after you use it.",
+			text: "#bThe fuse isn't lit... yet.#dInstead of attacking, you can throw the Dynamite through a connecting door into an adjacent room. Each explorer and monster with Might and Speed traits in that room must make a Speed roll:#r5+#tTake no damage from Dynamite.#y#r0-4#tTake 4 points of physical damage.#yDiscard this item after you use it.",
 		},
 		{
 			id: 1009,
@@ -81,7 +82,7 @@ const betrayal_2e = {
 			id: 1011,
 			type: "item",
 			name: "Medical Kit",
-			text: "#bA doctor's bag, depleted in some critical resources.#d Once during your turn, you can attempt a Knowledge roll to heal yourself or another explorer in the same room:#r8+#tGain up to 3 points of physical traits.#y#r6-7#tGain up to 2 points of physical traits.#y#r4-5#tGain 1 point in a physical trait.#y#r0-3#tNothing happens.#yYou can't raise a trait above its starting value with the Medical Kit.",
+			text: "#bA doctor's bag, depleted in some critical resources.#d Once during your turn, you can make a Knowledge roll to heal yourself or another explorer in the same room:#r8+#tGain up to 3 points of physical traits.#y#r6-7#tGain up to 2 points of physical traits.#y#r4-5#tGain 1 point in a physical trait.#y#r0-3#tNothing happens.#yYou can't raise a trait above its starting value with the Medical Kit.",
 		},
 		{
 			id: 1012,
@@ -93,7 +94,7 @@ const betrayal_2e = {
 			id: 1013,
 			type: "item",
 			name: "Revolver",
-			text: "#bAn old, potent-looking weapon.#dYou can use this <i>weapon</i> to attack with Speed instead of Might. (Your opponent then defends with Speed and takes physical damage.)#n#nRoll 1 additional die on your Speed attack roll (maximum of 8 dice).#n#nWith the Revolver, you can attack anyone in the same room or within line of sight (through an uninterrupted straight line of doors). If you attack someone in another room and lose, you don't take damage.#n#nYou can't use another <i>weapon</i> while you're using this one.",
+			text: "#bAn old, potent-looking weapon.#dYou can use this <i>weapon</i> to attack with Speed instead of Might. (Your opponent then defends with Speed and takes physical damage.) Roll 1 additional die on your Speed attack roll (maximum of 8 dice).#n#nWith the Revolver, you can attack anyone in the same room or within line of sight (through an uninterrupted straight line of doors). If you attack someone in another room and lose, you don't take damage.#n#nYou can't use another <i>weapon</i> while you're using this one.",
 		},
 		{
 			id: 1014,
@@ -111,19 +112,19 @@ const betrayal_2e = {
 			id: 1016,
 			type: "item",
 			name: "Angel Feather",
-			text: "#bA perfect feather fluttering in your hand.#dWhen you attempt a roll of any kind, you can call out a number from 0 to 8. Use that number instead of rolling the dice.#n#nDiscard this item after you use it.",
+			text: "#bA perfect feather fluttering in your hand.#dWhen you make a roll of any kind, you can call out a number from 0 to 8. Use that number instead of rolling the dice.#n#nDiscard this item after you use it.",
 		},
 		{
 			id: 1017,
 			type: "item",
 			name: "Lucky Stone",
-			text: "#bA smooth, ordinary-looking rock. You sense it will bring you good fortune.#dAfter you attempt a roll of any kind, you can rub the stone once to reroll any number of those dice.#n#nDiscard this item after you use it.",
+			text: "#bA smooth, ordinary-looking rock. You sense it will bring you good fortune.#dAfter you make a roll of any kind, you can rub the stone once to reroll any number of those dice.#n#nDiscard this item after you use it.",
 		},
 		{
 			id: 1018,
 			type: "item",
 			name: "Puzzle Box",
-			text: "#bThere must be a way to open it.#dOnce during your turn, you can attempt a Knowledge roll to open the box:#r6+#tYou open the box. Draw 2 item cards and discard the Puzzle Box.#y#r0-5#tYou just can't get it open.#y",
+			text: "#bThere must be a way to open it.#dOnce during your turn, you can make a Knowledge roll to open the box:#r6+#tYou open the box. Draw 2 item cards and discard the Puzzle Box.#y#r0-5#tYou just can't get it open.#y",
 		},
 		{
 			id: 1019,
@@ -141,13 +142,13 @@ const betrayal_2e = {
 			id: 1021,
 			type: "item",
 			name: "Bell",
-			text: "#bA brass bell that makes a resonant clang.#dGain 1 Sanity now.#n#nLose 1 Sanity if you lose the Bell.#n#nOnce during your turn after the haunt is revealed, you can attempt a Sanity roll to use the Bell:#r5+#tMove any number of unimpeded heroes 1 space closer to you.#y#r0-4#tThe traitor can move any number of monsters 1 space closer to you. (If you are the traitor, this result has no effect.) If there is no traitor, all monsters move 1 space closer to you.#y",
+			text: "#bA brass bell that makes a resonant clang.#dGain 1 Sanity now.#n#nLose 1 Sanity if you lose the Bell.#n#nOnce during your turn after the haunt is revealed, you can make a Sanity roll to use the Bell:#r5+#tMove any number of unimpeded heroes 1 space closer to you.#y#r0-4#tThe traitor can move any number of monsters 1 space closer to you. (If you are the traitor, this result has no effect.) If there is no traitor, all monsters move 1 space closer to you.#y",
 		},
 		{
 			id: 1022,
 			type: "item",
 			name: "Adrenaline Shot",
-			text: "#bA syringe containing a strange fluorescent liquid.#dBefore you attempt a trait roll, you can use this item to add 4 to the result of that roll.#n#nDiscard this item after you use it.",
+			text: "#bA syringe containing a strange fluorescent liquid.#dBefore you make a trait roll, you can use this item to add 4 to the result of that roll.#n#nDiscard this item after you use it.",
 		},
 		{
 			id: 2001,
@@ -171,7 +172,7 @@ const betrayal_2e = {
 			id: 2004,
 			type: "event",
 			name: "Webs",
-			text: "#bCasually, you reach up to brush some webs aside... but they won't brush away. They cling.#dMake a Might roll:#r4+#tYou break free. Gain 1 Might and discard this card.#y#r0-3#tYou're stuck. Keep this card.#yIf you're stuck, you can't do anything until you're freed. Once during any explorer's turn (including you), they can attempt a Might roll to free you. A 4+ succeeds, but you don't gain the 1 Might. Anyone failing an attempt can't move for the rest of that turn. After 3 unsuccessful attempts, you break free automatically. Discard this event once freed.",
+			text: "#bCasually, you reach up to brush some webs aside... but they won't brush away. They cling.#dMake a Might roll:#r4+#tYou break free. Gain 1 Might and discard this card.#y#r0-3#tYou're stuck. Keep this card.#yIf you're stuck, you can't do anything until you're freed. Once during any explorer's turn (including you), they can make a Might roll to free you. A 4+ succeeds, but you don't gain the 1 Might. Anyone failing a roll can't move for the rest of that turn. After 3 unsuccessful attempts, you break free automatically. Discard this event once freed.",
 		},
 		{
 			id: 2005,
@@ -183,13 +184,13 @@ const betrayal_2e = {
 			id: 2006,
 			type: "event",
 			name: "Silence",
-			text: "#bUnderground, everything goes silent. Even the sound of breathing is gone.#dEach explorer in the basement must attempt a Sanity roll.#r4+#tYou wait calmly for your hearing to return.#y#r1-3#tYou scream a silent scream.#nTake 1 die of mental damage.#y#r0#tYou freak out.#nTake 2 dice of mental damage.#y",
+			text: "#bUnderground, everything goes silent. Even the sound of breathing is gone.#dEach explorer in the basement must make a Sanity roll.#r4+#tYou wait calmly for your hearing to return.#y#r1-3#tYou scream a silent scream.#nTake 1 die of mental damage.#y#r0#tYou freak out.#nTake 2 dice of mental damage.#y",
 		},
 		{
 			id: 2007,
 			type: "event",
 			name: "Skeletons",
-			text: "#bMother and child, still embracing.#dPut the Skeletons token in this room.#nTake 1 die of mental damage.#n#nOnce during an explorer's turn, if they are in this room, they can attempt a Sanity roll to search the Skeletons:#r5+#tDraw an item card.#nRemove the Skeletons token.#y#r0-4#tYou dig around, but find nothing.#nTake 1 die of mental damage.#y",
+			text: "#bMother and child, still embracing.#dPut the Skeletons token in this room.#nTake 1 die of mental damage.#n#nOnce during an explorer's turn, if they are in this room, they can make a Sanity roll to search the Skeletons:#r5+#tDraw an item card.#nRemove the Skeletons token.#y#r0-4#tYou dig around, but find nothing.#nTake 1 die of mental damage.#y",
 		},
 		{
 			id: 2008,
@@ -201,7 +202,7 @@ const betrayal_2e = {
 			id: 2009,
 			type: "event",
 			name: "Something hidden",
-			text: "#bThere's something odd about this room, but what? It's tickling the back of your mind.#dIf you want to try to figure out what's odd, attempt a Knowledge roll:#r4+#tA section of wall slides away, revealing an alcove. Draw an item card.#y#r0-3#tYou can't figure it out, and that makes you a bit crazy.#nLose 1 Sanity.#y",
+			text: "#bThere's something odd about this room, but what? It's tickling the back of your mind.#dIf you want to try to figure out what's odd, make a Knowledge roll:#r4+#tA section of wall slides away, revealing an alcove. Draw an item card.#y#r0-3#tYou can't figure it out, and that makes you a bit crazy.#nLose 1 Sanity.#y",
 		},
 		{
 			id: 2010,
@@ -213,13 +214,13 @@ const betrayal_2e = {
 			id: 2011,
 			type: "event",
 			name: "Spider",
-			text: "#bA spider the size of a fist lands on your shoulder... and crawls into your hair.#dMake a Speed roll to brush it away or a Sanity roll to stand still:#r4+#tIt's gone. Gain 1 in the trait you used to attempt this roll.#y#r1-3#tIt bites you. Take 1 die of physical damage.#y#r0#tIt takes a chunk out of you.#nTake 2 dice of physical damage.#y",
+			text: "#bA spider the size of a fist lands on your shoulder... and crawls into your hair.#dMake a Speed roll to brush it away or a Sanity roll to stand still:#r4+#tIt's gone. Gain 1 in the trait you used to make this roll.#y#r1-3#tIt bites you. Take 1 die of physical damage.#y#r0#tIt takes a chunk out of you.#nTake 2 dice of physical damage.#y",
 		},
 		{
 			id: 2012,
 			type: "event",
 			name: "The Beckoning",
-			text: "#bOutside.#nYou must get outside.#nFly to freedom!#dEach explorer in the Gardens, Graveyard, Tower, on the Balcony, or in a room with an outside-facing window must attempt a Sanity roll:#r3+#tYou back away from the ledge.#y#r0-2#tYou jump to the Patio. (If it isn't in the house, search the room stack for it, put it in the house, and shuffle that stack.) Put your explorer there and take 1 die of physical damage.#y",
+			text: "#bOutside.#nYou must get outside.#nFly to freedom!#dEach explorer in the Gardens, Graveyard, Tower, on the Balcony, or in a room with an outside-facing window must make a Sanity roll:#r3+#tYou back away from the ledge.#y#r0-2#tYou jump to the Patio. (If it isn't in the house, search the room stack for it, put it in the house, and shuffle that stack.) Put your explorer there and take 1 die of physical damage.#y",
 		},
 		{
 			id: 2013,
@@ -237,13 +238,13 @@ const betrayal_2e = {
 			id: 2015,
 			type: "event",
 			name: "Posession",
-			text: "#bA shadow separates from the wall. As you stand in shock, the shadow surrounds you and chills you to the core.#dYou must choose any one trait and attempt a roll for that trait:#r4+#tYou resist the shadow's corruption. Gain 1 in a trait of your choice.#y#r0-3#tThe shadow drains your energy. The chosen trait drops to its lowest value. (It doesn't drop to the skull.) If that trait is already at its lowest value, lower a different trait to its lowest value.#y",
+			text: "#bA shadow separates from the wall. As you stand in shock, the shadow surrounds you and chills you to the core.#dYou must choose any one trait and make a roll for that trait:#r4+#tYou resist the shadow's corruption. Gain 1 in a trait of your choice.#y#r0-3#tThe shadow drains your energy. The chosen trait drops to its lowest value. (It doesn't drop to the skull.) If that trait is already at its lowest value, lower a different trait to its lowest value.#y",
 		},
 		{
 			id: 2016,
 			type: "event",
 			name: "Revolving Wall",
-			text: "#bThe wall spins to another place.#dPlace the Wall Switch token on a solid wall or corner of this room, draw a room tile for this floor and place it on the other side, then put your explorer in that room. (Discard this card if it's not possible.)#n#nOnce during an explorer's turn, they can can attempt a Knowledge roll to find the Wall Switch from either side:#r3+#tThat explorer finds the hidden switch and moves to the other room. This doesn't count as moving a space.#y#r0-2#tThat explorer can't find the hidden switch and can't go through.#y",
+			text: "#bThe wall spins to another place.#dPlace the Wall Switch token on a solid wall or corner of this room, draw a room tile for this floor and place it on the other side, then put your explorer in that room. (Discard this card if it's not possible.)#n#nOnce during an explorer's turn, they can can make a Knowledge roll to find the Wall Switch from either side:#r3+#tThat explorer finds the hidden switch and moves to the other room. This doesn't count as moving a space.#y#r0-2#tThat explorer can't find the hidden switch and can't go through.#y",
 		},
 		{
 			id: 2017,
@@ -267,37 +268,37 @@ const betrayal_2e = {
 			id: 2020,
 			type: "event",
 			name: "Shrieking Wind",
-			text: "#bThe wind picks up, a slow crescendo to a screeching howl.#dEach explorer in the Gardens, Graveyard, Patio, Tower, on the Balcony, or in a room with an outside-facing window, must attempt a Might roll:#r5+#tYou keep your footing.#y#r3-4#tThe wind knocks you down.#nTake 1 die of physical damage.#y#r1-2#tThe wind chills your soul.#nTake 1 die of mental damage.#y#r0#tThe wind knocks you down hard. Discard one of your items, or if you don't have any, take 1 die of physical damage.#y",
+			text: "#bThe wind picks up, a slow crescendo to a screeching howl.#dEach explorer in the Gardens, Graveyard, Patio, Tower, on the Balcony, or in a room with an outside-facing window, must make a Might roll:#r5+#tYou keep your footing.#y#r3-4#tThe wind knocks you down.#nTake 1 die of physical damage.#y#r1-2#tThe wind chills your soul.#nTake 1 die of mental damage.#y#r0#tThe wind knocks you down hard. Discard one of your items, or if you don't have any, take 1 die of physical damage.#y",
 		},
 		{
 			id: 2021,
 			type: "event",
-			name: "Jonah's Turn", // TODO: Puzzle box will get rarer, so include another item or two in this.
-			text: "#bTwo boys are playing with a wooden top. <i>\"Would you like a turn, Jonah?\"</i> one asks.#n#n<i>\"No,\"</i> says Jonah, <i>\"I want all the turns.\"</i> Jonah takes the top and hits the other boy in the face. The boy falls. Jonah keeps hitting him as they fade from view.#dIf an explorer has the Puzzle Box, that explorer discards that item and draws a replacement item for it. If this happens, you gain 1 Sanity; otherwise, you take 1 die of mental damage.",
+			name: "Jonah's Turn",
+			text: "#bTwo boys are playing with a wooden top. <i>\"Would you like a turn, Jonah?\"</i> one asks.#n#n<i>\"No,\"</i> says Jonah, <i>\"I want all the turns.\"</i> Jonah takes the top and hits the other boy in the face. The boy falls. Jonah keeps hitting him as they fade from view.#dIf an explorer has the Puzzle Box or Nice Thingy, that explorer discards that item and draws a replacement item for it. If this happens, you gain 1 Sanity; otherwise, you take 1 die of mental damage.",
 		},
 		{
 			id: 2022,
 			type: "event",
-			name: "Lights Out", // TODO: Candle will get rarer, so include another item or two in this.
-			text: "#bYour flashlight goes out.#nDon't worry, someone else has batteries.#dKeep this card. You can move only 1 space each turn until you end your turn in the same room as another explorer. At the end of that turn, discard this card. Then you can move normally again.#n#nIf you have the Candle or end your turn in the Furnace Room, discard this card.",
+			name: "Lights Out",
+			text: "#bYour flashlight goes out.#nDon't worry, someone else has batteries.#dKeep this card. You can move only 1 space each turn until you end your turn in the same room as another explorer. At the end of that turn, discard this card. Then you can move normally again.#n#nIf you have the Candle or Map, or end your turn in the Furnace Room, discard this card.",
 		},
 		{
 			id: 2023,
 			type: "event",
 			name: "Locked Safe",
-			text: "#bBehind a portrait is a wall safe.#nIt is trapped, of course.#dPut the Safe token in this room.#n#nOnce during an explorer's turn, that explorer can attempt a Knowledge roll to open the Safe:#r5+#tDraw 2 item cards and remove the Safe token.#y#r2-4#tTake 1 die of physical damage.#nThe Safe won't open.#y#r0-1#tTake 2 dice of physical damage.#nThe Safe won't open.#y",
+			text: "#bBehind a portrait is a wall safe.#nIt is trapped, of course.#dPut the Safe token in this room.#n#nOnce during an explorer's turn, that explorer can make a Knowledge roll to open the Safe:#r5+#tDraw 2 item cards and remove the Safe token.#y#r2-4#tTake 1 die of physical damage.#nThe Safe won't open.#y#r0-1#tTake 2 dice of physical damage.#nThe Safe won't open.#y",
 		},
 		{
 			id: 2024,
 			type: "event",
 			name: "Mists from the Walls",
-			text: "#bMists pour out from the walls.#nThere are faces in the mist, human and... inhuman.#dEach explorer in the basement must attempt a Sanity roll:#r4+#tThe faces are tricks of light and shadow. All is well.#y#r1-3#tTake 1 die of mental damage (and 1 additional die of damage if that explorer is in a room with an event symbol).#y#r0#tTake 1 die of mental damage (and 2 additional dice of damage if that explorer is in a room with an event symbol).#y",
+			text: "#bMists pour out from the walls.#nThere are faces in the mist, human and... inhuman.#dEach explorer in the basement must make a Sanity roll:#r4+#tThe faces are tricks of light and shadow. All is well.#y#r1-3#tTake 1 die of mental damage (and 1 additional die of damage if that explorer is in a room with an event symbol).#y#r0#tTake 1 die of mental damage (and 2 additional dice of damage if that explorer is in a room with an event symbol).#y",
 		},
 		{
 			id: 2025,
 			type: "event",
 			name: "Mystic Slide",
-			text: "#bPASS TO THE LEFT IF YOU'RE IN THE BASEMENT.#n#nThe floor falls from under you.#dPlace the Slide token in this room, then attempt a Might roll to use the Slide.#r5+#tYou control the Slide. Move to any explored room on any floor below.#y#r0-4#tMove to a new basement room, or choose a basement room if none are left in the stack. You fall to that room and take 1 die of physical damage. If it's not your turn, don't draw a card for that room.#yKeep this card. Any explorer can attempt this roll to use the Slide.",
+			text: "#bPASS TO THE LEFT IF YOU'RE IN THE BASEMENT.#n#nThe floor falls from under you.#dPlace the Slide token in this room, then make a Might roll to use the Slide.#r5+#tYou control the Slide. Move to any explored room on any floor below.#y#r0-4#tMove to a new basement room, or choose a basement room if none are left in the stack. You fall to that room and take 1 die of physical damage. If it's not your turn, don't draw a card for that room.#yKeep this card. Any explorer can make this roll to use the Slide.",
 		},
 		{
 			id: 2026,
@@ -321,7 +322,7 @@ const betrayal_2e = {
 			id: 2029,
 			type: "event",
 			name: "Hideous Shriek",
-			text: "#bIt starts like a whisper, but ends in a soul-rending shriek.#dEach explorer must attempt a Sanity roll:#r4+#tYou resist the sound.#y#r1-3#tTake 1 die of mental damage.#y#r0#tTake 2 dice of mental damage.#y",
+			text: "#bIt starts like a whisper, but ends in a soul-rending shriek.#dEach explorer must make a Sanity roll:#r4+#tYou resist the sound.#y#r1-3#tTake 1 die of mental damage.#y#r0#tTake 2 dice of mental damage.#y",
 		},
 		{
 			id: 2030,
@@ -350,14 +351,14 @@ const betrayal_2e = {
 		{
 			id: 2034,
 			type: "event",
-			name: "Creepy Puppet", // TODO: Add another item to affect.
-			text: "#bYou see one of those dolls that give you the willies.#nIt jumps at you with a tiny spear.#dThe player on your right rolls a Might 4 attack for the Creepy Puppet. You defend against this attack as normal, by rolling dice equal to your Might.#n#nIf you take any damage from this attack, the explorer with the Spear gains 2 Might (unless you have the Spear).",
+			name: "Creepy Puppet",
+			text: "#bYou see one of those dolls that give you the willies.#nIt jumps at you with a tiny spear.#dThe player on your right rolls a Might 4 attack for the Creepy Puppet. You defend against this attack as normal, by rolling dice equal to your Might.#n#nIf you take any damage from this attack, explorers with the Spear or Pitchfork gain 2 Might (except for you).",
 		},
 		{
 			id: 2035,
 			type: "event",
 			name: "Debris",
-			text: "#bPlaster falls from the walls and ceiling.#dMake a Speed roll:#r3+#tYou dodge the plaster.#nGain 1 Speed.#y#r1-2#tYou're buried in debris.#nTake 1 die of physical damage.#y#r0#tYou're buried in debris.#nTake 2 dice of physical damage.#yIf you're buried, you can't do anything until you're freed. Once during any explorer's turn (including you), they can attempt a Might roll to free you. A 4+ succeeds. After 3 unsuccessful attempts, you break free automatically. Discard this event once freed.",
+			text: "#bPlaster falls from the walls and ceiling.#dMake a Speed roll:#r3+#tYou dodge the plaster.#nGain 1 Speed.#y#r1-2#tYou're buried in debris.#nTake 1 die of physical damage.#y#r0#tYou're buried in debris.#nTake 2 dice of physical damage.#yIf you're buried, you can't do anything until you're freed. Once during any explorer's turn (including you), they can make a Might roll to free you. A 4+ succeeds. After 3 unsuccessful attempts, you break free automatically. Discard this event once freed.",
 		},
 		{
 			id: 2036,
@@ -453,7 +454,7 @@ const betrayal_2e = {
 			id: 3006,
 			type: "omen",
 			name: "Mask",
-			text: "#bA somber mask to hide your intentions.#dOnce during your turn, you can attempt a Sanity roll to use the Mask:#r4+#tYou can put on or take off the Mask.#yIf you put on the Mask, gain 2 Knowledge and lose 2 Sanity.#n#nIf you take off the Mask, gain 2 Sanity and lose 2 Knowledge.#r0-3#tYou can't use the Mask this turn.#y",
+			text: "#bA somber mask to hide your intentions.#dOnce during your turn, you can make a Sanity roll to use the Mask:#r4+#tYou can put on or take off the Mask.#yIf you put on the Mask, gain 2 Knowledge and lose 2 Sanity.#n#nIf you take off the Mask, gain 2 Sanity and lose 2 Knowledge.#r0-3#tYou can't use the Mask this turn.#y",
 		},
 		{
 			id: 3007,
@@ -483,7 +484,7 @@ const betrayal_2e = {
 			id: 3011,
 			type: "omen",
 			name: "Crystal Ball",
-			text: "#bHazy images appear in the glass.#dOnce during your turn during the haunt, you can attempt a Knowledge roll to predict the future:#r4+#tYou see the truth. Draw up to 3 cards from the event stack. For each card, either shuffle it back into the stack or choose to stop drawing and discard it. The next event card anyone draws, is your chosen card. (They can use the <i class='material-icons'>search</i> button to find it.)#y#r1-3#tYou avert your eyes. Lose 1 Sanity.#y#r0#tYou stare into Hell. Lose 2 Sanity.#y",
+			text: "#bHazy images appear in the glass.#dOnce during your turn during the haunt, you can make a Knowledge roll to predict the future:#r4+#tYou see the truth. Draw up to 3 cards from the event stack. For each card, either shuffle it back into the stack or choose to stop drawing and discard it. The next event card anyone draws, is your chosen card. (They can use the <i class='material-icons'>search</i> button to find it.)#y#r1-3#tYou avert your eyes. Lose 1 Sanity.#y#r0#tYou stare into Hell. Lose 2 Sanity.#y",
 		},
 		{
 			id: 3012,
@@ -571,8 +572,8 @@ const betrayal_2e = {
 		const events = _.filter(state.deck, d => card.get(d).type == "event");
 		card.draw(events[Math.floor(rand() * events.length)]);
 
-		if (state.drawnCardId == 2102 && _.some(state.hand, x => x == 1135)) {
-			state.hand.push(1135);
+		if (state.drawnCardId == 2102 && !_.some(state.hand, x => x == 1135)) {
+			card.move(1135, state.hand);
 		}
 	},
 
@@ -709,6 +710,33 @@ const betrayal_2e = {
 			element.append($("<div>")
 				.addClass("card-suffix")
 				.html(betrayal_2e.text.haunt));
+		}
+
+		// Add the trinket button if required. Clunky, but used in a specific scenario.
+		if (c.id == 1127 && _.filter(state.hand, x => x >= 1131 && x <= 1134).length < 4) {
+			element.append($("<div>")
+				.addClass("card-suffix button shadow")
+				.attr("id", "trinket")
+				.html(betrayal_2e.text.trinket)
+				.click(() => {
+					let trinketId = 1131
+					while (trinketId <= 1134) {
+						if (!_.some(state.hand, x => x == trinketId)) {
+							card.move(trinketId, state.hand);
+							break;
+						} else {
+							trinketId++;
+						}
+					}
+					$("#trinket")
+						.css({ "display": "none" });
+					if (_.filter(state.hand, x => x >= 1131 && x <= 1134).length < 4) {
+						setTimeout(() => {
+							$("#trinket")
+								.css({ "display": "" });
+						}, 10000);
+					}
+				}));
 		}
 
 		return element;

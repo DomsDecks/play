@@ -9,13 +9,13 @@ const text = (id) => {
 
 		case "empty": return game.text.empty || "<span>Your hand of cards is empty.<span>";
 
-		case "hand": return game.text.hand || "Keep in your hand";
+		case "hand": return game.text.hand || "<i class='material-icons'>front_hand</i> Keep in your hand";
 
-		case "deck": return game.text.deck || "Shuffle back into deck";
+		case "deck": return game.text.deck || "<i class='material-icons'>layers</i> Shuffle back into deck";
 
-		case "discard": return game.text.discard || "Place on discard pile";
+		case "discard": return game.text.discard || "<i class='material-icons'>delete</i> Place on discard pile";
 
-		case "discardCancel": return game.text.discardCancel || "Leave in discard pile";
+		case "discardCancel": return game.text.discardCancel || "<i class='material-icons'>delete</i> Leave in discard pile";
 
 		case "up": return game.text.up || "<i class='material-icons'>keyboard_arrow_up</i>";
 

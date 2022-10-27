@@ -75,8 +75,8 @@ const betrayal_2e_dom = {
 		{
 			id: 1111,
 			type: "item",
-			name: "Map",// TODO search for haunt and exlplor and make sure the phase names and character names are correct.
-			text: "#bI solemnly swear I am going to be naughty.#dAt the start of your turn, and only during the exploration phase, you may draw a tile and place it adjacent to the room you are currently in.#n#nIf it contains an omen, take 1 mental damage and then enter it and follow it's rules.#n#nOtherwise, you may choose to either gain one knowledge and end your turn, or enter the room and follow it's rules.#nIf you do not enter the room, the next player to enter it does not draw it's card. It is considered discovered already.",
+			name: "Map",
+			text: "#bI solemnly swear I am going to be naughty.#dAt the start of your turn, and only before the haunt has been revealed, you may draw a tile and place it adjacent to the room you are currently in.#n#nIf it contains an omen, take 1 mental damage and then enter it and follow it's rules.#n#nOtherwise, you may choose to either gain one knowledge and end your turn, or enter the room and follow it's rules.#nIf you do not enter the room, the next explorer to enter it does not draw it's card. It is considered discovered already.",
 		},
 		{
 			id: 1112,
@@ -234,6 +234,20 @@ const betrayal_2e_dom = {
 			noDeck: true,
 		},
 		{
+			id: 1136,
+			type: "item",
+			name: "Pitchfork",
+			text: "#bIn a pinch, this could be useful for stabbing.#dYou roll 1 additional dice (maximum of 8 dice) when making a Might attack with this <i>weapon</i>. When you do so, move to an adjacent explored room.#n#nYou can't use another weapon while you're using this one.",
+		},
+		{
+			id: 1137,
+			type: "item",
+			name: "Blunderbuss",
+			text: "#bThis is my boomstick.#dYou can use this <i>weapon</i> to attack with Speed instead of Might. (Your opponent then defends with Speed and takes physical damage.) Roll 1 additional die on your Speed attack roll (maximum of 8 dice).#n#nWith the Blunderbuss, you can't attack anyone in the same room, but you can attack anyone in another room within line of sight (through an uninterrupted straight line of doors). If you attack someone and lose, you don't take damage.#n#nYou can't use another weapon while you're using this one.",
+			noDraw: true,
+			noDeck: true,
+		},
+		{
 			id: 2101,
 			type: "event",
 			name: "Gelevator's Curse",
@@ -381,13 +395,13 @@ const betrayal_2e_dom = {
 			id: 2125,
 			type: "event",
 			name: "Shambling Hoarder",
-			text: "#bShuffle... Jangle... Moan...#dYou come across a hunched figure with leathery skin, grey eyes and a vacant expression, slowly hobbling through the house weighed down by a cloak covered in overflowing pockets. You may choose to attempt a Speed roll to pickpocket them.#r3+#tYou deftly steal an item and get away. Draw an item card.#y#r0-2#tThe moment you touch it's treasure, the hoarder spins around. But it doesn't do anything else. It just stares at you with it's blank eyes until you back away. Take 2 mental damage.#y",
+			text: "#bShuffle... Jangle... Moan...#dYou come across a hunched figure with leathery skin, grey eyes and a vacant expression, slowly hobbling through the house weighed down by a cloak covered in overflowing pockets. You may choose to make a Speed roll to pickpocket them.#r3+#tYou deftly steal an item and get away. Draw an item card.#y#r0-2#tThe moment you touch it's treasure, the hoarder spins around. But it doesn't do anything else. It just stares at you with it's blank eyes until you back away. Take 2 mental damage.#y",
 		},
 		{
 			id: 2126,
 			type: "event",
 			name: "Evangelical Botherers",
-			text: "#bHave you heard the story of Alberto? He Turned fish into wine!#dThey won't leave you alone. You'll have to attempt a Speed roll:#r4+#tYou get away, move 2 spaces to a room that has already been discovered.#y#r0-3#tThey pin you down and make you read a pamphlet about how you're bound for internal damnation. Take 1 mental damage.#y",
+			text: "#bHave you heard the story of Alberto? He Turned fish into wine!#dThey won't leave you alone. You'll have to make a Speed roll:#r4+#tYou get away, move 2 spaces to a room that has already been discovered.#y#r0-3#tThey pin you down and make you read a pamphlet about how you're bound for internal damnation. Take 1 mental damage.#y",
 		},
 		{
 			id: 2127,
@@ -442,6 +456,18 @@ const betrayal_2e_dom = {
 			type: "event",
 			name: "Death of the Witch",
 			text: "#bOne less siren to seduce you?#dAhead you hear a thumping and gargling noise. It's a woman frothing at the mouth and writing on the floor, her long black hair tangled around her pretty face as she struggles. She's been poisoned and there's nothing you can do to save her. Unexpectedly, you feel glad. A feeling in your gut tells you that the poison is working to eradicate an evil force, not just from her body but from this place in general. She is dead.#n#nIf there have been no such other sightings, gain 1 Sanity. Otherwise, lose 1 Sanity.",
+		},
+		{
+			id: 2136,
+			type: "event",
+			name: "Peer Pressure",
+			text: "#bAll the cool people are doing it.#dEveryone you respect has starting doing this new thing: <i>flooping</i>. You don't know much about it but you don't want to miss out. It's all everyone is talking about, and if you don't do it, then you can't be part of the conversation.#n#n#bYOU MUST CHOOSE...#dFloop. Gain 1 die of Speed and take 1 mental damage.#cDo not floop.",
+		},
+		{
+			id: 2137,
+			type: "event",
+			name: "Treasure Chest",
+			text: "#bIt's locked up tight.#dYou find an ornate treasure chest that is bound to have a cool item inside. But to open it, you'll have to whack the padlock with something heavy. Make a Might roll:#r4+#tIt opens and you loot the hell out of it. Draw an item card.#y#r0-3#tYou are not stong enough to open it. Drat.#y",
 		},
 	]),
 
