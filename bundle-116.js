@@ -1550,8 +1550,6 @@ const betrayal_2e_dom = {
 			type: "item",
 			name: "Blunderbuss",
 			text: "#bThis is my boomstick.#dYou can use this <i>weapon</i> to attack with Speed instead of Might. (Your opponent then defends with Speed and takes physical damage.) Roll 1 additional die on your Speed attack roll (maximum of 8 dice).#n#nWith the Blunderbuss, you can't attack anyone in the same room, but you can attack anyone in another room within line of sight (through an uninterrupted straight line of doors). If you attack someone and lose, you don't take damage.#n#nYou can't use another weapon while you're using this one.",
-			noDraw: true,
-			noDeck: true,
 		},
 		{
 			id: 2101,
