@@ -34,7 +34,7 @@ const betrayal_2e_dom = {
 			id: 1104,
 			type: "item",
 			name: "Frog",
-			text: "#bThis frog seems to hold himself in a distinguished manner.#dOnce per turn you may kiss the Frog and roll 3 dice:#r0-2#tEw, gross.#nTake 1 Physical damage.#y#r3#tThe Frog turns into a prince. How could this have happened? Did your kiss have magic powers or was it the placebo effect?#nGain 1 in every trait and then draw an item card.#nDiscard the prince.#y#r4-6#tEw, gross.#nTake 1 Mental damage.#y",
+			text: "#bThis frog seems to hold himself in a distinguished manner.#dOnce per turn you may kiss the Frog and roll 3 dice:#r4-6#tEw, gross.#nTake 1 Mental damage.#y#r3#tThe Frog turns into a prince. How could this have happened? Did your kiss have magic powers or was it the placebo effect?#nGain 1 in every trait and then draw an item card.#nDiscard the prince.#y#r0-2#tEw, gross.#nTake 1 Physical damage.#y",
 		},
 		{
 			id: 1105,
@@ -131,7 +131,7 @@ const betrayal_2e_dom = {
 			id: 1120,
 			type: "item",
 			name: "Bag of Bees",
-			text: "#bBuzzzzzzz...#dSomeone has left a bag here. The bag is full of bees.#n#nAt the start of your turn you may open it to unleash all the bees. They might be angry and it's probably best to run as fast possible, so gain 2 speed and lose 2 sanity.#n#nDiscard this item after you use it.",
+			text: "#bBuzzzzzzz...#dSomeone has left a bag here. The bag is full of bees. Who would do that?#n#nAt the start of your turn you may open it to unleash all the bees. They might be angry and it's probably best to run as fast possible, so gain 2 speed and lose 2 sanity.#n#nDiscard this item after you use it.",
 		},
 		{
 			id: 1121,
@@ -466,6 +466,18 @@ const betrayal_2e_dom = {
 			type: "event",
 			name: "Treasure Chest",
 			text: "#bIt's locked up tight.#dYou find an ornate treasure chest that is bound to have a cool item inside. But to open it, you'll have to whack the padlock with something heavy. Make a Might roll:#r4+#tIt opens and you loot the hell out of it. Draw an item card.#y#r0-3#tYou are not stong enough to open it. Drat.#y",
+		},
+		{
+			id: 2138,
+			type: "event",
+			name: "Slugs",
+			text: "#bSilent killers. Once you see them, it's already too late.#dFirst you notice there are slugs on the floor.#nThen you notice there are slugs on the walls.#nThen you notice there are slugs on your clothes.#nThen you notice there are slugs on your face.#n#nLose 1 Might.",
+		},
+		{
+			id: 2139,
+			type: "event",
+			name: "Encyclopedia Domum",
+			text: "#bIt has everything you need to know, and more!#dThere's an encyclopedia in this room. It contains information about all the secrets of the house. But you're kind of on a mission and will have to read it fast. Make a Speed roll:#r6+#tYou skim read it all. Gain 2 Knowledge.#y#r3-5#tYou flip through the pages reading the headings and looking at the pictures. Gain 1 Knowledge.#y#r0-2#tU R 2 dum. You can't even read an entire encyclopedia in one sitting. Lose 1 Might due to embarrassment.",
 		},
 	]),
 
