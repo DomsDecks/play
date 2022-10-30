@@ -149,7 +149,7 @@ const betrayal_2e_dom = {
 			id: 1123,
 			type: "item",
 			name: "Fresh Kicks",
-			text: "#bA nice pair of shoes.#dWhile you are in the Bedroom, Closet or x, you may put these on to gain 1 Speed.#n#nThis does not end your turn and you may continue to move if possible, taking into account your new speed.#nDiscard this item after you use it.",
+			text: "#bA nice pair of shoes.#dWhile you are in the Bedroom, Closet or Statuary Corridor, you may put these on to gain 1 Speed.#n#nThis does not end your turn and you may continue to move if possible, taking into account your new speed.#nDiscard this item after you use it.",
 		},
 		{
 			id: 1124,
