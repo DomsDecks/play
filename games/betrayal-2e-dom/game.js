@@ -375,7 +375,7 @@ const betrayal_2e_dom = {
 			id: 2122,
 			type: "event",
 			name: "Liminal Space",
-			text: "#bWhere am I?#dAs look around the room, all seems normal. You glance down at your watch, then look up again. The room looks nothing like it did a moment ago, and you find yourself in a totally unfamiliar space.#n#nTake the next basement tile from the deck, except the stairs, and swap it with the tile you thought you were in. Shuffle the old tile (and stairs) back into the deck. Draw a card if necessary.",
+			text: "#bWhere am I?#dAs you look around the room, all seems normal. You glance down at your watch, then look up again. The room looks nothing like it did a moment ago, and you find yourself in a totally unfamiliar space.#n#nTake the next basement tile from the deck, except the stairs, and swap it with the tile you thought you were in. Shuffle the old tile (and stairs) back into the deck. Draw a card if necessary.",
 		},
 		{
 			id: 2123,
@@ -479,9 +479,13 @@ const betrayal_2e_dom = {
 			name: "Encyclopedia Domum",
 			text: "#bIt has everything you need to know, and more!#dThere's an encyclopedia in this room. It contains information about all the secrets of the house. But you're kind of on a mission and will have to read it fast. Make a Speed roll:#r6+#tYou skim read it all. Gain 2 Knowledge.#y#r3-5#tYou flip through the pages reading the headings and looking at the pictures. Gain 1 Knowledge.#y#r0-2#tU R 2 dum. You can't even read an entire encyclopedia in one sitting. Lose 1 Might due to embarrassment.",
 		},
+		{
+			id: 2140,
+			type: "event",
+			name: "Look Up",
+			text: "#bYou feel a tickling sensation on the top of your head. You look up... and see a girl standing on the ceiling!#dShe's staring down at you and her long messy hair is dangling just shy of your face. Before you can react she drops and lands on you. Make a Might or Sanity roll.#r5+#t(Might) You pin her in a chokehold until she goes limp. You step over her body and continue on your way. Gain 1 Sanity.#y#r5+#t(Sanity) You scream at her to go to her room and she stomps out through the door in a huff. Gain 1 Might.#y#r0-4#tShe lays on top of you, unmoving, and you have no choice but to wriggle out from under her and run away.#y",
+		},
 	]),
-
-	// text: "<b>You feel a tickling sensation on the top of your head. You look up... and see a girl standing on the ceiling! She's staring down at you and her long messy hair is dangling just shy of your face. Before you can react she drops and lands on you.</b><br>You must attempt a Might or Sanity roll.<br><b>(Might 5+)</b> You pin her in a chokehold until she goes limp. You step over her body and continue on your way. Gain 1 Sanity.<br><b>(Sanity 5+)</b> You scream at her to go to her room and she stomps out through the door in a huff. Gain 1 Might.",
 
 	// Do the initial shuffling and dividing, and get the game states for each player.
 	startGame: betrayal_2e.startGame,
