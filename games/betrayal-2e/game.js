@@ -40,7 +40,7 @@ const betrayal_2e = {
 			id: 1004,
 			type: "item",
 			name: "Blood Dagger",
-			text: "#bA nasty weapon. Needles and tubes extend from the handle... and plunge right into your veins.#dYou roll 3 additional dice (maximum of 8 dice) when making a Might attack with this <i>weapon</i>. If you do, lose 1 Speed.#n#nYou can't use another <i>weapon</i> while you're using this one.#n#nThis item can't be traded or dropped. If it's stolen, take 2 dice of physical damage.",
+			text: "#bA nasty weapon. Needles and tubes extend from the handle... and plunge right into your veins.#dYou roll 3 additional dice (maximum of 8 dice) when making a Might attack with this <i>weapon</i>. If you do, lose 1 Speed.#n#nYou can't use another <i>weapon</i> while you're using this one.#n#nThis item can't be traded or dropped. If it's stolen or lost in any other way, take 2 dice of physical damage.",
 		},
 		{
 			id: 1005,

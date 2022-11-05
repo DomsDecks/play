@@ -602,7 +602,7 @@ const betrayal_2e = {
 			id: 1004,
 			type: "item",
 			name: "Blood Dagger",
-			text: "#bA nasty weapon. Needles and tubes extend from the handle... and plunge right into your veins.#dYou roll 3 additional dice (maximum of 8 dice) when making a Might attack with this <i>weapon</i>. If you do, lose 1 Speed.#n#nYou can't use another <i>weapon</i> while you're using this one.#n#nThis item can't be traded or dropped. If it's stolen, take 2 dice of physical damage.",
+			text: "#bA nasty weapon. Needles and tubes extend from the handle... and plunge right into your veins.#dYou roll 3 additional dice (maximum of 8 dice) when making a Might attack with this <i>weapon</i>. If you do, lose 1 Speed.#n#nYou can't use another <i>weapon</i> while you're using this one.#n#nThis item can't be traded or dropped. If it's stolen or lost in any other way, take 2 dice of physical damage.",
 		},
 		{
 			id: 1005,
@@ -1388,13 +1388,13 @@ const betrayal_2e_dom = {
 			id: 1112,
 			type: "item",
 			name: "Ravenous Raccoon",
-			text: "#bIt will eat <i>anything</i>.#dOnce at the start of each of your turns, you may feed any other 1 item to this <i>companion</i>. If you do, discard that item and gain 2 in all traits that are 1 level above the skull.#n#nThe Raccoon really likes Walnuts and proposes a trade: additionally draw an item card if you feed it a Walnut.",
+			text: "#bIt will eat <i>anything</i>.#dOnce at the start of each of your turns, you may drop any other 1 item for this <i>companion</i> to eat. If you do, discard that item and gain 2 in all traits that are 1 level above the skull.#n#nThe Raccoon really likes Walnuts and proposes a trade: additionally draw an item card if you feed it a Walnut.",
 		},
 		{
 			id: 1113,
 			type: "item",
 			name: "Gluttonous Gerbil",
-			text: "#bIt's <i>nuts</i> for nuts.#dOnce at the start of each of your turns, you may feed any other 1 item to this <i>companion</i>. If you do, discard that item and gain 1 Sanity#n#nThe Gerbil really likes Walnuts and will be grateful to be fed any. Additionally gain 1 Might, 1 Speed and 1 Knowledge if you feed it a Walnut.",
+			text: "#bIt's <i>nuts</i> for nuts.#dOnce at the start of each of your turns, you may drop any other 1 item for this <i>companion</i> to eat. If you do, discard that item and gain 1 Sanity#n#nThe Gerbil really likes Walnuts and will be grateful to be fed any. Additionally gain 1 Might, 1 Speed and 1 Knowledge if you feed it a Walnut.",
 		},
 		{
 			id: 1114,
@@ -1790,6 +1790,30 @@ const betrayal_2e_dom = {
 			type: "event",
 			name: "Look Up",
 			text: "#bYou feel a tickling sensation on the top of your head. You look up... and see a girl standing on the ceiling!#dShe's staring down at you and her long messy hair is dangling just shy of your face. Before you can react she drops and lands on you. Make a Might or Sanity roll.#r5+#t(Might) You pin her in a chokehold until she goes limp. You step over her body and continue on your way. Gain 1 Sanity.#y#r5+#t(Sanity) You scream at her to go to her room and she stomps out through the door in a huff. Gain 1 Might.#y#r0-4#tShe lays on top of you, unmoving, and you have no choice but to wriggle out from under her and run away.#y",
+		},
+		{
+			id: 1138,
+			type: "item",
+			name: "Screaming Orb",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+		},
+		{
+			id: 1139,
+			type: "item",
+			name: "Screaming Orb",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+		},
+		{
+			id: 1140,
+			type: "item",
+			name: "Screaming Orb",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+		},
+		{
+			id: 1141,
+			type: "item",
+			name: "Screaming Orb",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
 		},
 	]),
 
