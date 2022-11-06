@@ -1340,7 +1340,7 @@ const betrayal_2e_dom = {
 			id: 1104,
 			type: "item",
 			name: "Frog",
-			text: "#bThis frog seems to hold himself in a distinguished manner.#dOnce per turn you may kiss the Frog and roll 3 dice:#r4-6#tEw, gross.#nTake 1 Mental damage.#y#r3#tThe Frog turns into a prince. How could this have happened? Did your kiss have magic powers or was it the placebo effect?#nGain 1 in every trait and then draw an item card.#nDiscard the prince.#y#r0-2#tEw, gross.#nTake 1 Physical damage.#y",
+			text: "#bThis frog seems to hold himself in a distinguished manner.#dOnce per turn you may kiss the Frog and roll 3 dice:#r4-6#tEw, gross.#nTake 1 mental damage.#y#r3#tThe Frog turns into a prince. How could this have happened? Did your kiss have magic powers or was it the placebo effect?#nGain 1 in every trait and then draw an item card.#nDiscard the prince.#y#r0-2#tEw, gross.#nTake 1 physical damage.#y",
 		},
 		{
 			id: 1105,
@@ -1723,7 +1723,7 @@ const betrayal_2e_dom = {
 			id: 2129,
 			type: "event",
 			name: "Panicked Wretch",
-			text: "#bAaaargh. Uuuurgh!#dA granny jumps out from a cranny. She grabs you and screams in your face. There is intense panic in her eyes, but she has no teeth and is unable to tell you what is wrong. Make a Sanity roll:#r4+#tYou manage to calm her down with a combination of hugging and shushing. She gives you a present in gratitude. Draw an item card.#y#r0-3#tShe drops to the floor and wraps her arms around your ankles so tightly that you struggle against her to walk. Take 1 Physical damage.#y",
+			text: "#bAaaargh. Uuuurgh!#dA granny jumps out from a cranny. She grabs you and screams in your face. There is intense panic in her eyes, but she has no teeth and is unable to tell you what is wrong. Make a Sanity roll:#r4+#tYou manage to calm her down with a combination of hugging and shushing. She gives you a present in gratitude. Draw an item card.#y#r0-3#tShe drops to the floor and wraps her arms around your ankles so tightly that you struggle against her to walk. Take 1 physical damage.#y",
 		},
 		{
 			id: 2130,
@@ -1814,6 +1814,24 @@ const betrayal_2e_dom = {
 			type: "item",
 			name: "Screaming Orb",
 			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+		},
+		{
+			id: 2141,
+			type: "item",
+			name: "Incomprehensible Cretin",
+			text: "#bIs this even English?#dYou're accosted by a young man. He uses so much bizarre slang that you're not sure if it's an entirely different language. <i>\"Fancy a splim for yer dingle?\"</i> Make a Knowledge roll:#r5+#tYou reply: \"Mate, ya aching for a whongle and a quongle? Your stank blonch quank!\" He understands you perfectly and smiles as he hands you something. Draw an item card.#y#r0-4#tYou reply: \"Mate, U pongo me dongle?\" He has no idea what you said and looks at you like you're mad.#y",
+		},
+		{
+			id: 2142,
+			type: "item",
+			name: "Cuthbold Boycent",
+			text: "#bWhat is up with this Cuthbold guy?#dYou meet an extremely strange man. Before you can say anything, he manically launches into a story filled with disturbing details about his chaotic life: <i>\"I rescued a pit bull to try and keep my mind away from the bad thoughts.\" \"I just got out of jail, for that little incident in the Sheetz parking lot.\" \"I can't be trusted with my... Urges.\" \"My therapist said I'm the worst case she's ever seen.\"</i> Make a Speed roll:#r5+#tAs he continues to talk, you manage to slip away quietly.#y#r0-4#tHe traps you in the conversation for a long time and you learn many more gross details than you're comfortable with. Lose 1 Sanity.#y",
+		},
+		{
+			id: 2143,
+			type: "item",
+			name: "The Box",
+			text: "#bWhat's in the Box?#dThere's a box here. You are desperate to know what's inside. However, the lid is nailed down and it's someone else's property. Make a Sanity Roll:#r5+#tYou pry open the lid and steal the contents without regret. Draw an Item card.#y#r3-4#tYou raid the box but feel guilty about it. Take 1 mental damage then draw an item card.#y#r0-2#tYou aren't even brave enough to look inside. Take 1 mental damage.#y",
 		},
 	]),
 
