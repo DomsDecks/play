@@ -381,7 +381,7 @@ const betrayal_2e_dom = {
 			id: 2123,
 			type: "event",
 			name: "Trance",
-			text: "#bWhat happened?#dYou suddenly snap to attention, becoming aware that you having been moving through the house without knowing what you were doing. In your hand is a knife, and you don't remember where you picked it up.#n#nThe Knife has been added to your hand. Return to the room where you started your turn. You return there regardless of the distance. Do not move The Mystic Elevator back, even if you used it this turn.",
+			text: "#bWhat happened?#dYou suddenly snap to attention, becoming aware that you have been moving through the house without knowing what you were doing. In your hand is a knife, and you don't remember where you picked it up.#n#nThe Knife has been added to your hand. Return to the room where you started your turn. You return there regardless of the distance. Do not move The Mystic Elevator back, even if you used it this turn.",
 		},
 		{
 			id: 2124,
