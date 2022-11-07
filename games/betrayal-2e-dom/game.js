@@ -405,7 +405,7 @@ const betrayal_2e_dom = {
 			id: 2127,
 			type: "event",
 			name: "Crone's Riddle",
-			text: "#bRiddle me this.#dYou are accosted by an impossibly old woman, leaning heavily on a walking stick and hunched over so far she faces the ground instead of you. <i>\"You younger folks aren't wise enough, I say. Can you prove yourself to me? Aheh heh heh? Answer my riddle or prepare for a damn good thrashing.\"</i> Make a Knowledge roll:#r4+#tIn a battle of wits, you exchange riddles and come out on top. She dies. You walk away.#y#r0-3#tShe humiliates you with tricksy riddles and you are wallopped. Talke 1 physical damage.#y",
+			text: "#bRiddle me this.#dYou are accosted by an impossibly old woman, leaning heavily on a walking stick and hunched over so far she faces the ground instead of you. <i>\"You younger folks aren't wise enough, I say. Can you prove yourself to me? Aheh heh heh? Answer my riddle or prepare for a damn good thrashing.\"</i> Make a Knowledge roll:#r4+#tIn a battle of wits, you exchange riddles and come out on top. She dies. You walk away.#y#r0-3#tShe humiliates you with tricksy riddles and you are wallopped. Take 1 physical damage.#y",
 		},
 		{
 			id: 2128,
