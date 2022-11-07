@@ -364,7 +364,7 @@ const betrayal_2e = {
 			id: 2036,
 			type: "event",
 			name: "Disquieting Sounds",
-			text: "#bA baby's cry, lost and abandoned.#nA scream.#nThe crack of breaking glass.#nThen silence.#dRoll 6 dice. If you roll equal to or more than the number of omens that have been revealed, you gain Sanity. If not, take 1 die of mental damage.#n#n(Note from the editor: aren't all sounds <i>disquieting</i>?)",
+			text: "#bA baby's cry, lost and abandoned.#nA scream.#nThe crack of breaking glass.#nThen silence.#dRoll 6 dice. If you roll equal to or more than the number of omens that have been revealed, you gain 1 Sanity. If not, take 1 die of mental damage.",
 		},
 		{
 			id: 2037,
