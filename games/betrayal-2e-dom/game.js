@@ -173,7 +173,7 @@ const betrayal_2e_dom = {
 			id: 1127,
 			type: "item",
 			name: "Magpie",
-			text: "#bOne for sorrow.#nTwo for joy.#dOnce at the start of each of your turns, you may choose to send this <i>companion</i> out to collect shiny trinkets. You may not move during the turn, but you gain 1 Trinket.#n#nAt any time on your turn, you may release the Magpie from your control, discard it, and draw as many items as you have trinkets, up to a maximum of 4. (You may then discard the trinkets as they are of no use to you.)",
+			text: "#bOne for sorrow.#nTwo for joy.#dOnce at the start of each of your turns, you may choose to send this <i>companion</i> out to collect shiny trinkets. You may not move during the turn, but you gain 1 Trinket.#n#nDuring any of your turns you may release the Magpie from your control, discard it, and draw as many items as you have trinkets, up to a maximum of 4. (You may then discard the trinkets as they are of no use to you.)",
 		},
 		{
 			id: 1128,
