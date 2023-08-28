@@ -556,7 +556,7 @@ const text = (id) => {
 
 		case "x": return game.text.x || "<i class='material-icons'>close</i>";
 
-		case "actions": return game.text.x || "<i class='material-icons'>more_horiz</i>";
+		case "actions": return game.text.actions || "<i class='material-icons'>more_horiz</i>";
 
 	};
 }; 
@@ -926,7 +926,7 @@ const betrayal_2e = {
 			id: 2036,
 			type: "event",
 			name: "Disquieting Sounds",
-			text: "#bA baby's cry, lost and abandoned.#nA scream.#nThe crack of breaking glass.#nThen silence.#dRoll 6 dice. If you roll equal to or more than the number of omens that have been revealed, you gain Sanity. If not, take 1 die of mental damage.#n#n(Note from the editor: aren't all sounds <i>disquieting</i>?)",
+			text: "#bA baby's cry, lost and abandoned.#nA scream.#nThe crack of breaking glass.#nThen silence.#dRoll 6 dice. If you roll equal to or more than the number of omens that have been revealed, you gain 1 Sanity. If not, take 1 die of mental damage.",
 		},
 		{
 			id: 2037,
@@ -1303,7 +1303,8 @@ const betrayal_2e = {
 
 		return element;
 	},
-}; 
+};
+ 
 const betrayal_2e_dom = {
 
 	displayName: "Betrayal at House on the Hill (2nd Edition) (Dom's Expansion)",
@@ -1479,7 +1480,7 @@ const betrayal_2e_dom = {
 			id: 1127,
 			type: "item",
 			name: "Magpie",
-			text: "#bOne for sorrow.#nTwo for joy.#dOnce at the start of each of your turns, you may choose to send this <i>companion</i> out to collect shiny trinkets. You may not move during the turn, but you gain 1 Trinket.#n#nAt any time on your turn, you may release the Magpie from your control, discard it, and draw as many items as you have trinkets, up to a maximum of 4. (You may then discard the trinkets as they are of no use to you.)",
+			text: "#bOne for sorrow.#nTwo for joy.#dOnce at the start of each of your turns, you may choose to send this <i>companion</i> out to collect shiny trinkets. You may not move during the turn, but you gain 1 Trinket.#n#nDuring any of your turns you may release the Magpie from your control, discard it, and draw as many items as you have trinkets, up to a maximum of 4. (You may then discard the trinkets as they are of no use to you.)",
 		},
 		{
 			id: 1128,
@@ -1687,7 +1688,7 @@ const betrayal_2e_dom = {
 			id: 2123,
 			type: "event",
 			name: "Trance",
-			text: "#bWhat happened?#dYou suddenly snap to attention, becoming aware that you having been moving through the house without knowing what you were doing. In your hand is a knife, and you don't remember where you picked it up.#n#nThe Knife has been added to your hand. Return to the room where you started your turn. You return there regardless of the distance. Do not move The Mystic Elevator back, even if you used it this turn.",
+			text: "#bWhat happened?#dYou suddenly snap to attention, becoming aware that you have been moving through the house without knowing what you were doing. In your hand is a knife, and you don't remember where you picked it up.#n#nThe Knife has been added to your hand. Return to the room where you started your turn. You return there regardless of the distance. Do not move The Mystic Elevator back, even if you used it this turn.",
 		},
 		{
 			id: 2124,
@@ -1711,7 +1712,7 @@ const betrayal_2e_dom = {
 			id: 2127,
 			type: "event",
 			name: "Crone's Riddle",
-			text: "#bRiddle me this.#dYou are accosted by an impossibly old woman, leaning heavily on a walking stick and hunched over so far she faces the ground instead of you. <i>\"You younger folks aren't wise enough, I say. Can you prove yourself to me? Aheh heh heh? Answer my riddle or prepare for a damn good thrashing.\"</i> Make a Knowledge roll:#r4+#tIn a battle of wits, you exchange riddles and come out on top. She dies. You walk away.#y#r0-3#tShe humiliates you with tricksy riddles and you are wallopped. Talke 1 physical damage.#y",
+			text: "#bRiddle me this.#dYou are accosted by an impossibly old woman, leaning heavily on a walking stick and hunched over so far she faces the ground instead of you. <i>\"You younger folks aren't wise enough, I say. Can you prove yourself to me? Aheh heh heh? Answer my riddle or prepare for a damn good thrashing.\"</i> Make a Knowledge roll:#r4+#tIn a battle of wits, you exchange riddles and come out on top. She dies. You walk away.#y#r0-3#tShe humiliates you with tricksy riddles and you are wallopped. Take 1 physical damage.#y",
 		},
 		{
 			id: 2128,
@@ -1795,25 +1796,25 @@ const betrayal_2e_dom = {
 			id: 1138,
 			type: "item",
 			name: "Screaming Orb",
-			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage or stealing an item. You may only lose one orb at a time.",
 		},
 		{
 			id: 1139,
 			type: "item",
 			name: "Screaming Orb",
-			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage or stealing an item. You may only lose one orb at a time.",
 		},
 		{
 			id: 1140,
 			type: "item",
 			name: "Screaming Orb",
-			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage or stealing an item. You may only lose one orb at a time.",
 		},
 		{
 			id: 1141,
 			type: "item",
 			name: "Screaming Orb",
-			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage or stealing an item. You may only lose one orb at a time.",
 		},
 		{
 			id: 2141,
@@ -1832,6 +1833,18 @@ const betrayal_2e_dom = {
 			type: "event",
 			name: "The Box",
 			text: "#bWhat's in the Box?#dThere's a box here. You are desperate to know what's inside. However, the lid is nailed down and it's someone else's property. Make a Sanity Roll:#r5+#tYou pry open the lid and steal the contents without regret. Draw an Item card.#y#r3-4#tYou raid the box but feel guilty about it. Take 1 mental damage then draw an item card.#y#r0-2#tYou aren't even brave enough to look inside. Take 1 mental damage.#y",
+		},
+		{
+			id: 1142,
+			type: "item",
+			name: "Kitten",
+			text: "#bA cute and soft kitten.#nMeow.#dWhile holding this kitten you can't make attacks, but you can still defend against them. While holding the kitten, if anyone with a Sanity trait attacks you and wins, they lose 1 Sanity.#n#nYou may throw the kitten away at any time, but be warned: you will lose 2 Sanity if you lose custody of the kitten.",
+		},
+		{
+			id: 2144,
+			type: "event",
+			name: "Board Game",
+			text: "#bWhat year is it?#dLaid out on the floor is an abandoned board game. It looks like someone was half way through playing it when they just... disappeared.#n#n#bYOU MUST CHOOSE...#dTake part in the game, get absorbed into some kind of cursed jungle, come back having drawn two new item cards and then take 2 Mental damage.#cSet fire to the board and run away.#nPray for those in the jungle.",
 		},
 	]),
 

@@ -489,25 +489,25 @@ const betrayal_2e_dom = {
 			id: 1138,
 			type: "item",
 			name: "Screaming Orb",
-			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage or stealing an item. You may only lose one orb at a time.",
 		},
 		{
 			id: 1139,
 			type: "item",
 			name: "Screaming Orb",
-			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage or stealing an item. You may only lose one orb at a time.",
 		},
 		{
 			id: 1140,
 			type: "item",
 			name: "Screaming Orb",
-			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage or stealing an item. You may only lose one orb at a time.",
 		},
 		{
 			id: 1141,
 			type: "item",
 			name: "Screaming Orb",
-			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage and stealing an item. You may only lose one orb at a time.",
+			text: "#bAAAAAAAAAA#dThis horrid orb screams constantly. When you acquire your first Screaming Orb, lose 1 Sanity. If you lose your last Screaming Orb, gain 1 Sanity.#n#nThere are only two ways to lose this orb: feed it to a hungry creature, or give it to something with a Sanity trait that you defeat in combat, in lieu of dealing damage or stealing an item. You may only lose one orb at a time.",
 		},
 		{
 			id: 2141,
@@ -526,6 +526,18 @@ const betrayal_2e_dom = {
 			type: "event",
 			name: "The Box",
 			text: "#bWhat's in the Box?#dThere's a box here. You are desperate to know what's inside. However, the lid is nailed down and it's someone else's property. Make a Sanity Roll:#r5+#tYou pry open the lid and steal the contents without regret. Draw an Item card.#y#r3-4#tYou raid the box but feel guilty about it. Take 1 mental damage then draw an item card.#y#r0-2#tYou aren't even brave enough to look inside. Take 1 mental damage.#y",
+		},
+		{
+			id: 1142,
+			type: "item",
+			name: "Kitten",
+			text: "#bA cute and soft kitten.#nMeow.#dWhile holding this kitten you can't make attacks, but you can still defend against them. While holding the kitten, if anyone with a Sanity trait attacks you and wins, they lose 1 Sanity.#n#nYou may throw the kitten away at any time, but be warned: you will lose 2 Sanity if you lose custody of the kitten.",
+		},
+		{
+			id: 2144,
+			type: "event",
+			name: "Board Game",
+			text: "#bWhat year is it?#dLaid out on the floor is an abandoned board game. It looks like someone was half way through playing it when they just... disappeared.#n#n#bYOU MUST CHOOSE...#dTake part in the game, get absorbed into some kind of cursed jungle, come back having drawn two new item cards and then take 2 Mental damage.#cSet fire to the board and run away.#nPray for those left in the jungle.",
 		},
 	]),
 
