@@ -525,7 +525,7 @@ const betrayal_2e_dom = {
 			id: 2143,
 			type: "event",
 			name: "The Box",
-			text: "#bWhat's in the Box?#dThere's a box here. You are desperate to know what's inside. However, the lid is nailed down and it's someone else's property. Make a Sanity Roll:#r5+#tYou pry open the lid and steal the contents without regret. Draw an Item card.#y#r3-4#tYou raid the box but feel guilty about it. Take 1 mental damage then draw an item card.#y#r0-2#tYou aren't even brave enough to look inside. Take 1 mental damage.#y",
+			text: "#bWhat's in the Box?#dThere's a box here. You are desperate to know what's inside. However, the lid is nailed down and it's someone else's property. Make a Sanity Roll:#r5+#tYou pry open the lid and steal the contents without regret. Draw an item card.#y#r3-4#tYou raid the box but feel guilty about it. Take 1 mental damage then draw an item card.#y#r0-2#tYou aren't even brave enough to look inside. Take 1 mental damage.#y",
 		},
 		{
 			id: 1142,
@@ -538,6 +538,12 @@ const betrayal_2e_dom = {
 			type: "event",
 			name: "Board Game",
 			text: "#bWhat year is it?#dLaid out on the floor is an abandoned board game. It looks like someone was half way through playing it when they just... disappeared.#n#n#bYOU MUST CHOOSE...#dTake part in the game, get absorbed into some kind of cursed jungle, come back having drawn two new item cards and then take 2 Mental damage.#cSet fire to the board and run away.#nPray for those left in the jungle.",
+		},
+		{
+id: "2145",
+type: "event",
+name: "Siren's Call",
+text: "#bLalalala.#nawooolalalala.#dA beautiful young woman lounges before you. She has the wings of an eagle, the claws of a cat, and the tail of a slug. She is naked, save for two cabbage leaves cupping her breasts. Your gaze drifts down her torso only to see she is all slug from the waist down. She offers you a gift while singing an enticing song that echoes through the house.#n#n#bYOU MUST CHOOSE...#dGive in to her temptation, draw an item card, lose 1 Speed.#cResist, run away and gain 1 Speed.#n#nAll other explorers must move towards this room as far as they can. Do not discover new rooms and ignore movement restrictions.",
 		},
 	]),
 
