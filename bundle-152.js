@@ -1844,13 +1844,25 @@ const betrayal_2e_dom = {
 			id: 2144,
 			type: "event",
 			name: "Board Game",
-			text: "#bWhat year is it?#dLaid out on the floor is an abandoned board game. It looks like someone was half way through playing it when they just... disappeared.#n#n#bYOU MUST CHOOSE...#dTake part in the game, get absorbed into some kind of cursed jungle, come back having drawn two new item cards and then take 2 Mental damage.#cSet fire to the board and run away.#nPray for those left in the jungle.",
+			text: "#bWhat year is it?#dLaid out on the floor is an abandoned board game. It looks like someone was half way through playing it when they just... disappeared.#n#n#bYOU MUST CHOOSE...#dTake part in the game, get absorbed into some kind of cursed jungle, come back having drawn 2 new item cards and then take 2 Mental damage.#cSet fire to the board and run away.#nPray for those left in the jungle.",
 		},
 		{
 			id: 2145,
 			type: "event",
 			name: "Siren's Call",
-			text: "#bLalalala.#nAwooolalalala.#dA beautiful young woman lounges before you. She has the wings of an eagle, the claws of a cat, and the tail of a slug. She is naked, save for two cabbage leaves cupping her breasts. Your gaze drifts down her torso only to see she is all gastropod from the waist down. She offers you a gift while singing an enticing song.#n#n#bYOU MUST CHOOSE...#dGive in to her temptation.#nDraw an item card, then lose 1 speed.#cResist.#nGain 1 speed, then move 5 rooms away if possible.#n",
+			text: "#bLalalala.#nAwooolalalala.#dA beautiful young woman lounges before you. She has the wings of an eagle, the claws of a cat, and the tail of a slug. She is naked, save for two cabbage leaves cupping her breasts. Your gaze drifts down her torso only to see she is all gastropod from the waist down. She offers you a gift while singing an enticing song.#n#n#bYOU MUST CHOOSE...#dGive in to her temptation.#nDraw an item card, then lose 1 speed.#cResist, gain 1 speed, then move 5 rooms away if possible. (Do not discover any new rooms.)",
+		},
+		{
+			id: 2146,
+			type: "event",
+			name: "Chuckler's Gift",
+			text: "#bWant to know how I got these scars?#dThere's an incredibly suspicious looking gift-wrapped box here, with clowns on the wrapping paper. The label says it's \"for you\" but it also has a lot of maniacal laughter hand-written on it. You read it all out loud. \"Ha ha ha ha ha. Ha ha ha.\" It's heavy and you hear things rattling around inside.#n#n#bYOU MUST CHOOSE...#dOpen it, allowing the bomb to explode in your face. Take 2 physical damage and then draw 2 item cards.#cDo not open it. Back away slowly into the room you came from if possible.",
+		},
+		{
+			id: 2147,
+			type: "event",
+			name: "Wise Woman's Words",
+			text: "#bLet me tell you something important...#dYou are daydreaming as you walk around the house, and you remember that one time a wise woman whispered some wisdom into your ear. Damn, she was so wise. So, so wise. The wisest women you've ever met.#n#nYou don't quite remember what she said, but it was probably useful at the time, and it gives you some confidence.#n#nGain 1 knowledge.",
 		},
 	]),
 
