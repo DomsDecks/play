@@ -304,7 +304,7 @@ const betrayal_2e = {
 			id: 2026,
 			type: "event",
 			name: "Grave Dirt",
-			text: "#bThis room is covered in a thick layer of dirt. You cough as it gets on your skin and in your lungs.#dMake a might roll:#r4+#tYou shake it off. Gain 1 might.#y#r0-3#tSomething is wrong. Keep this card. Take 1 point of physical damage at the start of each of your turns. Discard this card if an item card increases one of your traits or if you end your turn in the Balcony, Gardens, Graveyard, Gymnasium, Larder, Patio, or Tower.##y",
+			text: "#bThis room is covered in a thick layer of dirt. You cough as it gets on your skin and in your lungs.#dMake a might roll:#r4+#tYou shake it off. Gain 1 might.#y#r0-3#tSomething is wrong. Keep this card. Take 1 point of physical damage at the start of each of your turns. Discard this card if an item card increases one of your traits or if you end your turn in the Balcony, Gardens, Graveyard, Gymnasium, Larder, Patio, or Tower.#y",
 		},
 		{
 			id: 2027,
@@ -424,7 +424,7 @@ const betrayal_2e = {
 			id: 3001,
 			type: "omen",
 			name: "Spirit Board",
-			text: "#bA board with letters and numbers to call the dead.#dBefore you move during your turn, you can look at the top tile of the room stack.#n#nIf you use the Spirit Board after the haunt has been revealed, the traitor can move any number of monsters 1 space closer to you. (If you are the If the traitor, you don't have to move those monsters.) If there is no traitor, all monsters move 1 space closer to you.",
+			text: "#bA board with letters and numbers to call the dead.#dBefore you move during your turn, you can look at the top tile of the room stack.#n#nIf you use the Spirit Board after the haunt has been revealed, the traitor can move any number of monsters 1 space closer to you. (If you are the traitor, you don't have to move those monsters.) If there is no traitor, all monsters move 1 space closer to you.",
 		},
 		{
 			id: 3002,
