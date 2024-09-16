@@ -136,7 +136,7 @@ const render = {
 				.attr("id", "game")
 				.append($(`<option value='${betrayal_2e.code}'>`)
 					.html(betrayal_2e.displayName))
-				.append($(`<option value='${betrayal_2e_dom.code}'>`)
+				.append($(`<option value='${betrayal_2e_dom.code}' selected='selected'>`)
 					.html(betrayal_2e_dom.displayName)))
 			.append($("<div>")
 				.html(text("players")))

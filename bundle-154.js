@@ -361,7 +361,7 @@ const render = {
 				.attr("id", "game")
 				.append($(`<option value='${betrayal_2e.code}'>`)
 					.html(betrayal_2e.displayName))
-				.append($(`<option value='${betrayal_2e_dom.code}'>`)
+				.append($(`<option value='${betrayal_2e_dom.code}' selected='selected'>`)
 					.html(betrayal_2e_dom.displayName)))
 			.append($("<div>")
 				.html(text("players")))
@@ -866,7 +866,7 @@ const betrayal_2e = {
 			id: 2026,
 			type: "event",
 			name: "Grave Dirt",
-			text: "#bThis room is covered in a thick layer of dirt. You cough as it gets on your skin and in your lungs.#dMake a might roll:#r4+#tYou shake it off. Gain 1 might.#y#r0-3#tSomething is wrong. Keep this card. Take 1 point of physical damage at the start of each of your turns. Discard this card if an item card increases one of your traits or if you end your turn in the Balcony, Gardens, Graveyard, Gymnasium, Larder, Patio, or Tower.##y",
+			text: "#bThis room is covered in a thick layer of dirt. You cough as it gets on your skin and in your lungs.#dMake a might roll:#r4+#tYou shake it off. Gain 1 might.#y#r0-3#tSomething is wrong. Keep this card. Take 1 point of physical damage at the start of each of your turns. Discard this card if an item card increases one of your traits or if you end your turn in the Balcony, Gardens, Graveyard, Gymnasium, Larder, Patio, or Tower.#y",
 		},
 		{
 			id: 2027,
@@ -986,7 +986,7 @@ const betrayal_2e = {
 			id: 3001,
 			type: "omen",
 			name: "Spirit Board",
-			text: "#bA board with letters and numbers to call the dead.#dBefore you move during your turn, you can look at the top tile of the room stack.#n#nIf you use the Spirit Board after the haunt has been revealed, the traitor can move any number of monsters 1 space closer to you. (If you are the If the traitor, you don't have to move those monsters.) If there is no traitor, all monsters move 1 space closer to you.",
+			text: "#bA board with letters and numbers to call the dead.#dBefore you move during your turn, you can look at the top tile of the room stack.#n#nIf you use the Spirit Board after the haunt has been revealed, the traitor can move any number of monsters 1 space closer to you. (If you are the traitor, you don't have to move those monsters.) If there is no traitor, all monsters move 1 space closer to you.",
 		},
 		{
 			id: 3002,
@@ -1864,6 +1864,30 @@ const betrayal_2e_dom = {
 			name: "Wise Woman's Words",
 			text: "#bLet me tell you something important...#dYou are daydreaming as you walk around the house, and you remember that one time a wise woman whispered some wisdom into your ear. Damn, she was so wise. So, so wise. The wisest women you've ever met.#n#nYou don't quite remember what she said, but it was probably useful at the time, and it gives you some confidence.#n#nGain 1 knowledge.",
 		},
+		{
+			id: 2148,
+			type: "event",
+			name: "Owl",
+			text: "#bWho? Who?#dWhile you feel around the rafters, rustling around for goodies, you accidentally prod an owl and wake it up. It panics and flutteres around the room, scratches your face, drops an item in your lap and flys away.#n#nTake 1 physical damage then draw an item card.",
+		},
+		{
+			id: 2149,
+			type: "event",
+			name: "Sam Hell",
+			text: "#b#dyou meet sam and hes looking for spangle. he says he cant get too far from her. he gives you a powerful and fertile high 5. gain 1 might. if anyones seen spangle, everone draws 1 item.",
+		},
+		{
+			id: 2150,
+			type: "event",
+			name: "Dr Spangle",
+			text: "#b#dyou meet spangle and shes hunting sam. she says shes got to find him. if anyone saw him gain 1 knowlege and 1 sanity. otherwise lose 1 might.",
+		},
+		{
+			id: 2151,
+			type: "event",
+			name: "Chained Ghost",
+			text: "#bSet meeee freeee!#dRattling chains echo through the house. A ghost is shacked to the wall and is begging to be released. His body is spectral but the chains are very real.#n#n#bYOU MUST CHOOSE...#dStrain to break the chains, lose 1 might and accept an item as a reward.#cLaugh in the ghosts face, just out of his reach. Gain 1 might.",
+		}
 	]),
 
 	// Do the initial shuffling and dividing, and get the game states for each player.
